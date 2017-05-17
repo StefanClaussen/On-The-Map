@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		F8BAECD51ECC4D6100644586 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BAECD41ECC4D6100644586 /* AppDelegate.swift */; };
-		F8BAECD71ECC4D6100644586 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BAECD61ECC4D6100644586 /* ViewController.swift */; };
 		F8BAECDA1ECC4D6100644586 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BAECD81ECC4D6100644586 /* Main.storyboard */; };
 		F8BAECDF1ECC4D6100644586 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BAECDD1ECC4D6100644586 /* LaunchScreen.storyboard */; };
 		F8BAECEA1ECC4D6100644586 /* On_The_MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BAECE91ECC4D6100644586 /* On_The_MapTests.swift */; };
 		F8BAECF51ECC4D6100644586 /* On_The_MapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BAECF41ECC4D6100644586 /* On_The_MapUITests.swift */; };
 		F8BAED061ECC51FA00644586 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8BAED051ECC51FA00644586 /* Assets.xcassets */; };
+		F8BAED081ECC552500644586 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BAED071ECC552500644586 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +36,6 @@
 /* Begin PBXFileReference section */
 		F8BAECD11ECC4D6100644586 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8BAECD41ECC4D6100644586 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F8BAECD61ECC4D6100644586 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F8BAECD91ECC4D6100644586 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F8BAECDE1ECC4D6100644586 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F8BAECE01ECC4D6100644586 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +46,7 @@
 		F8BAECF41ECC4D6100644586 /* On_The_MapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = On_The_MapUITests.swift; sourceTree = "<group>"; };
 		F8BAECF61ECC4D6100644586 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8BAED051ECC51FA00644586 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F8BAED071ECC552500644586 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				F8BAECD41ECC4D6100644586 /* AppDelegate.swift */,
-				F8BAECD61ECC4D6100644586 /* ViewController.swift */,
+				F8BAED091ECC552A00644586 /* ViewController */,
 				F8BAED021ECC501A00644586 /* Assets */,
 				F8BAECE01ECC4D6100644586 /* Info.plist */,
 			);
@@ -131,6 +131,14 @@
 				F8BAED051ECC51FA00644586 /* Assets.xcassets */,
 			);
 			name = Assets;
+			sourceTree = "<group>";
+		};
+		F8BAED091ECC552A00644586 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F8BAED071ECC552500644586 /* LoginViewController.swift */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,7 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F8BAECD71ECC4D6100644586 /* ViewController.swift in Sources */,
+				F8BAED081ECC552500644586 /* LoginViewController.swift in Sources */,
 				F8BAECD51ECC4D6100644586 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
