@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension ParseClient {
+extension ParseAPI {
     
     struct Constants {
         
