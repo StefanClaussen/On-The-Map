@@ -87,8 +87,8 @@
 		F85F42871ECF04A000D8619C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F88143EA1ECCD1CA0093964E /* ParseAPI.swift */,
 				F85F42891ECF05A400D8619C /* ParseConstants.swift */,
+				F88143EA1ECCD1CA0093964E /* ParseAPI.swift */,
 				F85F428E1ECF0EA000D8619C /* StudentInformation.swift */,
 				F85F42901ECF0EB200D8619C /* Student.swift */,
 			);

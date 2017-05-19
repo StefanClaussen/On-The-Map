@@ -9,16 +9,21 @@
 import UIKit
 
 class MapViewController: UIViewController {
+    
+    var studentInformation: StudentInformation!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        studentInformation.getStudentLocation {
+            (studentsResult) -> Void in
+            
+            switch studentsResult {
+            case let .success(students):
+                print("Successful found \(students.count) students.")
+            case let .failure(error):
+                print("Error getting studentLocation: \(error)")
+            }
+        }
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
-
 }

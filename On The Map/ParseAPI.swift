@@ -8,59 +8,63 @@
 
 import Foundation
 
-class ParseAPI: NSObject {
+enum ParseError: Error {
+    case invalidJSONData
+}
+
+struct ParseAPI {
     
-    var session = URLSession.shared
-    
-    func taskForGETStudentLocation() -> Void {
-        // 2/3. Build URL, Configure request
-        let request = createURLRequest()
-        
-        // 4. Make the request
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            
-            guard (error == nil) else {
-                print("There was an error with your request: \(String(describing: error))")
-                return
-            }
-            
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                print("Your request returned a status code other than 2xx!")
-                return
-            }
-            
-            guard let data = data else {
-                print("No data was returned by the request!")
-                return
-            }
-            
-            // 5. Parse the data
-            let parsedResult = self.convertDataToJSON(with: data, options: .allowFragments)
-            print(parsedResult!)
-        }
-        
-        // 7. Start the request
-        task.resume()
+    static var mutableURLRequest: NSMutableURLRequest {
+        return createURLRequest()
     }
     
-    // MARK: Helper methods
+    static func students(fromJSON data: Data) -> StudentResult {
+        do {
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            guard
+                let jsonDictionary = jsonObject as? [AnyHashable:Any],
+                let studentsArray =  jsonDictionary["results"] as? [[String: Any]] else {
+                    return .failure(ParseError.invalidJSONData)
+            }
+            
+            var finalStudents = [Student]()
+            //TODO: change this to return the first 100 students
+            for studentJSON in studentsArray {
+                if let student = student(fromJSON: studentJSON) {
+                    finalStudents.append(student)
+                }
+            }
+            
+            if finalStudents.isEmpty && !studentsArray.isEmpty {
+                return .failure(ParseError.invalidJSONData)
+            }
+            return .success(finalStudents)
+        } catch let error {
+            return .failure(error)
+        }
+        
+    }
     
-    private func createURLRequest() -> NSMutableURLRequest {
+    private static func student(fromJSON json: [String:Any]) -> Student? {
+        guard
+            let firstName = json["firstName"] as? String
+//            let lastName = json["lastName"] as? String,
+//            let latitude = json["latitude"] as? String,
+//            let longitude = json["longitude"] as? String,
+//            let mapString = json["mapString"] as? String,
+//            let mediaURL = URL(string: "mediaURL")  
+        else {
+            return nil
+        }
+        
+        return Student(firstName: firstName)
+            //, lastName: lastName, latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: mediaURL)
+    }
+    
+    private static func createURLRequest() -> NSMutableURLRequest {
         let request = NSMutableURLRequest(url: URL(string: Constants.baseURLString)!)
         request.addValue(Constants.applicationID, forHTTPHeaderField: Constants.xParseApplicationID)
         request.addValue(Constants.apiKey, forHTTPHeaderField: Constants.xParseRestAPIKey)
         return request
     }
-    
-    private func convertDataToJSON(with data: Data, options: JSONSerialization.ReadingOptions ) -> [String: AnyObject]? {
-        
-        var parsedResult: [String: AnyObject]! = nil
-        do {
-            parsedResult = try JSONSerialization.jsonObject(with: data, options: options) as! [String: AnyObject]
-        } catch {
-            print("Could not parse the data as JSON: '\(data)'")
-        }
-        return parsedResult
-    }
-
 }

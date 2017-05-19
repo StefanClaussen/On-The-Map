@@ -11,10 +11,9 @@ import Foundation
 struct Student {
     
     let firstName: String
-    let lastName: String
-    let latitude: String
-    let longitude: String
-    let mapString: String
-    let mediaURL: String
-    
+//    let lastName: String
+//    let latitude: String
+//    let longitude: String
+//    let mapString: String
+//    let mediaURL: URL
 }
