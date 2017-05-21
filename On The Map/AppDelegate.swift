@@ -12,11 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var studentInformation = StudentInformation()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let rootViewController = window!.rootViewController as! MapViewController
-        rootViewController.studentInformation = StudentInformation()
         return true
     }
 

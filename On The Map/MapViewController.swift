@@ -10,7 +10,10 @@ import UIKit
 
 class MapViewController: UIViewController {
     
-    var studentInformation: StudentInformation!
+    var studentInformation: StudentInformation {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        return delegate.studentInformation
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
