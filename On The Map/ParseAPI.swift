@@ -28,7 +28,7 @@ struct ParseAPI {
             }
             
             var finalStudents = [Student]()
-            //TODO: change this to return the first 100 students
+            
             for studentJSON in studentsArray {
                 if let student = student(fromJSON: studentJSON) {
                     finalStudents.append(student)
