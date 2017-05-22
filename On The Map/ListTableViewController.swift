@@ -43,10 +43,8 @@ class ListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OTMTableViewCell", for: indexPath) as? OTMTableViewCell
 
-        for student in students {
-            cell?.nameLabel.text = student.firstName
-        }
-        
+        let student = students[indexPath.row]
+        cell?.textLabel?.text = student.firstName + " " + student.lastName
         return cell!
         
     }
