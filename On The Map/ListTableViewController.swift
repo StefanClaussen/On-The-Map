@@ -41,11 +41,15 @@ class ListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OTMTableViewCell", for: indexPath) as? OTMTableViewCell
-
+        let identifier = "cell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        
+        cell.imageView?.image = #imageLiteral(resourceName: "icon_pin")
+        
         let student = students[indexPath.row]
-        cell?.textLabel?.text = student.firstName + " " + student.lastName
-        return cell!
+        cell.textLabel?.text = student.firstName + " " + student.lastName
+        
+        return cell
         
     }
 }
