@@ -58,8 +58,8 @@ struct ParseAPI {
     
     private static func createURLRequest() -> NSMutableURLRequest {
         let request = NSMutableURLRequest(url: URL(string: Constants.baseURLString)!)
-        request.addValue(Constants.applicationID, forHTTPHeaderField: Constants.xParseApplicationID)
-        request.addValue(Constants.apiKey, forHTTPHeaderField: Constants.xParseRestAPIKey)
+        request.addValue(Constants.ParseParameterValues.ApplicationID, forHTTPHeaderField: Constants.ParseParameterKeys.ParseApplicationID)
+        request.addValue(Constants.ParseParameterValues.ApiKey, forHTTPHeaderField: Constants.ParseParameterValues.ApiKey)
         return request
     }
 }
