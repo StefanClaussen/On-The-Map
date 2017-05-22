@@ -11,7 +11,7 @@ import Foundation
 struct Student {
     
     let firstName: String
-//    let lastName: String
+    let lastName: String
 //    let latitude: String
 //    let longitude: String
 //    let mapString: String

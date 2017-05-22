@@ -6,7 +6,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -94,19 +96,43 @@
         <!--On The Map-->
         <scene sceneID="89B-sF-7Hp">
             <objects>
-                <tableViewController id="xOT-fj-bUU" sceneMemberID="viewController">
+                <tableViewController id="xOT-fj-bUU" customClass="ListTableViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qbj-KZ-Ax1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FYa-AX-Muk">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OTMTableViewCell" id="FYa-AX-Muk" customClass="OTMTableViewCell" customModule="On_The_Map" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FYa-AX-Muk" id="YbM-Ed-yzX">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_pin" translatesAutoresizingMaskIntoConstraints="NO" id="AsH-Sx-v3w">
+                                            <rect key="frame" x="16" y="7.5" width="38.5" height="24"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6l-sM-49S">
+                                            <rect key="frame" x="62.5" y="9" width="304.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="AsH-Sx-v3w" firstAttribute="height" secondItem="YbM-Ed-yzX" secondAttribute="height" multiplier="0.62" id="4Ux-WX-gN2"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="H6l-sM-49S" secondAttribute="trailing" id="BiG-lc-Daq"/>
+                                        <constraint firstItem="AsH-Sx-v3w" firstAttribute="leading" secondItem="YbM-Ed-yzX" secondAttribute="leadingMargin" constant="8" id="Bl9-ET-Ci5"/>
+                                        <constraint firstItem="H6l-sM-49S" firstAttribute="leading" secondItem="AsH-Sx-v3w" secondAttribute="trailing" constant="8" id="JNO-Ck-TaA"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="AsH-Sx-v3w" secondAttribute="trailing" constant="190" id="UCB-o7-taa"/>
+                                        <constraint firstItem="H6l-sM-49S" firstAttribute="centerY" secondItem="YbM-Ed-yzX" secondAttribute="centerY" id="UOf-hr-Y2u"/>
+                                        <constraint firstItem="AsH-Sx-v3w" firstAttribute="width" secondItem="YbM-Ed-yzX" secondAttribute="height" multiplier="1:1" id="Wq0-KL-XBc"/>
+                                        <constraint firstItem="AsH-Sx-v3w" firstAttribute="centerY" secondItem="YbM-Ed-yzX" secondAttribute="centerY" id="g57-fD-wFd"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="H6l-sM-49S" id="pjb-HI-kKS"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -184,6 +210,7 @@
         <image name="icon_listview-selected" width="75" height="50"/>
         <image name="icon_mapview-deselected" width="75" height="50"/>
         <image name="icon_mapview-selected" width="75" height="50"/>
+        <image name="icon_pin" width="24" height="24"/>
         <image name="logo-u" width="62" height="62"/>
     </resources>
 </document>

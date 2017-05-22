@@ -47,18 +47,13 @@ struct ParseAPI {
     
     private static func student(fromJSON json: [String:Any]) -> Student? {
         guard
-            let firstName = json["firstName"] as? String
-//            let lastName = json["lastName"] as? String,
-//            let latitude = json["latitude"] as? String,
-//            let longitude = json["longitude"] as? String,
-//            let mapString = json["mapString"] as? String,
-//            let mediaURL = URL(string: "mediaURL")  
+            let firstName = json["firstName"] as? String,
+            let lastName = json["lastName"] as? String 
         else {
             return nil
         }
         
-        return Student(firstName: firstName)
-            //, lastName: lastName, latitude: latitude, longitude: longitude, mapString: mapString, mediaURL: mediaURL)
+        return Student(firstName: firstName, lastName: lastName)
     }
     
     private static func createURLRequest() -> NSMutableURLRequest {
