@@ -23,9 +23,32 @@ class LoginViewController: UIViewController {
     
     // MARK: Actions
     
+    private func alertDetails(_ email: String?, _ password: String?) -> (title: String, message: String)? {
+        var string = ""
+        let emptyEmail = email?.isEmpty
+        let emptyPassword = password?.isEmpty
+        
+        switch (emptyEmail, emptyPassword) {
+        case (true?, true?):    string = "Email and Password"
+        case (true?, false?):   string = "Email"
+        case (false?, true?):   string = "Password"
+        default:    return nil
+        }
+        
+        let title =  string + " Missing"
+        let message = "Enter your " + string.lowercased() + " to login"
+        return (title, message)
+    }
+    
+    private func showAlertWith(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func loginPressed(_ sender: Any) {
-        if emailTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
-            
+        if let information = alertDetails(emailTextField.text, passwordTextField.text) {
+            showAlertWith(title: information.title, message: information.message)
         } else {
             loginAuthentication.POSTSessionFor(email: emailTextField.text!, password: passwordTextField.text!) {
                 (loginResult) -> Void in
