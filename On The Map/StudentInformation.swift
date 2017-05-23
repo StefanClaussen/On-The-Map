@@ -23,7 +23,6 @@ struct StudentInformation {
             data, response, error in
             
             let result = self.processRequest(data: data, error: error)
-            //TODO: I am not sure about the line below.
             OperationQueue.main.addOperation {
                 completion(result)
             }

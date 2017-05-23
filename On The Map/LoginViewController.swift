@@ -26,13 +26,13 @@ class LoginViewController: UIViewController {
             
         } else {
             
-            getSession()
+            authenticateWithUdacity()
         }
     }
     
     // MARK: Parse 
     
-    private func getSession() {
+    private func authenticateWithUdacity() {
         
         let email = emailTextField.text!
         let password = passwordTextField.text!
@@ -59,23 +59,19 @@ class LoginViewController: UIViewController {
             let parsedResult: [String:AnyObject]!
             do {
                 parsedResult = try JSONSerialization.jsonObject(with: newData!, options: .allowFragments) as! [String: AnyObject]
-                print("Parsed result: \(parsedResult)")
                 self.completeLogin()
             } catch {
                 displayError("Could not parse the data as JSON: '\(String(describing: data))'")
                 return
             }
-            
-          
         }
         task.resume()
     }
     
     private func completeLogin() {
-        performUIUpdatesOnMain {
+        DispatchQueue.main.async {
             let controller = self.storyboard?.instantiateViewController(withIdentifier: "OTMTabBarController") as! UITabBarController
             self.present(controller, animated: true, completion: nil)
         }
     }
-
 }
