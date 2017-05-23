@@ -37,13 +37,13 @@ struct LoginAuthentication {
     }
     
     func processSessionRequest(data: Data?, error: Error?) -> LoginResult {
-        let range = Range(5..<data!.count)
-        let newData = data?.subdata(in: range)
-        
-        guard let jsonData = newData else {
-            return .failure(error!)
+        guard let data = data else {
+            return .failure(ParseError.noConnection)
         }
-        return ParseAPI.session(fromJSON: jsonData)
+        let range = Range(5..<data.count)
+        let newData = data.subdata(in: range)
+        
+        return ParseAPI.session(fromJSON: newData)
     }
 }
 

@@ -10,6 +10,8 @@ import Foundation
 
 enum ParseError: Error {
     case invalidJSONData
+    case accountNotFoundOrInvalidCredentials
+    case noConnection
 }
 
 struct ParseAPI {
@@ -20,10 +22,15 @@ struct ParseAPI {
     
     static func session(fromJSON data: Data) -> LoginResult {
         do {
-            try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            return .success
-        } catch let error {
-            return .failure(error)
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            if let jsonDictionary = jsonObject as? [AnyHashable:Any],
+                let _ = jsonDictionary["error"] as? String {
+                return .failure(ParseError.accountNotFoundOrInvalidCredentials)
+            } else {
+                return .success
+            }
+        } catch {
+            return .failure(ParseError.invalidJSONData)
         }
     }
     
