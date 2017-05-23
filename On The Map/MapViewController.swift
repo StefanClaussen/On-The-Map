@@ -18,7 +18,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        studentInformation.getStudentLocation {
+        studentInformation.GETStudentLocation {
             (studentsResult) -> Void in
             
             switch studentsResult {

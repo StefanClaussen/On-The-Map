@@ -19,7 +19,7 @@ class ListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        studentInformation.getStudentLocation {
+        studentInformation.GETStudentLocation {
             (studentsResult) -> Void in
             
             switch studentsResult {
@@ -31,7 +31,6 @@ class ListTableViewController: UITableViewController {
                 print("Error getting studentLocation: \(error)")
             }
         }
-        
     }
 
     // MARK: - Table view data source

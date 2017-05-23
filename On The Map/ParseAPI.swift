@@ -18,6 +18,15 @@ struct ParseAPI {
         return createURLRequest()
     }
     
+    static func session(fromJSON data: Data) -> LoginResult {
+        do {
+            try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            return .success
+        } catch let error {
+            return .failure(error)
+        }
+    }
+    
     static func students(fromJSON data: Data) -> StudentResult {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
