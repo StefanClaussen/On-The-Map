@@ -18,7 +18,7 @@ struct StudentInformation {
     let session = URLSession.shared
     
     func GETStudentLocation(completion: @escaping (StudentResult) -> Void) {
-        let request = ParseAPI.mutableURLRequest
+        let request = ParseAPI.parseURLRequest
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
             

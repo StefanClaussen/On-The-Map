@@ -18,11 +18,7 @@ struct LoginAuthentication {
     let session = URLSession.shared
     
     func POSTSessionFor(email: String, password: String, completion: @escaping (LoginResult) -> Void) {
-        // TODO: refactor request url.
-        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let request = ParseAPI.udacityURLRequest
         request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
         
         let task = session.dataTask(with: request as URLRequest) {

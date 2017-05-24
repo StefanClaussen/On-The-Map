@@ -16,8 +16,12 @@ enum ParseError: Error {
 
 struct ParseAPI {
     
-    static var mutableURLRequest: NSMutableURLRequest {
-        return createURLRequest()
+    static var parseURLRequest: NSMutableURLRequest {
+        return createParseURLRequest()
+    }
+    
+    static var udacityURLRequest: NSMutableURLRequest {
+        return createUdacityURLRequest()
     }
     
     static func session(fromJSON data: Data) -> LoginResult {
@@ -72,10 +76,22 @@ struct ParseAPI {
         return Student(firstName: firstName, lastName: lastName)
     }
     
-    private static func createURLRequest() -> NSMutableURLRequest {
-        let request = NSMutableURLRequest(url: URL(string: Constants.baseURLString)!)
-        request.addValue(Constants.ParseParameterValues.ApplicationID, forHTTPHeaderField: Constants.ParseParameterKeys.ParseApplicationID)
-        request.addValue(Constants.ParseParameterValues.ApiKey, forHTTPHeaderField: Constants.ParseParameterValues.ApiKey)
+    private static func createParseURLRequest() -> NSMutableURLRequest {
+        let request = NSMutableURLRequest(url: URL(string: Constants.Parse.baseURLString)!) // "https://parse.udacity.com/parse/classes/StudentLocation"
+        request.addValue(Constants.Parse.ParameterValues.ApplicationID, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApplicationID)
+        request.addValue(Constants.Parse.ParameterValues.ApiKey, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApiKey)
+        
         return request
     }
+    
+    private static func createUdacityURLRequest() -> NSMutableURLRequest {
+        let request = NSMutableURLRequest(url: URL(string: Constants.Udacity.baseURLString)!)
+        request.httpMethod = Constants.Udacity.Methods.Post
+        request.addValue(Constants.Udacity.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.Udacity.ParameterKeys.Accept)
+        request.addValue(Constants.Udacity.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.Udacity.ParameterKeys.ContentType)
+        
+        return request
+    }
+    
+
 }
