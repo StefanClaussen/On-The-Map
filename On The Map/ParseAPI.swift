@@ -8,6 +8,8 @@
 
 import Foundation
 
+// TODO: This is now Parse and Udacity API.
+
 enum ParseError: Error {
     case invalidJSONData
     case accountNotFoundOrInvalidCredentials
