@@ -83,7 +83,18 @@
                     <view key="view" contentMode="scaleToFill" id="6LL-cc-WlR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dtr-qd-dtV">
+                                <rect key="frame" x="0.0" y="72" width="375" height="538"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="dtr-qd-dtV" secondAttribute="trailing" id="8b8-YB-gwH"/>
+                            <constraint firstAttribute="bottom" secondItem="dtr-qd-dtV" secondAttribute="bottom" id="bFs-BX-c4G"/>
+                            <constraint firstItem="dtr-qd-dtV" firstAttribute="leading" secondItem="6LL-cc-WlR" secondAttribute="leading" id="dWe-NL-xyg"/>
+                            <constraint firstItem="dtr-qd-dtV" firstAttribute="top" secondItem="6LL-cc-WlR" secondAttribute="top" id="zDy-42-bXq"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="On The Map" id="8HX-5k-Bgw"/>
                 </viewController>
