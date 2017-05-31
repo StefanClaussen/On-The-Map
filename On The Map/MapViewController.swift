@@ -27,9 +27,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             switch studentsResult {
             case let .success(students):
                 self.addMapAnnotations(for: students)
-                print("Successful found \(String(describing: students.count)) students.")
-            case let .failure(error):
-                print("Error getting studentLocation: \(error)")
+            case .failure:
+                self.showAlertGETStudentLocationFailed()
             }
         }
     }
@@ -56,6 +55,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotations.append(annotation)
         }
         self.mapView.addAnnotations(annotations)
+    }
+    
+    func showAlertGETStudentLocationFailed() {
+        let title = "Student Locations not found"
+        let message = "Student locations were not returned from the server and therefore cannot be displayed."
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+
     }
     
     // MARK: - MKMapViewDelegate
