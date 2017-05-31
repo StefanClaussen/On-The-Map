@@ -70,12 +70,15 @@ struct ParseAPI {
     private static func student(fromJSON json: [String:Any]) -> Student? {
         guard
             let firstName = json["firstName"] as? String,
-            let lastName = json["lastName"] as? String 
+            let lastName = json["lastName"] as? String,
+            let latitude = json["latitude"] as? Double,
+            let longitude = json["longitude"] as? Double,
+            let mediaURL = json["mediaURL"] as? String
         else {
             return nil
         }
         
-        return Student(firstName: firstName, lastName: lastName)
+        return Student(firstName: firstName, lastName: lastName, latitude: latitude, longitude: longitude, mediaURL: mediaURL)
     }
     
     private static func createParseURLRequest() -> NSMutableURLRequest {
