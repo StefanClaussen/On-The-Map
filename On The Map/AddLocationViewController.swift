@@ -16,14 +16,13 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var countryTextField: UITextField!
     @IBOutlet weak var websiteTextField: UITextField!
     @IBOutlet weak var coordinatesLabel: UILabel!
-    
     @IBOutlet weak var addLocationButton: UIButton!
+    
     lazy var geocoder = CLGeocoder()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    var studentInformation: StudentInformation {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        return delegate.studentInformation
     }
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
@@ -60,6 +59,8 @@ class AddLocationViewController: UIViewController {
             if let location = location {
                 let coordinate = location.coordinate
                 coordinatesLabel.text = "\(coordinate.latitude), \(coordinate.longitude)"
+                studentInformation.POSTStudentLocation()
+                
             } else {
                 coordinatesLabel.text = "No Matching Location Found"
             }

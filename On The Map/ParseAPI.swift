@@ -22,6 +22,10 @@ struct ParseAPI {
         return createParseURLRequest()
     }
     
+    static var parsePOSTURLRequest: NSMutableURLRequest {
+        return createParsePOSTURLRequest() 
+    }
+    
     static var udacityURLRequest: NSMutableURLRequest {
         return createUdacityURLRequest()
     }
@@ -89,11 +93,19 @@ struct ParseAPI {
         return request
     }
     
+    private static func createParsePOSTURLRequest() -> NSMutableURLRequest {
+        let request = createParseURLRequest()
+        request.httpMethod = "POST"
+        request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
+        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"Aii\", \"lastName\": \"Carumba\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".data(using: String.Encoding.utf8)
+        return request
+    }
+    
     private static func createUdacityURLRequest() -> NSMutableURLRequest {
         let request = NSMutableURLRequest(url: URL(string: Constants.Udacity.baseURLString)!)
         request.httpMethod = Constants.Udacity.Methods.Post
-        request.addValue(Constants.Udacity.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.Udacity.ParameterKeys.Accept)
-        request.addValue(Constants.Udacity.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.Udacity.ParameterKeys.ContentType)
+        request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.Udacity.ParameterKeys.Accept)
+        request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
         
         return request
     }

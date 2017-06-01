@@ -37,12 +37,15 @@ extension ParseAPI {
             
             struct ParameterKeys {
                 static let Accept = "Accept"
-                static let ContentType = "Content-Type"
             }
-            
-            struct ParameterValues {
-                static let ApplicationJSON =  "application/json"
-            }
+        }
+        
+        struct ParameterKeys {
+            static let ContentType = "Content-Type"
+        }
+        
+        struct ParameterValues {
+            static let ApplicationJSON =  "application/json"
         }
     }
 }
