@@ -97,7 +97,7 @@ struct ParseAPI {
         let request = createParseURLRequest()
         request.httpMethod = "POST"
         request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
-        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"Aii\", \"lastName\": \"Carumba\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".data(using: String.Encoding.utf8)
+//        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"Aii\", \"lastName\": \"Carumba\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".data(using: String.Encoding.utf8)
         return request
     }
     

@@ -37,8 +37,11 @@ struct StudentInformation {
         return ParseAPI.students(fromJSON: jsonData)
     }
     
-    func POSTStudentLocation() {
+    func POSTStudentLocation(for student: Student) {
         let request = ParseAPI.parsePOSTURLRequest
+        
+        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": \(student.latitude), \"longitude\": \(student.longitude)}".data(using: String.Encoding.utf8)
+        
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
             
