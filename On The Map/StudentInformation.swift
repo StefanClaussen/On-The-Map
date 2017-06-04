@@ -18,7 +18,7 @@ struct StudentInformation {
     let session = URLSession.shared
     
     func GETStudentLocation(completion: @escaping (StudentResult) -> Void) {
-        let request = ParseAPI.parseURLRequest
+        let request = ParseClient.parseURLRequest
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
             
@@ -34,11 +34,11 @@ struct StudentInformation {
         guard let jsonData = data else {
             return .failure(error!)
         }
-        return ParseAPI.students(fromJSON: jsonData)
+        return ParseClient.students(fromJSON: jsonData)
     }
     
     func POSTStudentLocation(for student: Student) {
-        let request = ParseAPI.parsePOSTURLRequest
+        let request = ParseClient.parsePOSTURLRequest
         
         request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": \(student.latitude), \"longitude\": \(student.longitude)}".data(using: String.Encoding.utf8)
         
@@ -53,6 +53,5 @@ struct StudentInformation {
         }
         task.resume()
     }
-    
     
 }

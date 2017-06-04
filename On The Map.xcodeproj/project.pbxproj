@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		F83B420B1EE01B04002D8235 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B420A1EE01B04002D8235 /* AddLocationViewController.swift */; };
-		F85F428A1ECF05A400D8619C /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F42891ECF05A400D8619C /* ParseConstants.swift */; };
+		F85F428A1ECF05A400D8619C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F42891ECF05A400D8619C /* Constants.swift */; };
 		F85F428C1ECF06FD00D8619C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F428B1ECF06FD00D8619C /* MapViewController.swift */; };
 		F85F428F1ECF0EA000D8619C /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F428E1ECF0EA000D8619C /* StudentInformation.swift */; };
 		F85F42911ECF0EB200D8619C /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F42901ECF0EB200D8619C /* Student.swift */; };
 		F876C2671ED43AE40056CC6B /* LoginAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876C2661ED43AE40056CC6B /* LoginAuthentication.swift */; };
-		F88143EB1ECCD1CA0093964E /* ParseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88143EA1ECCD1CA0093964E /* ParseAPI.swift */; };
+		F88143EB1ECCD1CA0093964E /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88143EA1ECCD1CA0093964E /* ParseClient.swift */; };
+		F8A1E20C1EE40D4F0021753E /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E20B1EE40D4F0021753E /* UdacityClient.swift */; };
 		F8BAECD51ECC4D6100644586 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BAECD41ECC4D6100644586 /* AppDelegate.swift */; };
 		F8BAECDA1ECC4D6100644586 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BAECD81ECC4D6100644586 /* Main.storyboard */; };
 		F8BAECDF1ECC4D6100644586 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BAECDD1ECC4D6100644586 /* LaunchScreen.storyboard */; };
@@ -43,12 +44,13 @@
 
 /* Begin PBXFileReference section */
 		F83B420A1EE01B04002D8235 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
-		F85F42891ECF05A400D8619C /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
+		F85F42891ECF05A400D8619C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F85F428B1ECF06FD00D8619C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F85F428E1ECF0EA000D8619C /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		F85F42901ECF0EB200D8619C /* Student.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
 		F876C2661ED43AE40056CC6B /* LoginAuthentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAuthentication.swift; sourceTree = "<group>"; };
-		F88143EA1ECCD1CA0093964E /* ParseAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPI.swift; sourceTree = "<group>"; };
+		F88143EA1ECCD1CA0093964E /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
+		F8A1E20B1EE40D4F0021753E /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		F8BAECD11ECC4D6100644586 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8BAECD41ECC4D6100644586 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8BAECD91ECC4D6100644586 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -93,11 +95,12 @@
 		F85F42871ECF04A000D8619C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F85F42891ECF05A400D8619C /* Constants.swift */,
 				F876C2661ED43AE40056CC6B /* LoginAuthentication.swift */,
-				F88143EA1ECCD1CA0093964E /* ParseAPI.swift */,
-				F85F42891ECF05A400D8619C /* ParseConstants.swift */,
+				F88143EA1ECCD1CA0093964E /* ParseClient.swift */,
 				F85F42901ECF0EB200D8619C /* Student.swift */,
 				F85F428E1ECF0EA000D8619C /* StudentInformation.swift */,
+				F8A1E20B1EE40D4F0021753E /* UdacityClient.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -318,16 +321,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F88143EB1ECCD1CA0093964E /* ParseAPI.swift in Sources */,
+				F88143EB1ECCD1CA0093964E /* ParseClient.swift in Sources */,
 				F85F428C1ECF06FD00D8619C /* MapViewController.swift in Sources */,
 				F8DCB3981ED1A3D70029D015 /* ListTableViewController.swift in Sources */,
+				F8A1E20C1EE40D4F0021753E /* UdacityClient.swift in Sources */,
 				F8BAED081ECC552500644586 /* LoginViewController.swift in Sources */,
 				F85F428F1ECF0EA000D8619C /* StudentInformation.swift in Sources */,
 				F876C2671ED43AE40056CC6B /* LoginAuthentication.swift in Sources */,
 				F8BAECD51ECC4D6100644586 /* AppDelegate.swift in Sources */,
 				F83B420B1EE01B04002D8235 /* AddLocationViewController.swift in Sources */,
 				F85F42911ECF0EB200D8619C /* Student.swift in Sources */,
-				F85F428A1ECF05A400D8619C /* ParseConstants.swift in Sources */,
+				F85F428A1ECF05A400D8619C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

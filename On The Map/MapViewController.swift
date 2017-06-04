@@ -26,6 +26,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             switch studentsResult {
             case let .success(students):
+                print("Student count is: \(students.count)")
                 self.addMapAnnotations(for: students)
             case .failure:
                 self.showAlertGETStudentLocationFailed()

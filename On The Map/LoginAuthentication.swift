@@ -18,7 +18,7 @@ struct LoginAuthentication {
     let session = URLSession.shared
     
     func POSTSessionFor(email: String, password: String, completion: @escaping (LoginResult) -> Void) {
-        let request = ParseAPI.udacityURLRequest
+        let request = UdacityClient.udacityURLRequest
         request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
         
         let task = session.dataTask(with: request as URLRequest) {
@@ -34,12 +34,12 @@ struct LoginAuthentication {
     
     func processSessionRequest(data: Data?, error: Error?) -> LoginResult {
         guard let data = data else {
-            return .failure(ParseError.noConnection)
+            return .failure(UdacityError.noConnection)
         }
         let range = Range(5..<data.count)
         let newData = data.subdata(in: range)
         
-        return ParseAPI.session(fromJSON: newData)
+        return UdacityClient.session(fromJSON: newData)
     }
 }
 

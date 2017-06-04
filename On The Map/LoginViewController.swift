@@ -43,9 +43,9 @@ class LoginViewController: UIViewController {
         switch loginResult {
         case .success:
             self.completeLogin()
-        case .failure(ParseError.accountNotFoundOrInvalidCredentials):
+        case .failure(UdacityError.accountNotFoundOrInvalidCredentials):
             self.showAlertWith(title: self.unableToLogin, message: self.noAccountOrInvalidCredentials)
-        case .failure(ParseError.noConnection):
+        case .failure(UdacityError.noConnection):
             self.showAlertWith(title: self.unableToLogin, message: self.noConnection)
         default:
             self.showAlertWith(title: self.unableToLogin, message: self.unknown)
