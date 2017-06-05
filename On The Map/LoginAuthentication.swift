@@ -9,7 +9,7 @@
 import UIKit
 
 enum LoginResult {
-    case success
+    case success(String)
     case failure(Error)
 }
 

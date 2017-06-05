@@ -12,6 +12,8 @@ enum UdacityError: Error {
     case invalidJSONData
     case accountNotFoundOrInvalidCredentials
     case noConnection
+    case uniqueKeyNotCreated
+    case parsingJSONFailed
 }
 
 struct UdacityClient {
@@ -21,17 +23,22 @@ struct UdacityClient {
     }
     
     static func session(fromJSON data: Data) -> LoginResult {
+        var parsedResult: [String: AnyObject]! = nil
         do {
-            let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-            if let jsonDictionary = jsonObject as? [AnyHashable:Any],
-                let _ = jsonDictionary["error"] as? String {
-                return .failure(UdacityError.accountNotFoundOrInvalidCredentials)
-            } else {
-                return .success
-            }
+            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
         } catch {
-            return .failure(UdacityError.invalidJSONData)
+            print("could not parse the data as JSON: '\(data)'")
+            return .failure(UdacityError.parsingJSONFailed)
         }
+        
+        guard
+            let account = parsedResult["account"],
+            let keyValue = account["key"],
+            let value: String = keyValue as? String  else {
+                return .failure(UdacityError.uniqueKeyNotCreated)
+        }
+        
+        return .success(value)
     }
     
     // MARK: - Private Methods
