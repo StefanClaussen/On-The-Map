@@ -20,8 +20,7 @@ class LoginViewController: UIViewController {
     let tryAgain = "Try Again"
     
     var loginAuthentication = LoginAuthentication()
-    var uniqueKey: String?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,8 +42,7 @@ class LoginViewController: UIViewController {
     private func processLoginResult(_ loginResult: LoginResult) {
         switch loginResult {
         case .success(let key):
-            uniqueKey = key
-            print("Successful login. Unique key: \(String(describing: uniqueKey))")
+            Constants.LoggedInUser.uniqueKey = key
             self.completeLogin()
         case .failure(UdacityError.accountNotFoundOrInvalidCredentials):
             self.showAlertWith(title: self.unableToLogin, message: self.noAccountOrInvalidCredentials)

@@ -9,7 +9,6 @@
 import Foundation
 
 enum UdacityError: Error {
-    case invalidJSONData
     case accountNotFoundOrInvalidCredentials
     case noConnection
     case uniqueKeyNotCreated
@@ -20,6 +19,9 @@ struct UdacityClient {
     
     static var udacityURLRequest: NSMutableURLRequest {
         return createUdacityURLRequest()
+    }
+    static var udacityUserIDURLRequest: NSMutableURLRequest {
+        return createUdacityUserIDURLRequest()
     }
     
     static func session(fromJSON data: Data) -> LoginResult {
@@ -35,6 +37,7 @@ struct UdacityClient {
             let account = parsedResult["account"],
             let keyValue = account["key"],
             let value: String = keyValue as? String  else {
+                print("Failed to create the unique key")
                 return .failure(UdacityError.uniqueKeyNotCreated)
         }
         
@@ -49,6 +52,13 @@ struct UdacityClient {
         request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.Udacity.ParameterKeys.Accept)
         request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
         
+        return request
+    }
+    
+    private static func createUdacityUserIDURLRequest() -> NSMutableURLRequest {
+        // "https://www.udacity.com/api/users/3903878747"
+        
+        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/users/\(Constants.LoggedInUser.uniqueKey)")!)
         return request
     }
 }

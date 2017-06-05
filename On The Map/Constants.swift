@@ -46,5 +46,13 @@ struct Constants {
         static let ApplicationJSON =  "application/json"
     }
     
+    // MARK: Login data
+    struct LoggedInUser {
+        static var firstName = ""
+        static var lastName = ""
+        // Stores the unique key created when logging in
+        static var uniqueKey = ""
+    }
+    
 }
 

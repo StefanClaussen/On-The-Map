@@ -61,7 +61,10 @@ class AddLocationViewController: UIViewController {
                 coordinatesLabel.text = "\(coordinate.latitude), \(coordinate.longitude)"
                 let latitude = Double(coordinate.latitude)
                 let longitude = Double(coordinate.longitude)
+                
                 let student = Student(firstName: "Bob", lastName: "Barker", latitude: latitude, longitude: longitude, mediaURL: "udacity.com")
+                
+                studentInformation.GETUser()
                 studentInformation.POSTStudentLocation(for: student)
             } else {
                 coordinatesLabel.text = "No Matching Location Found"
