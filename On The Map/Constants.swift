@@ -52,6 +52,7 @@ struct Constants {
         static var lastName = ""
         // Stores the unique key created when logging in
         static var uniqueKey = ""
+        static var mediaURL = ""
     }
     
 }

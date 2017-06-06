@@ -33,6 +33,9 @@ class AddLocationViewController: UIViewController {
         guard let country = countryTextField.text else { return }
         guard let street = streetTextField.text else { return }
         guard let city = cityTextField.text else { return }
+        //TODO: check the formatting of the url / url is valid
+        guard let mediaURL = websiteTextField.text else { return }
+        Constants.LoggedInUser.mediaURL = mediaURL
         
         let address = "\(country), \(city), \(street)"
         
@@ -66,7 +69,7 @@ class AddLocationViewController: UIViewController {
                     (loggedInStudent) -> Void in
                     switch loggedInStudent {
                     case .success(let student):
-                        let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: "https://udacity.com")
+                        let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
                         self.studentInformation.POSTStudentLocation(for: addStudent)
                     case .failure(let error):
                         print("failed to retrieve the names for the logged in user: \(error)")
