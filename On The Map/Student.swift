@@ -12,10 +12,10 @@ struct Student {
     //let createdAt: String
     let firstName: String
     let lastName: String
-    let latitude: Double
-    let longitude: Double
+    var latitude: Double?
+    var longitude: Double?
     //let mapString: String
-    let mediaURL: String
+    let mediaURL: String?
 //    let objectID: String
 //    let uniqueKey: Float
 //    let updatedAt: String

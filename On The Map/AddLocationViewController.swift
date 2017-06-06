@@ -62,10 +62,17 @@ class AddLocationViewController: UIViewController {
                 let latitude = Double(coordinate.latitude)
                 let longitude = Double(coordinate.longitude)
                 
-                let student = Student(firstName: "Bob", lastName: "Barker", latitude: latitude, longitude: longitude, mediaURL: "udacity.com")
-                
-                studentInformation.GETUser()
-                studentInformation.POSTStudentLocation(for: student)
+                studentInformation.GETUser {
+                    (loggedInStudent) -> Void in
+                    switch loggedInStudent {
+                    case .success(let student):
+                        let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: "https://udacity.com")
+                        self.studentInformation.POSTStudentLocation(for: addStudent)
+                    case .failure(let error):
+                        print("failed to retrieve the names for the logged in user: \(error)")
+                        return
+                    }
+                }
             } else {
                 coordinatesLabel.text = "No Matching Location Found"
             }

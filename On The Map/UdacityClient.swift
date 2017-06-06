@@ -44,6 +44,26 @@ struct UdacityClient {
         return .success(value)
     }
     
+    static func student(fromJSON data: Data) -> LoggedInStudent {
+        var parsedResult: [String: AnyObject]! = nil
+        do {
+            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
+        } catch {
+            print("could not parse the data as JSON: '\(data)'")
+            return .failure(UdacityError.parsingJSONFailed)
+        }
+        
+        
+        guard
+            let user = parsedResult["user"],
+            let firstName = user["first_name"] as? String,
+            let lastName = user["last_name"] as? String else {
+                return .failure(UdacityError.parsingJSONFailed)
+        }
+        let student = Student(firstName: firstName, lastName: lastName, latitude: nil, longitude: nil, mediaURL: nil)
+        return .success(student)
+    }
+    
     // MARK: - Private Methods
     
     private static func createUdacityURLRequest() -> NSMutableURLRequest {

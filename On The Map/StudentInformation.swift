@@ -13,6 +13,11 @@ enum StudentResult {
     case failure(Error)
 }
 
+enum LoggedInStudent {
+    case success(Student)
+    case failure(Error)
+}
+
 struct StudentInformation {
     let session = URLSession.shared
     
@@ -36,53 +41,37 @@ struct StudentInformation {
         return ParseClient.students(fromJSON: jsonData)
     }
     
-    func GETUser() {
+    func GETUser(completion: @escaping (LoggedInStudent) -> Void) {
         let request = UdacityClient.udacityUserIDURLRequest
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
             
-            self.processUserRequest(data: data, error: error)
+            let loggedInStudent = self.processUserRequest(data: data, error: error)
+            OperationQueue.main.addOperation {
+                completion(loggedInStudent)
+            }
         }
         task.resume()
     }
     
-    func processUserRequest(data: Data?, error: Error?) {
-        guard let data = data else {
-            print("No data was returned by the request")
-            return
+    func processUserRequest(data: Data?, error: Error?) -> LoggedInStudent {
+        guard let jsonData = data else {
+            return .failure(error!)
         }
+        let range = Range(5..<jsonData.count)
+        let newData = jsonData.subdata(in: range)
         
-        let range = Range(5..<data.count)
-        let newData = data.subdata(in: range)
-        
-        var parsedResult: [String: AnyObject]! = nil
-        do {
-            parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! [String: AnyObject]
-        } catch {
-            print("Could not parse the data as JSON: '\(data)'")
-        }
-        
-        guard
-            let user = parsedResult["user"],
-            let lastName = user["last_name"],
-            let firstName = user["first_name"] else {
-                print("Can not get value out of dictionary")
-                return
-        }
-        
-        Constants.LoggedInUser.firstName = firstName as! String
-        Constants.LoggedInUser.lastName = lastName as! String
-        
-        
-        print("Last name: \(Constants.LoggedInUser.lastName))")
-        print("First name: \(Constants.LoggedInUser.firstName))")
+        return UdacityClient.student(fromJSON: newData)
     }
     
     func POSTStudentLocation(for student: Student) {
         let request = ParseClient.parsePOSTURLRequest
-
         
-        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": \(student.latitude), \"longitude\": \(student.longitude)}".data(using: String.Encoding.utf8)
+        guard let latitude = student.latitude, let longitude = student.longitude else {
+            return
+        }
+        
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: String.Encoding.utf8)
         
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
