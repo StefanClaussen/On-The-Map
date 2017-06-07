@@ -64,6 +64,7 @@ class FindLocationViewController: UIViewController {
                 let latitude = Double(coordinate.latitude)
                 let longitude = Double(coordinate.longitude)
                 
+                //TODO: This will move out to the AddLocationViewController
                 studentInformation.GETUser {
                     (loggedInStudent) -> Void in
                     switch loggedInStudent {
