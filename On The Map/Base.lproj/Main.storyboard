@@ -185,13 +185,6 @@
                                     <constraint firstItem="k0I-Ik-uII" firstAttribute="height" secondItem="IrS-eo-VRh" secondAttribute="height" id="aNT-yc-K3u"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyM-pp-Z0J">
-                                <rect key="frame" x="16" y="567" width="343" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -209,7 +202,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cityTextField" destination="k0I-Ik-uII" id="dif-FY-UiP"/>
-                        <outlet property="coordinatesLabel" destination="zyM-pp-Z0J" id="BiB-BB-qJe"/>
                         <outlet property="countryTextField" destination="UUu-qE-qJQ" id="BAu-84-dKA"/>
                         <outlet property="findLocationButton" destination="oTf-RA-mqH" id="h3q-T8-rSO"/>
                         <outlet property="streetTextField" destination="IrS-eo-VRh" id="GM6-Fj-6SY"/>
@@ -218,7 +210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iSn-a9-nCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5996" y="446.62668665667172"/>
+            <point key="canvasLocation" x="5817" y="447"/>
         </scene>
         <!--Add Location-->
         <scene sceneID="qH4-GK-xMh">
@@ -244,14 +236,24 @@
                                     <action selector="finishAddingLocation:" destination="yZX-fN-kCq" eventType="touchUpInside" id="vjI-Be-Ie1"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyM-pp-Z0J">
+                                <rect key="frame" x="16" y="588" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Location" id="cvL-9T-h53"/>
+                    <connections>
+                        <outlet property="coordinatesLabel" destination="zyM-pp-Z0J" id="997-cE-Czu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tg5-1B-JKi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6820" y="446.62668665667172"/>
+            <point key="canvasLocation" x="6572" y="447"/>
         </scene>
         <!--On The Map-->
         <scene sceneID="89B-sF-7Hp">

@@ -7,18 +7,45 @@
 //
 
 import UIKit
+import CoreLocation
 
 class AddLocationViewController: UIViewController {
+    
+    @IBOutlet weak var coordinatesLabel: UILabel!
+    
+    var coordinate = CLLocationCoordinate2D()
+    
+    var studentInformation: StudentInformation {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        return delegate.studentInformation
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let latitude = Double(coordinate.latitude)
+        let longitude = Double(coordinate.longitude)
+        coordinatesLabel.text = "Latitude: \(latitude) | Longitude: \(longitude)"
+        
     }
 
     @IBAction func finishAddingLocation(_ sender: Any) {
-        // Think in the completion handler, this is where the
-        // logged in student's location will be sent to udacity server
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            let latitude = Double(self.coordinate.latitude)
+            let longitude = Double(self.coordinate.longitude)
+            
+            self.studentInformation.GETUser {
+                (loggedInStudent) -> Void in
+                switch loggedInStudent {
+                case .success(let student):
+                    let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
+                    self.studentInformation.POSTStudentLocation(for: addStudent)
+                case .failure(let error):
+                    print("failed to retrieve the names for the logged in user: \(error)")
+                    return
+                }
+            }
+        }
     }
 
 }

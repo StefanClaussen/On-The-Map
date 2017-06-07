@@ -15,15 +15,11 @@ class FindLocationViewController: UIViewController {
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
     @IBOutlet weak var websiteTextField: UITextField!
-    @IBOutlet weak var coordinatesLabel: UILabel!
     @IBOutlet weak var findLocationButton: UIButton!
     
     lazy var geocoder = CLGeocoder()
     
-    var studentInformation: StudentInformation {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        return delegate.studentInformation
-    }
+    var coordinate = CLLocationCoordinate2D()
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -50,7 +46,7 @@ class FindLocationViewController: UIViewController {
         
         if let error = error {
             print("Unable to Forward Geocode Address (\(error)")
-            coordinatesLabel.text = "Unable to find location for address"
+            // TODO: Handle failure to geocode address error in an alert.
         } else {
             var location: CLLocation?
             
@@ -59,26 +55,19 @@ class FindLocationViewController: UIViewController {
             }
             
             if let location = location {
-                let coordinate = location.coordinate
-                coordinatesLabel.text = "\(coordinate.latitude), \(coordinate.longitude)"
-                let latitude = Double(coordinate.latitude)
-                let longitude = Double(coordinate.longitude)
-                
-                //TODO: This will move out to the AddLocationViewController
-                studentInformation.GETUser {
-                    (loggedInStudent) -> Void in
-                    switch loggedInStudent {
-                    case .success(let student):
-                        let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
-                        self.studentInformation.POSTStudentLocation(for: addStudent)
-                    case .failure(let error):
-                        print("failed to retrieve the names for the logged in user: \(error)")
-                        return
-                    }
-                }
+                coordinate = location.coordinate
+    
             } else {
-                coordinatesLabel.text = "No Matching Location Found"
+                // Handle error, might be done above.
+                //coordinatesLabel.text = "No Matching Location Found"
             }
         }
+    }
+    
+    // MARK: Storyboard
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = segue.destination as! AddLocationViewController
+        controller.coordinate = self.coordinate
     }
 }
