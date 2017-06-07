@@ -12,6 +12,7 @@ import CoreLocation
 class AddLocationViewController: UIViewController {
     
     @IBOutlet weak var coordinatesLabel: UILabel!
+    @IBOutlet weak var urlTextField: UITextField!
     
     var coordinate = CLLocationCoordinate2D()
     
@@ -30,6 +31,10 @@ class AddLocationViewController: UIViewController {
     }
 
     @IBAction func finishAddingLocation(_ sender: Any) {
+        // Handle URL
+        guard let mediaURL = urlTextField.text else { return }
+        Constants.LoggedInUser.mediaURL = mediaURL
+        
         dismiss(animated: true) {
             let latitude = Double(self.coordinate.latitude)
             let longitude = Double(self.coordinate.longitude)

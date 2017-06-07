@@ -11,10 +11,8 @@ import CoreLocation
 
 class FindLocationViewController: UIViewController {
 
-    @IBOutlet weak var streetTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
-    @IBOutlet weak var websiteTextField: UITextField!
     @IBOutlet weak var findLocationButton: UIButton!
     
     lazy var geocoder = CLGeocoder()
@@ -27,12 +25,9 @@ class FindLocationViewController: UIViewController {
     
     @IBAction func findLocation(_ sender: Any) {
         guard let country = countryTextField.text else { return }
-        guard let street = streetTextField.text else { return }
         guard let city = cityTextField.text else { return }
-        guard let mediaURL = websiteTextField.text else { return }
-        Constants.LoggedInUser.mediaURL = mediaURL
         
-        let address = "\(country), \(city), \(street)"
+        let address = "\(country), \(city)"
         
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             self.processResponse(withPlacemarks: placemarks, error: error)
