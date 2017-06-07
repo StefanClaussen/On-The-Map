@@ -1,5 +1,5 @@
 //
-//  AddLocationViewController.swift
+//  FindLocationViewController.swift
 //  On The Map
 //
 //  Created by Stefan Claussen on 01/06/2017.
@@ -9,14 +9,14 @@
 import UIKit
 import CoreLocation
 
-class AddLocationViewController: UIViewController {
+class FindLocationViewController: UIViewController {
 
     @IBOutlet weak var streetTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
     @IBOutlet weak var websiteTextField: UITextField!
     @IBOutlet weak var coordinatesLabel: UILabel!
-    @IBOutlet weak var addLocationButton: UIButton!
+    @IBOutlet weak var findLocationButton: UIButton!
     
     lazy var geocoder = CLGeocoder()
     
@@ -29,11 +29,10 @@ class AddLocationViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func addLocation(_ sender: Any) {
+    @IBAction func findLocation(_ sender: Any) {
         guard let country = countryTextField.text else { return }
         guard let street = streetTextField.text else { return }
         guard let city = cityTextField.text else { return }
-        //TODO: check the formatting of the url / url is valid
         guard let mediaURL = websiteTextField.text else { return }
         Constants.LoggedInUser.mediaURL = mediaURL
         
@@ -42,12 +41,12 @@ class AddLocationViewController: UIViewController {
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             self.processResponse(withPlacemarks: placemarks, error: error)
         }
-        
-        addLocationButton.isHidden = true
+        // Hide button, so repeat geocode requests cannot be made
+        findLocationButton.isHidden = true
     }
     
     private func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
-        addLocationButton.isHidden = false
+        findLocationButton.isHidden = false
         
         if let error = error {
             print("Unable to Forward Geocode Address (\(error)")

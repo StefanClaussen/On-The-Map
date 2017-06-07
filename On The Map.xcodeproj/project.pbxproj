@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F83B420B1EE01B04002D8235 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B420A1EE01B04002D8235 /* AddLocationViewController.swift */; };
+		F83B420B1EE01B04002D8235 /* FindLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B420A1EE01B04002D8235 /* FindLocationViewController.swift */; };
 		F85F428A1ECF05A400D8619C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F42891ECF05A400D8619C /* Constants.swift */; };
 		F85F428C1ECF06FD00D8619C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F428B1ECF06FD00D8619C /* MapViewController.swift */; };
 		F85F428F1ECF0EA000D8619C /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F428E1ECF0EA000D8619C /* StudentInformation.swift */; };
@@ -43,7 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F83B420A1EE01B04002D8235 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
+		F83B420A1EE01B04002D8235 /* FindLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindLocationViewController.swift; sourceTree = "<group>"; };
 		F85F42891ECF05A400D8619C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F85F428B1ECF06FD00D8619C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F85F428E1ECF0EA000D8619C /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
@@ -179,7 +179,7 @@
 				F8DCB3971ED1A3D70029D015 /* ListTableViewController.swift */,
 				F8BAED071ECC552500644586 /* LoginViewController.swift */,
 				F85F428B1ECF06FD00D8619C /* MapViewController.swift */,
-				F83B420A1EE01B04002D8235 /* AddLocationViewController.swift */,
+				F83B420A1EE01B04002D8235 /* FindLocationViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -329,7 +329,7 @@
 				F85F428F1ECF0EA000D8619C /* StudentInformation.swift in Sources */,
 				F876C2671ED43AE40056CC6B /* LoginAuthentication.swift in Sources */,
 				F8BAECD51ECC4D6100644586 /* AppDelegate.swift in Sources */,
-				F83B420B1EE01B04002D8235 /* AddLocationViewController.swift in Sources */,
+				F83B420B1EE01B04002D8235 /* FindLocationViewController.swift in Sources */,
 				F85F42911ECF0EB200D8619C /* Student.swift in Sources */,
 				F85F428A1ECF05A400D8619C /* Constants.swift in Sources */,
 			);
