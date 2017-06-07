@@ -24,15 +24,14 @@ class FindLocationViewController: UIViewController {
     }
     
     @IBAction func findLocation(_ sender: Any) {
-        guard let country = countryTextField.text else { return }
-        guard let city = cityTextField.text else { return }
+        guard let country = countryTextField.text, let city = cityTextField.text else { return }
         
         let address = "\(country), \(city)"
         
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             self.processResponse(withPlacemarks: placemarks, error: error)
         }
-        // Hide button, so repeat geocode requests cannot be made
+        // Hide button to prevent repeated geocoding requests
         findLocationButton.isHidden = true
     }
     
