@@ -8,11 +8,13 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 class AddLocationViewController: UIViewController {
     
     @IBOutlet weak var coordinatesLabel: UILabel!
     @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var mapView: MKMapView!
     
     var coordinate = CLLocationCoordinate2D()
     
@@ -28,6 +30,7 @@ class AddLocationViewController: UIViewController {
         let longitude = Double(coordinate.longitude)
         coordinatesLabel.text = "Latitude: \(latitude) | Longitude: \(longitude)"
         
+        addMapAnnotations()
     }
 
     @IBAction func finishAddingLocation(_ sender: Any) {
@@ -51,6 +54,12 @@ class AddLocationViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func addMapAnnotations() {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        self.mapView.addAnnotation(annotation)
     }
 
 }

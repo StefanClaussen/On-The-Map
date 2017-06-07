@@ -258,6 +258,7 @@
                     <navigationItem key="navigationItem" title="Add Location" id="cvL-9T-h53"/>
                     <connections>
                         <outlet property="coordinatesLabel" destination="zyM-pp-Z0J" id="997-cE-Czu"/>
+                        <outlet property="mapView" destination="Kps-aH-zn0" id="6Qv-Bv-52p"/>
                         <outlet property="urlTextField" destination="YiM-SQ-y8i" id="hfY-gY-BT0"/>
                     </connections>
                 </viewController>
