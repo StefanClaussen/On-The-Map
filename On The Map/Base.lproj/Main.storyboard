@@ -240,6 +240,9 @@
                                 <rect key="frame" x="167" y="617" width="41" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Finish"/>
+                                <connections>
+                                    <action selector="finishAddingLocation:" destination="yZX-fN-kCq" eventType="touchUpInside" id="vjI-Be-Ie1"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -282,7 +285,13 @@
                             <outlet property="delegate" destination="xOT-fj-bUU" id="ncc-Jg-yPu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="On The Map" id="tDe-9a-GyD"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="tDe-9a-GyD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="QL7-8c-x0N">
+                            <connections>
+                                <segue destination="iSp-zy-4ON" kind="presentation" id="azW-TE-AMP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vPj-Be-Wtu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -374,4 +383,7 @@
         <image name="icon_world" width="52" height="67"/>
         <image name="logo-u" width="62" height="62"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="azW-TE-AMP"/>
+    </inferredMetricsTieBreakers>
 </document>
