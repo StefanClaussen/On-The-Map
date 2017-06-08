@@ -160,7 +160,6 @@
                                         <state key="normal" title="FIND LOCATION"/>
                                         <connections>
                                             <action selector="findLocation:" destination="6yW-HS-ekf" eventType="touchUpInside" id="HWl-wZ-Usq"/>
-                                            <segue destination="yZX-fN-kCq" kind="show" id="o7r-YG-a8a"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -198,7 +197,7 @@
         <!--Add Location-->
         <scene sceneID="qH4-GK-xMh">
             <objects>
-                <viewController id="yZX-fN-kCq" customClass="AddLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddLocationViewController" id="yZX-fN-kCq" customClass="AddLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Mq-5h-7I4"/>
                         <viewControllerLayoutGuide type="bottom" id="qVX-dt-2zT"/>
@@ -208,7 +207,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lEq-jE-vdx">
-                                <rect key="frame" x="0.0" y="94" width="375" height="543"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="587"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a website" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YiM-SQ-y8i">
                                         <rect key="frame" x="19" y="0.0" width="337.5" height="40"/>
@@ -232,7 +231,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMG-E5-q5e">
-                                        <rect key="frame" x="161" y="495" width="53" height="48"/>
+                                        <rect key="frame" x="161" y="495" width="53" height="92"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="FINISH"/>
                                         <connections>

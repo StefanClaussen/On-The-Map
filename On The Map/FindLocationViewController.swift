@@ -34,6 +34,10 @@ class FindLocationViewController: UIViewController {
         print("Coordinate value: \(locationCoordinates)")
         // Hide button to prevent repeated geocoding requests
         findLocationButton.isHidden = true
+        
+        let addLocationVC = storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
+        addLocationVC.coordinate = locationCoordinates
+        navigationController?.pushViewController(addLocationVC, animated: true)
     }
     
     private func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
@@ -60,11 +64,11 @@ class FindLocationViewController: UIViewController {
         }
     }
     
-    // MARK: Storyboard
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let controller = segue.destination as! AddLocationViewController
-        print("locationCoordinates in segue: \(locationCoordinates)")
-        controller.coordinate = locationCoordinates
-    }
+//    // MARK: Storyboard
+//    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let controller = segue.destination as! AddLocationViewController
+//        controller.coordinate = locationCoordinates
+//        print("locationCoordinates in segue: \(locationCoordinates)")
+//    }
 }
