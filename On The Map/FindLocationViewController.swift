@@ -16,21 +16,22 @@ class FindLocationViewController: UIViewController {
     @IBOutlet weak var findLocationButton: UIButton!
     
     lazy var geocoder = CLGeocoder()
-    
-    var coordinate = CLLocationCoordinate2D()
+    var locationCoordinates = CLLocationCoordinate2D()
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func findLocation(_ sender: Any) {
-        guard let country = countryTextField.text, let city = cityTextField.text else { return }
+        guard let country = countryTextField.text else { return }
+        guard let city = cityTextField.text else { return }
         
         let address = "\(country), \(city)"
         
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             self.processResponse(withPlacemarks: placemarks, error: error)
         }
+        print("Coordinate value: \(locationCoordinates)")
         // Hide button to prevent repeated geocoding requests
         findLocationButton.isHidden = true
     }
@@ -48,12 +49,13 @@ class FindLocationViewController: UIViewController {
                 location = placemarks.first?.location
             }
             
-            if let location = location {
-                coordinate = location.coordinate
-    
+            if let unwrappedLocation = location {
+                let coordinate = unwrappedLocation.coordinate
+                locationCoordinates = coordinate
+                print("locationCoordinates: \(locationCoordinates)")
             } else {
                 // Handle error, might be done above.
-                //coordinatesLabel.text = "No Matching Location Found"
+                print("No Matching Location Found")
             }
         }
     }
@@ -62,6 +64,7 @@ class FindLocationViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let controller = segue.destination as! AddLocationViewController
-        controller.coordinate = self.coordinate
+        print("locationCoordinates in segue: \(locationCoordinates)")
+        controller.coordinate = locationCoordinates
     }
 }

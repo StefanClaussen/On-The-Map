@@ -26,6 +26,8 @@ class AddLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("Coordinates are: \(coordinate)")
+        
         let latitude = Double(coordinate.latitude)
         let longitude = Double(coordinate.longitude)
         coordinatesLabel.text = "Latitude: \(latitude) | Longitude: \(longitude)"
