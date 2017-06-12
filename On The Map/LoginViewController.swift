@@ -55,8 +55,8 @@ class LoginViewController: UIViewController {
     
     private func completeLogin() {
         DispatchQueue.main.async {
-            let controller = self.storyboard?.instantiateViewController(withIdentifier: "OTMTabBarController") as! UITabBarController
-            self.present(controller, animated: true, completion: nil)
+            let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "OTMTabBarController") as! UITabBarController
+            self.present(tabBarController, animated: true, completion: nil)
         }
     }
     

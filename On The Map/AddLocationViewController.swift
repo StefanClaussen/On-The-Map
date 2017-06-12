@@ -78,9 +78,8 @@ class AddLocationViewController: UIViewController {
     }
     
     private func exitScene() {
-        // Dismiss the controller
         DispatchQueue.main.async {
-            self.dismiss(animated: true, completion: nil)
+            // TODO: Need to transition somehow to the previously showing vc contained in the tab bars
         }
     }
     

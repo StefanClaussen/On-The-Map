@@ -38,6 +38,27 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    @IBAction func addLocation(_ sender: Any) {
+//        if Constants.CurrentUser.objectId == "" {
+//            displayFindLocationVC()
+//        } else {
+            let title = "Student has a location"
+            let message = "\(Constants.LoggedInUser.firstName) \(Constants.LoggedInUser.lastName) has posted a student location. Would you like to overwrite the existing location?"
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Overwrite", style: .default   ) {
+                action in
+                self.displayFindLocationVC()
+            })
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            present(alert, animated: true, completion: (displayFindLocationVC))
+        //}
+    }
+    
+    func displayFindLocationVC() {
+        let findLocationVC = storyboard?.instantiateViewController(withIdentifier: "FindLocation") as! FindLocationViewController
+        present(findLocationVC, animated: true, completion: nil)
+    }
+    
     func addMapAnnotations(for students: [Student]) {
         
         var annotations = [MKPointAnnotation]()
