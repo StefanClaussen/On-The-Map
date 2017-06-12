@@ -21,6 +21,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        retrieveStudentsLocations()
+    }
+    
+    func retrieveStudentsLocations() {
         studentInformation.GETStudentLocation {
             (studentsResult) -> Void in
             
