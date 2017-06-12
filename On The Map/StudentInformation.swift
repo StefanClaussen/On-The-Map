@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum StudentResult {
+enum StudentsResult {
     case success([Student])
     case failure(Error)
 }
@@ -18,15 +18,20 @@ enum LoggedInStudent {
     case failure(Error)
 }
 
+enum StudentResult {
+    case success(String)
+    case failure(Error)
+}
+
 struct StudentInformation {
     let session = URLSession.shared
     
-    func GETStudentLocation(completion: @escaping (StudentResult) -> Void) {
+    func GETStudentLocation(completion: @escaping (StudentsResult) -> Void) {
         let request = ParseClient.parseURLRequest
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
             
-            let results = self.processStudentLocationRequest(data: data, error: error)
+            let results = self.processGETStudentLocationRequest(data: data, error: error)
             OperationQueue.main.addOperation {
                 completion(results)
             }
@@ -34,7 +39,7 @@ struct StudentInformation {
         task.resume()
     }
     
-    func processStudentLocationRequest(data: Data?, error: Error?) -> StudentResult {
+    func processGETStudentLocationRequest(data: Data?, error: Error?) -> StudentsResult {
         guard let jsonData = data else {
             return .failure(error!)
         }
@@ -80,9 +85,17 @@ struct StudentInformation {
                 print("Unable to post student location")
                 return
             }
+            
             print("Posting student: \(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)")
         }
         task.resume()
+    }
+    
+    func processPOSTStudentLocationRequest(data: Data?, error: Error?) -> StudentResult {
+        guard let jsonData = data else {
+            return StudentResult.failure(error!)
+        }
+        return ParseClient.student(fromJSON: jsonData)
     }
     
 }
