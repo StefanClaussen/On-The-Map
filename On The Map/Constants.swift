@@ -55,5 +55,10 @@ struct Constants {
         static var mediaURL = ""
     }
     
+    // MARK: CurrentUser {
+    struct CurrentUser {
+        static var objectId = ""
+    }
+    
 }
 

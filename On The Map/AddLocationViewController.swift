@@ -32,6 +32,12 @@ class AddLocationViewController: UIViewController {
         
         addMapAnnotations()
     }
+    
+    func addMapAnnotations() {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        self.mapView.addAnnotation(annotation)
+    }
 
     @IBAction func finishAddingLocation(_ sender: Any) {
         // Handle URL
@@ -47,7 +53,7 @@ class AddLocationViewController: UIViewController {
                 switch loggedInStudent {
                 case .success(let student):
                     let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
-                    self.studentInformation.POSTStudentLocation(for: addStudent)
+                    self.studentInformation.POSTStudentLocation(for: addStudent, completion: self.processStudentResult)
                 case .failure(let error):
                     print("failed to retrieve the names for the logged in user: \(error)")
                     return
@@ -56,10 +62,28 @@ class AddLocationViewController: UIViewController {
         }
     }
     
-    func addMapAnnotations() {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        self.mapView.addAnnotation(annotation)
+    // MARK: Helper methods
+    
+    private func processStudentResult(_ studentResult: StudentResult) {
+        switch studentResult {
+        case .success(let objectId):
+            Constants.CurrentUser.objectId = objectId
+            print(Constants.CurrentUser.objectId)
+            self.exitScene()
+        case .failure(ParseError.objectIDNotCreated):
+            print("ObjectId not created")
+        default:
+            print("Something went wrong when creating the objectID")
+        }
     }
+    
+    private func exitScene() {
+        // Dismiss the controller
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
 
 }

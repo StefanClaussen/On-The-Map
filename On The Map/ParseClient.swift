@@ -28,7 +28,7 @@ struct ParseClient {
         var parsedResult: [String: AnyObject]! = nil
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
-        } catch let error {
+        } catch {
             print("ParseClient.student method: Could not parse the data as JSON")
             return .failure(ParseError.parsingJSONFailed)
         }
@@ -37,7 +37,7 @@ struct ParseClient {
             print("Failed to create objectId")
             return .failure(ParseError.objectIDNotCreated)
         }
-        
+        print("ObjectID retrieved: \(objectID)")
         return .success(objectID)
     }
     

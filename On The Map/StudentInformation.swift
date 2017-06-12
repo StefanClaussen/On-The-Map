@@ -69,7 +69,7 @@ struct StudentInformation {
         return UdacityClient.student(fromJSON: newData)
     }
     
-    func POSTStudentLocation(for student: Student) {
+    func POSTStudentLocation(for student: Student, completion: @escaping (StudentResult) -> Void) {
         let request = ParseClient.parsePOSTURLRequest
         
         guard let latitude = student.latitude, let longitude = student.longitude else {
@@ -87,6 +87,10 @@ struct StudentInformation {
             }
             
             print("Posting student: \(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)")
+            let studentWithObjectId = self.processPOSTStudentLocationRequest(data: data, error: error)
+            OperationQueue.main.addOperation {
+                completion(studentWithObjectId)
+            }
         }
         task.resume()
     }
