@@ -31,10 +31,13 @@ class FindLocationViewController: UIViewController {
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             self.processResponse(withPlacemarks: placemarks, error: error)
         }
-        print("Coordinate value: \(locationCoordinates)")
+        
         // Hide button to prevent repeated geocoding requests
         findLocationButton.isHidden = true
-        
+
+    }
+    
+    private func displayAddLocationVC() {
         let addLocationVC = storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
         addLocationVC.coordinate = locationCoordinates
         navigationController?.pushViewController(addLocationVC, animated: true)
@@ -56,19 +59,12 @@ class FindLocationViewController: UIViewController {
             if let unwrappedLocation = location {
                 let coordinate = unwrappedLocation.coordinate
                 locationCoordinates = coordinate
-                print("locationCoordinates: \(locationCoordinates)")
+                displayAddLocationVC()
             } else {
                 // Handle error, might be done above.
                 print("No Matching Location Found")
             }
         }
     }
-    
-//    // MARK: Storyboard
-//    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let controller = segue.destination as! AddLocationViewController
-//        controller.coordinate = locationCoordinates
-//        print("locationCoordinates in segue: \(locationCoordinates)")
-//    }
+
 }
