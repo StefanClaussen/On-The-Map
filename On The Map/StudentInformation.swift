@@ -18,7 +18,7 @@ enum LoggedInStudent {
     case failure(Error)
 }
 
-enum StudentResult {
+enum ObjectId {
     case success(String)
     case failure(Error)
 }
@@ -69,7 +69,7 @@ struct StudentInformation {
         return UdacityClient.student(fromJSON: newData)
     }
     
-    func POSTStudentLocation(for student: Student, completion: @escaping (StudentResult) -> Void) {
+    func POSTStudentLocation(for student: Student, completion: @escaping (ObjectId) -> Void) {
         let request = ParseClient.parsePOSTURLRequest
         
         guard let latitude = student.latitude, let longitude = student.longitude else {
@@ -86,7 +86,6 @@ struct StudentInformation {
                 return
             }
             
-            print("Posting student: \(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)")
             let studentWithObjectId = self.processPOSTStudentLocationRequest(data: data, error: error)
             OperationQueue.main.addOperation {
                 completion(studentWithObjectId)
@@ -95,11 +94,11 @@ struct StudentInformation {
         task.resume()
     }
     
-    func processPOSTStudentLocationRequest(data: Data?, error: Error?) -> StudentResult {
+    func processPOSTStudentLocationRequest(data: Data?, error: Error?) -> ObjectId {
         guard let jsonData = data else {
-            return StudentResult.failure(error!)
+            return ObjectId.failure(error!)
         }
-        return ParseClient.student(fromJSON: jsonData)
+        return ParseClient.objectId(fromJSON: jsonData)
     }
     
 }

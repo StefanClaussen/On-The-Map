@@ -53,7 +53,7 @@ class AddLocationViewController: UIViewController {
                 switch loggedInStudent {
                 case .success(let student):
                     let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
-                    self.studentInformation.POSTStudentLocation(for: addStudent, completion: self.processStudentResult)
+                    self.studentInformation.POSTStudentLocation(for: addStudent, completion: self.processStudentObjectIdResult)
                 case .failure(let error):
                     print("failed to retrieve the names for the logged in user: \(error)")
                     return
@@ -64,13 +64,13 @@ class AddLocationViewController: UIViewController {
     
     // MARK: Helper methods
     
-    private func processStudentResult(_ studentResult: StudentResult) {
-        switch studentResult {
+    private func processStudentObjectIdResult(_ objectId: ObjectId) {
+        switch objectId {
         case .success(let objectId):
             Constants.CurrentUser.objectId = objectId
             print(Constants.CurrentUser.objectId)
             self.exitScene()
-        case .failure(ParseError.objectIDNotCreated):
+        case .failure(ParseError.objectIdNotRetrieved):
             print("ObjectId not created")
         default:
             print("Something went wrong when creating the objectID")

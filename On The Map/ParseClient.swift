@@ -11,7 +11,7 @@ import Foundation
 enum ParseError: Error {
     case invalidJSONData
     case parsingJSONFailed
-    case objectIDNotCreated
+    case objectIdNotRetrieved
 }
 
 struct ParseClient {
@@ -24,20 +24,18 @@ struct ParseClient {
         return createParsePOSTURLRequest() 
     }
     
-    static func student(fromJSON data: Data) -> StudentResult {
+    static func objectId(fromJSON data: Data) -> ObjectId {
         var parsedResult: [String: AnyObject]! = nil
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
         } catch {
-            print("ParseClient.student method: Could not parse the data as JSON")
             return .failure(ParseError.parsingJSONFailed)
         }
         
         guard let objectID = parsedResult["objectId"] as? String else {
-            print("Failed to create objectId")
-            return .failure(ParseError.objectIDNotCreated)
+            return .failure(ParseError.objectIdNotRetrieved)
         }
-        print("ObjectID retrieved: \(objectID)")
+        
         return .success(objectID)
     }
     
