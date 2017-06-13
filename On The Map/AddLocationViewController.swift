@@ -32,6 +32,9 @@ class AddLocationViewController: UIViewController {
         
         addMapAnnotations()
     }
+    @IBAction func findLocationBackButtonPressed(_ sender: Any) {
+        
+    }
     
     func addMapAnnotations() {
         let annotation = MKPointAnnotation()
@@ -78,12 +81,12 @@ class AddLocationViewController: UIViewController {
     }
     
     private func exitScene() {
-        let controller = self.storyboard?.instantiateViewController(withIdentifier: "OTMTabBarController")
-        self.present(controller!, animated: true, completion: nil)
         DispatchQueue.main.async {
             // TODO: Need to transition somehow to the previously showing vc contained in the tab bars
-//            let controller = self.storyboard?.instantiateViewController(withIdentifier: "OTMTabBarController")
-//            self.present(controller!, animated: true, completion: nil)
+            
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "OTMTabBarController")
+            let navigationController = UINavigationController(rootViewController: viewController!)
+            self.present(navigationController, animated: true, completion: nil)
         }
     }
     
