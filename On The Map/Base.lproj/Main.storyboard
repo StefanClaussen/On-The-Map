@@ -121,6 +121,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="On The Map" id="8HX-5k-Bgw">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="HJW-nr-0EY">
+                            <connections>
+                                <action selector="logout:" destination="nei-SC-HvY" id="zq2-GT-jdB"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="icon_addpin" id="EyK-d5-UMW">
                             <connections>
                                 <action selector="addLocation:" destination="nei-SC-HvY" id="xTO-dN-vmw"/>

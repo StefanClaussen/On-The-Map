@@ -12,6 +12,11 @@ enum LoginResult {
     case success(String)
     case failure(Error)
 }
+// TODO: This seems overkill, based on what it is doing.
+enum LogoutResult {
+    case success
+    case failure
+}
 
 struct LoginAuthentication {
     
@@ -40,6 +45,47 @@ struct LoginAuthentication {
         let newData = data.subdata(in: range)
         
         return UdacityClient.session(fromJSON: newData)
+    }
+    
+    func DELETESession(completion: @escaping (LogoutResult) -> Void) {
+        let request = UdacityClient.deleteSessionURLRequest
+        
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            
+            let result = self.processDELETESessionRequest(data: data, error: error)
+            OperationQueue.main.addOperation {
+                completion(result)
+            }
+            
+            
+            if error != nil { // Handle error…
+                return
+            }
+            let range = Range(5..<data!.count)
+            let newData = data?.subdata(in: range) /* subset response data! */
+            print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
+        }
+        task.resume()
+        
+    }
+    
+    func processDELETESessionRequest(data: Data?, error: Error?) -> LogoutResult {
+        guard let data = data else {
+            return .failure
+        }
+        let range = Range(5..<data.count)
+        let newData = data.subdata(in: range)
+        
+        return UdacityClient.deleteSession(fromJSON: newData)
     }
 }
 

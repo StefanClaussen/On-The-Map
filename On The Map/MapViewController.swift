@@ -17,6 +17,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         return delegate.studentInformation
     }
+    
+    var loginAuthentication = LoginAuthentication()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +36,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 self.addMapAnnotations(for: students)
             case .failure:
                 self.showAlertGETStudentLocationFailed()
+            }
+        }
+    }
+    
+    @IBAction func logout(_ sender: Any) {
+        // TODO: Will need to use the completion handler to return to the login page
+        loginAuthentication.DELETESession {
+            (logoutResult) in
+            switch logoutResult {
+            case .success:
+                print("Successfully logged out")
+                self.dismiss(animated: true, completion: nil)
+            case .failure:
+                print("Failed to logout")
             }
         }
     }

@@ -23,6 +23,9 @@ struct UdacityClient {
     static var udacityUserIDURLRequest: NSMutableURLRequest {
         return createUdacityUserIDURLRequest()
     }
+    static var deleteSessionURLRequest: NSMutableURLRequest {
+        return createUdacityDELETEURLRequest()
+    }
     
     static func session(fromJSON data: Data) -> LoginResult {
         var parsedResult: [String: AnyObject]! = nil
@@ -64,6 +67,17 @@ struct UdacityClient {
         return .success(student)
     }
     
+    static func deleteSession(fromJSON data: Data) -> LogoutResult {
+        var parsedResult: [String: AnyObject]! = nil
+        do {
+            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
+        } catch {
+            return .failure
+        }
+        
+        return .success
+    }
+    
     // MARK: - Private Methods
     
     private static func createUdacityURLRequest() -> NSMutableURLRequest {
@@ -79,6 +93,12 @@ struct UdacityClient {
         // "https://www.udacity.com/api/users/3903878747"
         
         let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/users/\(Constants.LoggedInUser.uniqueKey)")!)
+        return request
+    }
+    
+    private static func createUdacityDELETEURLRequest() -> NSMutableURLRequest {
+        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+        request.httpMethod = "DELETE"
         return request
     }
 }
