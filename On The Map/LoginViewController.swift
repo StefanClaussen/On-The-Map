@@ -13,11 +13,20 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    // MARK: - Alert Titles
     let unableToLogin = "Unable to login"
+    let signUpPageNotFound = "Sign Up Page Not Found"
+    
+    // MARK: - Alert Messages
     let noAccountOrInvalidCredentials = "\nMake sure your email and password are correct\n\nOR\n\nSign up for an account if you do not have one"
     let noConnection = "\nA connection could not be made. Check your internet connection."
-    let unknown = "Something unexpected happened. Try logging in again."
+    let unknown = "Something unexpected happened. Try again now or later."
+    let noSignUpPage = "Visit www.udacity.com to sign up."
+    
+    
+    // MARK: - Alert Actions
     let tryAgain = "Try Again"
+    let okay = "Okay"
     
     var loginAuthentication = LoginAuthentication()
         
@@ -31,11 +40,22 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginPressed(_ sender: Any) {
         if let information = alertDetails(emailTextField.text, passwordTextField.text) {
-            showAlertWith(title: information.title, message: information.message)
+            showAlertWith(title: information.title, message: information.message, actionTitle: tryAgain)
         } else {
             loginAuthentication.POSTSessionFor(email: emailTextField.text!, password: passwordTextField.text!, completion: (self.processLoginResult))
         }
     }
+    
+    @IBAction func signUpPressed(_ sender: Any) {
+        guard
+            let url = URL(string: Constants.Udacity.signUpPage),
+            UIApplication.shared.canOpenURL(url) else {
+                showAlertWith(title: signUpPageNotFound, message: noSignUpPage, actionTitle: okay)
+                return
+        }
+        UIApplication.shared.open(url as URL)
+    }
+    
     
     // MARK: Helper methods
     
@@ -45,11 +65,11 @@ class LoginViewController: UIViewController {
             Constants.LoggedInUser.uniqueKey = key
             self.completeLogin()
         case .failure(UdacityError.accountNotFoundOrInvalidCredentials):
-            self.showAlertWith(title: self.unableToLogin, message: self.noAccountOrInvalidCredentials)
+            self.showAlertWith(title: self.unableToLogin, message: self.noAccountOrInvalidCredentials, actionTitle: tryAgain)
         case .failure(UdacityError.noConnection):
-            self.showAlertWith(title: self.unableToLogin, message: self.noConnection)
+            self.showAlertWith(title: self.unableToLogin, message: self.noConnection, actionTitle: tryAgain)
         default:
-            self.showAlertWith(title: self.unableToLogin, message: self.unknown)
+            self.showAlertWith(title: self.unableToLogin, message: self.unknown, actionTitle: tryAgain)
         }
     }
     
@@ -77,9 +97,9 @@ class LoginViewController: UIViewController {
         return (title, message)
     }
     
-    private func showAlertWith(title: String, message: String) {
+    private func showAlertWith(title: String, message: String, actionTitle: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: tryAgain, style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: nil))
         present(alert, animated: true, completion: {
             self.emailTextField.text = nil
             self.passwordTextField.text = nil
