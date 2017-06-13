@@ -40,7 +40,7 @@ class FindLocationViewController: UIViewController {
     private func displayAddLocationVC() {
         let addLocationVC = storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
         addLocationVC.coordinate = locationCoordinates
-        showDetailViewController(addLocationVC, sender: self)
+        present(addLocationVC, animated: true, completion: nil)
     }
     
     private func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
