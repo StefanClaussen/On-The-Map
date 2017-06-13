@@ -41,7 +41,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func logout(_ sender: Any) {
-        // TODO: Will need to use the completion handler to return to the login page
         loginAuthentication.DELETESession {
             (logoutResult) in
             switch logoutResult {
