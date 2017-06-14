@@ -23,6 +23,11 @@ enum ObjectId {
     case failure(Error)
 }
 
+enum UpdateStudentLocation {
+    case success(String)
+    case failure(Error)
+}
+
 struct StudentInformation {
     let session = URLSession.shared
     
@@ -99,6 +104,33 @@ struct StudentInformation {
             return ObjectId.failure(error!)
         }
         return ParseClient.objectId(fromJSON: jsonData)
+    }
+    
+    func PUTStudentLocation(for student: Student, completion: @escaping (UpdateStudentLocation) -> Void) {
+        let request = ParseClient.parsePUTURLRequest
+        
+        guard let latitude = student.latitude, let longitude = student.longitude else {
+            return
+        }
+        
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: String.Encoding.utf8)
+        
+        let task = session.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            let studentLocation = self.processPUTStudentLocationRequest(data: data, error: error)
+            OperationQueue.main.addOperation {
+                completion(studentLocation)
+            }
+        }
+        task.resume()
+    }
+    
+    func processPUTStudentLocationRequest(data: Data?, error: Error?) -> UpdateStudentLocation {
+        guard let jsonData = data else {
+            return UpdateStudentLocation.failure(error!)
+        }
+        return ParseClient.updateStudentLocation(fromJSON: jsonData)
     }
     
 }

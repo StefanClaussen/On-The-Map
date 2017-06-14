@@ -55,7 +55,11 @@ class AddLocationViewController: UIViewController {
             switch loggedInStudent {
             case .success(let student):
                 let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
-                self.studentInformation.POSTStudentLocation(for: addStudent, completion: self.processStudentObjectIdResult)
+                if Constants.CurrentUser.objectId == "" {
+                    self.studentInformation.POSTStudentLocation(for: addStudent, completion: self.processStudentObjectIdResult)
+                } else {
+                    self.studentInformation.PUTStudentLocation(for: addStudent, completion: self.processUpdateStudentLocationResult)
+                }
             case .failure(let error):
                 print("failed to retrieve the names for the logged in user: \(error)")
                 return
@@ -75,6 +79,18 @@ class AddLocationViewController: UIViewController {
             print("ObjectId not created")
         default:
             print("Something went wrong when creating the objectID")
+        }
+    }
+    
+    private func processUpdateStudentLocationResult(_ updateStudentLocation: UpdateStudentLocation) {
+        switch updateStudentLocation {
+        case .success(let date):
+            print("Successfully updated student location: \(date)")
+            exitScene()
+        case .failure(ParseError.studentLocationNotUpdated):
+            print("Student location not updated")
+        default:
+            print("Something went wrong when updating the student location")
         }
     }
     

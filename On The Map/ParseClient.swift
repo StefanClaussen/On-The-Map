@@ -12,6 +12,7 @@ enum ParseError: Error {
     case invalidJSONData
     case parsingJSONFailed
     case objectIdNotRetrieved
+    case studentLocationNotUpdated
 }
 
 struct ParseClient {
@@ -22,6 +23,10 @@ struct ParseClient {
     
     static var parsePOSTURLRequest: NSMutableURLRequest {
         return createParsePOSTURLRequest() 
+    }
+    
+    static var parsePUTURLRequest: NSMutableURLRequest {
+        return createPUTURLRequest()
     }
     
     static func objectId(fromJSON data: Data) -> ObjectId {
@@ -37,6 +42,20 @@ struct ParseClient {
         }
         
         return .success(objectID)
+    }
+    
+    static func updateStudentLocation(fromJSON data: Data) -> UpdateStudentLocation {
+        var parsedResult: [String: AnyObject]! = nil
+        do {
+            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
+        } catch {
+            return .failure(ParseError.parsingJSONFailed)
+        }
+        
+        guard let updateDate = parsedResult["updatedAt"] as? String else {
+            return .failure(ParseError.studentLocationNotUpdated)
+        }
+        return .success(updateDate)
     }
     
     static func students(fromJSON data: Data) -> StudentsResult {
@@ -96,6 +115,20 @@ struct ParseClient {
         request.httpMethod = "POST"
         request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
 
+        return request
+    }
+    
+    private static func createPUTURLRequest() -> NSMutableURLRequest {
+        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.CurrentUser.objectId)"
+        let url = URL(string: urlString)
+        let request = NSMutableURLRequest(url: url!)
+        
+        request.httpMethod = "PUT"
+        
+        request.addValue(Constants.Parse.ParameterValues.ApplicationID, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApplicationID)
+        request.addValue(Constants.Parse.ParameterValues.ApiKey, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApiKey)
+        request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
+        
         return request
     }
     
