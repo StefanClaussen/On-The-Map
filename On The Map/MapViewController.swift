@@ -39,7 +39,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             switch studentsResult {
             case let .success(students):
-                print("Student count is: \(students.count)")
                 self.addMapAnnotations(for: students)
             case .failure:
                 self.showAlertGETStudentLocationFailed()
@@ -58,6 +57,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 print("Failed to logout")
             }
         }
+    }
+    
+    @IBAction func refreshMap(_ sender: Any) {
+        retrieveStudentsLocations()
     }
     
     @IBAction func addLocation(_ sender: Any) {
