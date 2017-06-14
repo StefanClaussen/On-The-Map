@@ -12,6 +12,7 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var addLocationButton: UIBarButtonItem!
     
     var studentInformation: StudentInformation {
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -62,11 +63,24 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Overwrite", style: .default   ) {
                 action in
-                self.displayFindLocationVC()
+                self.segueToMap()
             })
+        
+        
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            present(alert, animated: true, completion: (displayFindLocationVC))
-        //}
+            present(alert, animated: true, completion: (segueToMap))
+        
+    }
+    
+    func segueToMap() {
+        self.performSegue(withIdentifier: "MapToFindLocation", sender: self)
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "MapToFindLocation" {
+            
+        }
     }
     
     func displayFindLocationVC() {

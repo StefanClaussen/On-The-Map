@@ -133,7 +133,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addLocationButton" destination="EyK-d5-UMW" id="l5c-UE-5Vg"/>
                         <outlet property="mapView" destination="dtr-qd-dtV" id="fg7-QS-OUz"/>
+                        <segue destination="6yW-HS-ekf" kind="show" identifier="MapToFindLocation" id="Jmu-HM-bbm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KbG-AP-HD3" userLabel="First Responder" sceneMemberID="firstResponder"/>

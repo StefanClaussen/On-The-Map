@@ -47,22 +47,26 @@ class AddLocationViewController: UIViewController {
         guard let mediaURL = urlTextField.text else { return }
         Constants.LoggedInUser.mediaURL = mediaURL
         
-        dismiss(animated: true) {
-            let latitude = Double(self.coordinate.latitude)
-            let longitude = Double(self.coordinate.longitude)
-            
-            self.studentInformation.GETUser {
-                (loggedInStudent) -> Void in
-                switch loggedInStudent {
-                case .success(let student):
-                    let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
-                    self.studentInformation.POSTStudentLocation(for: addStudent, completion: self.processStudentObjectIdResult)
-                case .failure(let error):
-                    print("failed to retrieve the names for the logged in user: \(error)")
-                    return
-                }
-            }
-        }
+        exitScene()
+        
+        
+        
+//        dismiss(animated: true) {
+//            let latitude = Double(self.coordinate.latitude)
+//            let longitude = Double(self.coordinate.longitude)
+//            
+//            self.studentInformation.GETUser {
+//                (loggedInStudent) -> Void in
+//                switch loggedInStudent {
+//                case .success(let student):
+//                    let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
+//                    self.studentInformation.POSTStudentLocation(for: addStudent, completion: self.processStudentObjectIdResult)
+//                case .failure(let error):
+//                    print("failed to retrieve the names for the logged in user: \(error)")
+//                    return
+//                }
+//            }
+//        }
     }
     
     // MARK: Helper methods
@@ -82,11 +86,9 @@ class AddLocationViewController: UIViewController {
     
     private func exitScene() {
         DispatchQueue.main.async {
-            // TODO: Need to transition somehow to the previously showing vc contained in the tab bars
-            
-            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "OTMTabBarController")
-            let navigationController = UINavigationController(rootViewController: viewController!)
-            self.present(navigationController, animated: true, completion: nil)
+            if let controllers = self.navigationController?.viewControllers {
+                self.navigationController?.popToViewController(controllers[controllers.count - 3], animated: true)
+            }
         }
     }
     
