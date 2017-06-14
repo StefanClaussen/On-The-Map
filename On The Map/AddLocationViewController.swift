@@ -69,7 +69,7 @@ class AddLocationViewController: UIViewController {
         switch objectId {
         case .success(let objectId):
             Constants.CurrentUser.objectId = objectId
-            print(Constants.CurrentUser.objectId)
+            print("Object id: \(Constants.CurrentUser.objectId)")
             exitScene()
         case .failure(ParseError.objectIdNotRetrieved):
             print("ObjectId not created")

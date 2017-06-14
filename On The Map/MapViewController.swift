@@ -55,9 +55,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func addLocation(_ sender: Any) {
-//        if Constants.CurrentUser.objectId == "" {
-//            displayFindLocationVC()
-//        } else {
+        // TODO: Am checking that it is equal to the default value. This seems fragile.
+        if Constants.CurrentUser.objectId == "" {
+            segueToMap()
+        } else {
             let title = "Student has a location"
             let message = "\(Constants.LoggedInUser.firstName) \(Constants.LoggedInUser.lastName) has posted a student location. Would you like to overwrite the existing location?"
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -65,11 +66,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 action in
                 self.segueToMap()
             })
-        
-        
+            
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             present(alert, animated: true, completion: (segueToMap))
-        
+        }
     }
     
     func segueToMap() {
@@ -82,12 +82,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
         }
     }
-    
-    func displayFindLocationVC() {
-        let findLocationVC = storyboard?.instantiateViewController(withIdentifier: "FindLocation") as! FindLocationViewController
-        present(findLocationVC, animated: true, completion: nil)
-    }
-    
+        
     func addMapAnnotations(for students: [Student]) {
         
         var annotations = [MKPointAnnotation]()
