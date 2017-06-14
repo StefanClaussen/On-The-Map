@@ -43,30 +43,24 @@ class AddLocationViewController: UIViewController {
     }
 
     @IBAction func finishAddingLocation(_ sender: Any) {
-        // Handle URL
+        // TODO: Handle empty or invalid URL
         guard let mediaURL = urlTextField.text else { return }
         Constants.LoggedInUser.mediaURL = mediaURL
         
-        exitScene()
-        
-        
-        
-//        dismiss(animated: true) {
-//            let latitude = Double(self.coordinate.latitude)
-//            let longitude = Double(self.coordinate.longitude)
-//            
-//            self.studentInformation.GETUser {
-//                (loggedInStudent) -> Void in
-//                switch loggedInStudent {
-//                case .success(let student):
-//                    let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
-//                    self.studentInformation.POSTStudentLocation(for: addStudent, completion: self.processStudentObjectIdResult)
-//                case .failure(let error):
-//                    print("failed to retrieve the names for the logged in user: \(error)")
-//                    return
-//                }
-//            }
-//        }
+        let latitude = Double(self.coordinate.latitude)
+        let longitude = Double(self.coordinate.longitude)
+
+        self.studentInformation.GETUser {
+            (loggedInStudent) -> Void in
+            switch loggedInStudent {
+            case .success(let student):
+                let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
+                self.studentInformation.POSTStudentLocation(for: addStudent, completion: self.processStudentObjectIdResult)
+            case .failure(let error):
+                print("failed to retrieve the names for the logged in user: \(error)")
+                return
+            }
+        }
     }
     
     // MARK: Helper methods
@@ -76,7 +70,7 @@ class AddLocationViewController: UIViewController {
         case .success(let objectId):
             Constants.CurrentUser.objectId = objectId
             print(Constants.CurrentUser.objectId)
-            self.exitScene()
+            exitScene()
         case .failure(ParseError.objectIdNotRetrieved):
             print("ObjectId not created")
         default:
