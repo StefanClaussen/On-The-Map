@@ -367,10 +367,10 @@
             </objects>
             <point key="canvasLocation" x="4164" y="842"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="uy5-6y-VE7">
             <objects>
-                <viewController id="Oud-2u-nrk" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="Oud-2u-nrk" customClass="DetailViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="B1K-3M-LzQ"/>
                         <viewControllerLayoutGuide type="bottom" id="Y9z-lh-FaH"/>

@@ -25,7 +25,6 @@ class TableViewController: UITableViewController {
             switch studentsResult {
             case let .success(students):
                 self.students = students
-                print("List Controller: Successful found \(self.students.count) students.")
                 self.tableView.reloadData()
             case let .failure(error):
                 print("Error getting studentLocation: \(error)")
@@ -54,8 +53,26 @@ class TableViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailController.meme = memes[indexPath.row]
-        navigationController!.pushViewController(detailController, animated: true)
+        let student = students[indexPath.row]
+        
+        guard let urlString = student.mediaURL, let urlToOpen = URL(string: urlString) else {
+            createAlertWith(title: "No URL to Open", message: "Student did not add a URL.", action: "Okay")
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(urlToOpen) {
+            UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
+        } else {
+            createAlertWith(title: "Invalid URL", message: "Student did not add a valid URL.", action: "Okay" )
+        }
     }
+    
+    // MARK: - Helper Methods
+    
+    func createAlertWith(title: String, message: String, action: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: action, style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
