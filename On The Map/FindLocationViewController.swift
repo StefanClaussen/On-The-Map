@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class FindLocationViewController: UIViewController {
+class FindLocationViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
@@ -66,6 +66,13 @@ class FindLocationViewController: UIViewController {
                 print("No Matching Location Found")
             }
         }
+    }
+    
+    // MARK: UITextFieldDelegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
 }

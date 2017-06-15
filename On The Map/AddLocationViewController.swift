@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class AddLocationViewController: UIViewController {
+class AddLocationViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var coordinatesLabel: UILabel!
     @IBOutlet weak var urlTextField: UITextField!
@@ -102,6 +102,11 @@ class AddLocationViewController: UIViewController {
         }
     }
     
+    // MARK: - UITextFieldDelegate
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 
 }
