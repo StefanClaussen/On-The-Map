@@ -51,10 +51,8 @@ struct UdacityClient {
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
         } catch {
-            print("could not parse the data as JSON: '\(data)'")
             return .failure(UdacityError.parsingJSONFailed)
         }
-        
         
         guard
             let user = parsedResult["user"],
