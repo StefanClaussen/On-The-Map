@@ -367,24 +367,6 @@
             </objects>
             <point key="canvasLocation" x="4164" y="842"/>
         </scene>
-        <!--Detail View Controller-->
-        <scene sceneID="uy5-6y-VE7">
-            <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="Oud-2u-nrk" customClass="DetailViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="B1K-3M-LzQ"/>
-                        <viewControllerLayoutGuide type="bottom" id="Y9z-lh-FaH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="56v-am-OHh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AkN-YN-LyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5041" y="842"/>
-        </scene>
         <!--Map Navigaton Controller-->
         <scene sceneID="qNC-RW-CjF">
             <objects>
