@@ -32,16 +32,15 @@ struct UdacityClient {
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
         } catch {
-            print("could not parse the data as JSON: '\(data)'")
             return .failure(UdacityError.parsingJSONFailed)
         }
         
+        print(parsedResult)
         guard
             let account = parsedResult["account"],
             let keyValue = account["key"],
             let value: String = keyValue as? String  else {
-                print("Failed to create the unique key")
-                return .failure(UdacityError.uniqueKeyNotCreated)
+                return .failure(UdacityError.accountNotFoundOrInvalidCredentials)
         }
         
         return .success(value)

@@ -67,9 +67,9 @@ class LoginViewController: UIViewController {
         case .failure(UdacityError.accountNotFoundOrInvalidCredentials):
             self.showAlertWith(title: self.unableToLogin, message: self.noAccountOrInvalidCredentials, actionTitle: tryAgain)
         case .failure(UdacityError.noConnection):
-            self.showAlertWith(title: self.unableToLogin, message: self.noConnection, actionTitle: tryAgain)
+            self.showAlertWith(title: self.unableToLogin, message: self.noConnection, actionTitle: okay)
         default:
-            self.showAlertWith(title: self.unableToLogin, message: self.unknown, actionTitle: tryAgain)
+            self.showAlertWith(title: self.unableToLogin, message: self.unknown, actionTitle: okay)
         }
     }
     
