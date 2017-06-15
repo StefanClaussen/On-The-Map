@@ -1,5 +1,5 @@
 //
-//  ListTableViewController.swift
+//  TableViewController.swift
 //  On The Map
 //
 //  Created by Stefan Claussen on 21/05/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListTableViewController: UITableViewController {
+class TableViewController: UITableViewController {
     
     var studentInformation: StudentInformation {
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -49,6 +49,13 @@ class ListTableViewController: UITableViewController {
         cell.textLabel?.text = student.firstName + " " + student.lastName
         
         return cell
-        
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailController = self.storyboard!.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        detailController.meme = memes[indexPath.row]
+        navigationController!.pushViewController(detailController, animated: true)
     }
 }
