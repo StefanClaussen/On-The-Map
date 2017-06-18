@@ -9,42 +9,43 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: ParentViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var addLocationButton: UIBarButtonItem!
     
-    var studentInformation: StudentInformation {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        return delegate.studentInformation
-    }
-    
-    var loginAuthentication = LoginAuthentication()
+//    var studentInformation: StudentInformation {
+//        let delegate = UIApplication.shared.delegate as! AppDelegate
+//        return delegate.studentInformation
+//    }
+//    
+//    var loginAuthentication = LoginAuthentication()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        retrieveStudentsLocations()
+        
+        addMapAnnotations(for: students)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        retrieveStudentsLocations()
+        addMapAnnotations(for: students)
     }
     
-    func retrieveStudentsLocations() {
-        studentInformation.GETStudentLocation {
-            (studentsResult) -> Void in
-            
-            switch studentsResult {
-            case let .success(students):
-                self.addMapAnnotations(for: students)
-            case .failure:
-                self.showAlertGETStudentLocationFailed()
-            }
-        }
-    }
+    // TODO: still need to call addMapAnnotations somehow.
+//    func retrieveStudentsLocations() {
+//        studentInformation.GETStudentLocation {
+//            (studentsResult) -> Void in
+//            
+//            switch studentsResult {
+//            case let .success(students):
+//                self.addMapAnnotations(for: students)
+//            case .failure:
+//                self.showAlertGETStudentLocationFailed()
+//            }
+//        }
+//    }
     
     @IBAction func logout(_ sender: Any) {
         loginAuthentication.DELETESession {
@@ -116,14 +117,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.mapView.addAnnotations(annotations)
     }
     
-    func showAlertGETStudentLocationFailed() {
-        let title = "Student Locations not found"
-        let message = "Student locations were not returned from the server and therefore cannot be displayed."
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-
-    }
+//    func showAlertGETStudentLocationFailed() {
+//        let title = "Student Locations not found"
+//        let message = "Student locations were not returned from the server and therefore cannot be displayed."
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+//        present(alert, animated: true, completion: nil)
+//
+//    }
     
     // MARK: - MKMapViewDelegate
     
