@@ -100,36 +100,32 @@ struct ParseClient {
     }
     
     private static func createParseURLRequest() -> NSMutableURLRequest {
-        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")!) // "https://parse.udacity.com/parse/classes/StudentLocation"
-        request.addValue(Constants.Parse.ParameterValues.ApplicationID, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApplicationID)
-        request.addValue(Constants.Parse.ParameterValues.ApiKey, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApiKey)
+        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
+        
+        request.addApplicationIdAndApiKey()
         
         return request
     }
     
     private static func createParsePOSTURLRequest() -> NSMutableURLRequest {
-        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!) 
-        request.addValue(Constants.Parse.ParameterValues.ApplicationID, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApplicationID)
-        request.addValue(Constants.Parse.ParameterValues.ApiKey, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApiKey)
+        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?")!)
+        
+        request.addApplicationIdApiKeyAndContentType()
         
         request.httpMethod = "POST"
-        request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
 
         return request
     }
     
     private static func createPUTURLRequest() -> NSMutableURLRequest {
-        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.CurrentUser.objectId)"
-        let url = URL(string: urlString)
-        let request = NSMutableURLRequest(url: url!)
+        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation?/\(Constants.CurrentUser.objectId)"
+        
+        let request = NSMutableURLRequest(url: URL(string: urlString)!)
+        request.addApplicationIdApiKeyAndContentType()
         
         request.httpMethod = "PUT"
         
-        request.addValue(Constants.Parse.ParameterValues.ApplicationID, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApplicationID)
-        request.addValue(Constants.Parse.ParameterValues.ApiKey, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApiKey)
-        request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
-        
         return request
     }
-    
+
 }
