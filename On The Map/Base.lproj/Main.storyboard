@@ -360,7 +360,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="On The Map" id="tDe-9a-GyD">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="QL7-8c-x0N"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="TnP-PI-1ML"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="QL7-8c-x0N"/>
+                            <barButtonItem systemItem="refresh" id="gZ1-fT-wDR"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vPj-Be-Wtu" userLabel="First Responder" sceneMemberID="firstResponder"/>
