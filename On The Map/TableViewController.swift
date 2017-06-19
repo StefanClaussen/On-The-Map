@@ -56,7 +56,6 @@ class TableViewController: UITableViewController, StudentDisplaying {
             (logoutResult) in
             switch logoutResult {
             case .success:
-                print("Successfully logged out")
                 self.dismiss(animated: true, completion: nil)
             case .failure:
                 print("Failed to logout")
