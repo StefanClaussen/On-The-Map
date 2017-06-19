@@ -45,43 +45,30 @@ class MapViewController: ParentViewController, StudentDisplaying, MKMapViewDeleg
     
     @IBAction func addLocation(_ sender: Any) {
         self.confirmLocationAdd { confirmed in
-            if confirmed { self.segueToMap() }
+            if confirmed { self.performSegue(withIdentifier: "MapToFindLocation", sender: self) }
         }
      }
-    
-    func segueToMap() {
-        self.performSegue(withIdentifier: "MapToFindLocation", sender: self)
-
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "MapToFindLocation" {
-            
-        }
-    }
         
     func addMapAnnotations(for students: [Student]) {
-        
         var annotations = [MKPointAnnotation]()
-        
         for student in students {
-            let lat = CLLocationDegrees(student.latitude!)
-            let long = CLLocationDegrees(student.longitude!)
-
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-
-            let first = student.firstName
-            let last = student.lastName
-            let mediaURL = student.mediaURL
-
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "\(first) \(last)"
-            annotation.subtitle = mediaURL
-            
+            let annotation = createAnnotation(for: student)
             annotations.append(annotation)
         }
         self.mapView.addAnnotations(annotations)
+    }
+    
+    func createAnnotation(for student: Student) -> MKPointAnnotation {
+        let lat = CLLocationDegrees(student.latitude!)
+        let long = CLLocationDegrees(student.longitude!)
+        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = "\(student.firstName) \(student.lastName)"
+        annotation.subtitle = student.mediaURL
+        
+        return annotation
     }
     
     // MARK: - MKMapViewDelegate
