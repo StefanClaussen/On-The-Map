@@ -107,12 +107,4 @@ class TableViewController: UITableViewController, Networking, StudentDisplaying 
         }
     }
     
-    // MARK: - Helper Methods
-    
-    func createAlertWith(title: String, message: String, action: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: action, style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-    
 }
