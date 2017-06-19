@@ -10,7 +10,6 @@ import UIKit
 
 class TableViewController: UITableViewController, Networking, StudentDisplaying {
     
-    var loginAuthentication = LoginAuthentication()
     var students = [Student]()
     
     // MARK: - View lifecycle
@@ -46,13 +45,13 @@ class TableViewController: UITableViewController, Networking, StudentDisplaying 
     // MARK: - Actions
     
     @IBAction func logout(_ sender: Any) {
-        loginAuthentication.DELETESession {
-            (logoutResult) in
-            switch logoutResult {
-            case .success:
+        deleteSession { (success) in
+            if success {
                 self.dismiss(animated: true, completion: nil)
-            case .failure:
-                print("Failed to logout")
+            } else {
+                self.createAlertWith(title: "Unable to Log Out",
+                                     message: "Try logging out again or closing the app",
+                                     action: "Okay")
             }
         }
     }

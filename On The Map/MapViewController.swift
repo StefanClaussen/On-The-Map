@@ -12,8 +12,6 @@ import MapKit
 class MapViewController: UIViewController, Networking, StudentDisplaying, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    
-    var loginAuthentication = LoginAuthentication()
 
     // MARK: - View lifecycle
     
@@ -32,7 +30,7 @@ class MapViewController: UIViewController, Networking, StudentDisplaying, MKMapV
     // MARK: - StudentLocations
     
     func retrieveStudentLocations() {
-        self.getStudentLocations { (students) in
+        getStudentLocations { (students) in
             guard let students = students else {
                 self.createAlertWith(title: "Student Locations not found",
                                      message: "Student locations were not returned from the server and therefore cannot be displayed.",
@@ -46,14 +44,13 @@ class MapViewController: UIViewController, Networking, StudentDisplaying, MKMapV
     // MARK: - Actions
     
     @IBAction func logout(_ sender: Any) {
-        loginAuthentication.DELETESession {
-            (logoutResult) in
-            switch logoutResult {
-            case .success:
-                print("Successfully logged out")
+        deleteSession { (success) in
+            if success {
                 self.dismiss(animated: true, completion: nil)
-            case .failure:
-                print("Failed to logout")
+            } else {
+                self.createAlertWith(title: "Unable to Log Out",
+                                     message: "Try logging out again or closing the app",
+                                     action: "Okay")
             }
         }
     }

@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 protocol Networking {
-    
     func getStudentLocations(completion: @escaping ([Student]?) -> Void)
+    func deleteSession(completion: @escaping (Bool) -> Void)
 }
 
 extension Networking {
@@ -20,8 +20,7 @@ extension Networking {
     // It returns students and their locations
     func getStudentLocations(completion: @escaping ([Student]?) -> Void) {
         let delegate = UIApplication.shared.delegate as! AppDelegate
-        let studentInformation = delegate.studentInformation
-        studentInformation.GETStudentLocation {
+        delegate.studentInformation.GETStudentLocation {
             (studentsResult) in
             
             switch studentsResult {
@@ -29,6 +28,21 @@ extension Networking {
                 completion(students)
             case .failure:
                 completion(nil)
+            }
+        }
+    }
+    
+    func deleteSession(completion: @escaping (Bool) -> Void) {
+        let loginAuthentication = LoginAuthentication()
+        
+        loginAuthentication.DELETESession {
+            (logoutResult) in
+            
+            switch logoutResult {
+            case .success:
+                completion(true)
+            case .failure:
+                completion(false)
             }
         }
     }
