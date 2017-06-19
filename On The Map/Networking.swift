@@ -27,7 +27,14 @@ extension Networking {
             case let .success(students):
                 completion(students)
             case .failure:
-                completion(nil)
+                let alert = UIAlertController(title: "Student Locations not found",
+                                              message: "Student locations were not returned from the server and therefore cannot be displayed.",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                
+                if let controller = self as? UIViewController {
+                    controller.present(alert, animated: true, completion: nil)
+                }
             }
         }
     }
@@ -47,3 +54,4 @@ extension Networking {
         }
     }
 }
+

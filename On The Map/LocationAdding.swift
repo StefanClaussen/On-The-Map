@@ -1,5 +1,5 @@
 //
-//  StudentDisplaying.swift
+//  LocationAdding.swift
 //  On The Map
 //
 //  Created by Stefan Claussen on 18/06/2017.
@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-protocol StudentDisplaying {
-    func confirmLocationAdd(completion: @escaping (Bool) -> Void)
+protocol LocationAdding {
+    func hasNoPreviousLocation(completion: @escaping (Bool) -> Void)
 }
 
-extension StudentDisplaying {
+extension LocationAdding {
     
-    func confirmLocationAdd(completion: @escaping (Bool) -> Void) {
+    func hasNoPreviousLocation(completion: @escaping (Bool) -> Void) {
         
         if !Constants.CurrentUser.hasSetLocation {
             completion(true)
@@ -23,7 +23,7 @@ extension StudentDisplaying {
             let title = "Student has a location"
             let message = "\(Constants.LoggedInUser.firstName) \(Constants.LoggedInUser.lastName) has posted a student location. Would you like to overwrite the existing location?"
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Overwrite", style: .default   ) {
+            alert.addAction(UIAlertAction(title: "Overwrite", style: .default) {
                 action in
                 completion(true)
             })
@@ -35,4 +35,5 @@ extension StudentDisplaying {
             }
         }
     }
+    
 }

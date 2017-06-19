@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, Networking, StudentDisplaying, MKMapViewDelegate {
+class MapViewController: UIViewController, Networking, LocationAdding, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
 
@@ -30,14 +30,10 @@ class MapViewController: UIViewController, Networking, StudentDisplaying, MKMapV
     // MARK: - StudentLocations
     
     func retrieveStudentLocations() {
-        getStudentLocations { (students) in
-            guard let students = students else {
-                self.createAlertWith(title: "Student Locations not found",
-                                     message: "Student locations were not returned from the server and therefore cannot be displayed.",
-                                     action: "Okay")
-                return
+        getStudentLocations { students in
+            if let students = students {
+                self.addMapAnnotations(for: students)
             }
-            self.addMapAnnotations(for: students)
         }
     }
     
@@ -60,8 +56,8 @@ class MapViewController: UIViewController, Networking, StudentDisplaying, MKMapV
     }
     
     @IBAction func addLocation(_ sender: Any) {
-        self.confirmLocationAdd { confirmed in
-            if confirmed { self.performSegue(withIdentifier: "MapToFindLocation", sender: self) }
+        hasNoPreviousLocation { correct in
+            if correct { self.performSegue(withIdentifier: "MapToFindLocation", sender: self) }
         }
     }
     

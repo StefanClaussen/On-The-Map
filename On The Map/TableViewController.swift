@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewController: UITableViewController, Networking, StudentDisplaying {
+class TableViewController: UITableViewController, Networking, LocationAdding {
     
     var students = [Student]()
     
@@ -29,16 +29,11 @@ class TableViewController: UITableViewController, Networking, StudentDisplaying 
     // MARK: - StudentLocations
     
     func retrieveStudentLocations() {
-        getStudentLocations { (students) in
-            guard let students = students else {
-                self.createAlertWith(title: "Student Locations not found",
-                                     message: "Student locations were not returned from the server and therefore cannot be displayed.",
-                                     action: "Okay")
-                return
+        getStudentLocations { students in
+            if let students = students {
+                self.students = students
+                self.tableView.reloadData()
             }
-            self.students = students
-            self.tableView.reloadData()
-            
         }
     }
     
@@ -62,8 +57,8 @@ class TableViewController: UITableViewController, Networking, StudentDisplaying 
     }
     
     @IBAction func addLocation(_ sender: Any) {
-        self.confirmLocationAdd { confirmed in
-            if confirmed { self.performSegue(withIdentifier: "MapToFindLocation", sender: self) }
+        hasNoPreviousLocation { correct in
+            if correct { self.performSegue(withIdentifier: "MapToFindLocation", sender: self) }
         }
     }
 
