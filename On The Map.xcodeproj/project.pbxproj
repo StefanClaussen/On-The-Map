@@ -106,6 +106,14 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
+		F83315EC1EF7DE8300D1BA03 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F8ACFFE11EF69908009F0FDF /* NSMutableRequest+Custom.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		F85F42871ECF04A000D8619C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,10 +161,10 @@
 				F85F42871ECF04A000D8619C /* Model */,
 				F85F428D1ECF075E00D8619C /* View */,
 				F8BAED091ECC552A00644586 /* Controller */,
+				F83315EB1EF7C4F300D1BA03 /* Protocols */,
+				F83315EC1EF7DE8300D1BA03 /* Extensions */,
 				F8BAED021ECC501A00644586 /* Assets */,
 				F8BAECE01ECC4D6100644586 /* Info.plist */,
-				F8ACFFE11EF69908009F0FDF /* NSMutableRequest+Custom.swift */,
-				F83315EB1EF7C4F300D1BA03 /* Protocols */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
