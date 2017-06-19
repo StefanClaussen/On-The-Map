@@ -14,11 +14,26 @@ class TableViewController: UITableViewController, StudentDisplaying {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         return delegate.studentInformation
     }
+    var loginAuthentication = LoginAuthentication()
     var students = [Student]()
+    
+    // MARK: - View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        retrieveStudentLocations()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        retrieveStudentLocations()
+    }
+    
+    // MARK: - StudentLocations
+    
+    func retrieveStudentLocations() {
         studentInformation.GETStudentLocation {
             (studentsResult) -> Void in
             
@@ -26,18 +41,39 @@ class TableViewController: UITableViewController, StudentDisplaying {
             case let .success(students):
                 self.students = students
                 self.tableView.reloadData()
-            case let .failure(error):
-                print("Error getting studentLocation: \(error)")
+            case .failure:
+                let title = "Student Locations not found"
+                let message = "Student locations were not returned from the server and therefore cannot be displayed."
+                self.createAlertWith(title: title, message: message, action: "Okay")
             }
         }
     }
     
-    @IBAction func addLocation(_ sender: Any) {
-        self.confirmLocationAdd { confirmed in
-            if confirmed { print("Set Location Here!") }
+    // MARK: - Actions
+    
+    @IBAction func logout(_ sender: Any) {
+        loginAuthentication.DELETESession {
+            (logoutResult) in
+            switch logoutResult {
+            case .success:
+                print("Successfully logged out")
+                self.dismiss(animated: true, completion: nil)
+            case .failure:
+                print("Failed to logout")
+            }
         }
     }
-
+    
+    @IBAction func refreshTable(_ sender: Any) {
+        retrieveStudentLocations()
+        tableView.reloadData()
+    }
+    
+    @IBAction func addLocation(_ sender: Any) {
+        self.confirmLocationAdd { confirmed in
+            if confirmed { self.performSegue(withIdentifier: "MapToFindLocation", sender: self) }
+        }
+    }
 
     // MARK: - Table view data source
 

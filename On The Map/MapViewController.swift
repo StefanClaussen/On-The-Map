@@ -12,13 +12,11 @@ import MapKit
 class MapViewController: UIViewController, StudentDisplaying, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var addLocationButton: UIBarButtonItem!
     
     var studentInformation: StudentInformation {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         return delegate.studentInformation
     }
-    
     var loginAuthentication = LoginAuthentication()
 
     // MARK: - View lifecycle
@@ -56,7 +54,6 @@ class MapViewController: UIViewController, StudentDisplaying, MKMapViewDelegate 
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
-        
     }
     
     // MARK: - Actions
