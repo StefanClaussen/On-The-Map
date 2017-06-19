@@ -9,22 +9,57 @@
 import UIKit
 import MapKit
 
-class MapViewController: ParentViewController, StudentDisplaying, MKMapViewDelegate {
+class MapViewController: UIViewController, StudentDisplaying, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var addLocationButton: UIBarButtonItem!
+    
+    var studentInformation: StudentInformation {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        return delegate.studentInformation
+    }
+    
+    var loginAuthentication = LoginAuthentication()
 
+    // MARK: - View lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addMapAnnotations(for: students)
+        retrieveStudentLocations()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        addMapAnnotations(for: students)
+        retrieveStudentLocations()
     }
+    
+    // MARK: - StudentLocations
+    
+    func retrieveStudentLocations() {
+        studentInformation.GETStudentLocation {
+            (studentsResult) -> Void in
+            
+            switch studentsResult {
+            case let .success(students):
+                self.addMapAnnotations(for: students)
+            case .failure:
+                self.showAlertGETStudentLocationFailed()
+            }
+        }
+    }
+    
+    func showAlertGETStudentLocationFailed() {
+        let title = "Student Locations not found"
+        let message = "Student locations were not returned from the server and therefore cannot be displayed."
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    // MARK: - Actions
     
     @IBAction func logout(_ sender: Any) {
         loginAuthentication.DELETESession {
@@ -40,14 +75,16 @@ class MapViewController: ParentViewController, StudentDisplaying, MKMapViewDeleg
     }
     
     @IBAction func refreshMap(_ sender: Any) {
-        retrieveStudentsLocations()
+        retrieveStudentLocations()
     }
     
     @IBAction func addLocation(_ sender: Any) {
         self.confirmLocationAdd { confirmed in
             if confirmed { self.performSegue(withIdentifier: "MapToFindLocation", sender: self) }
         }
-     }
+    }
+    
+    // MARK: - Map annotations
         
     func addMapAnnotations(for students: [Student]) {
         var annotations = [MKPointAnnotation]()
