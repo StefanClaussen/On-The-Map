@@ -1,4 +1,3 @@
-//
 //  StudentInformation.swift
 //  On The Map
 //

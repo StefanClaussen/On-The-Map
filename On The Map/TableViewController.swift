@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewController: UITableViewController {
+class TableViewController: UITableViewController, StudentDisplaying {
     
     var studentInformation: StudentInformation {
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -31,6 +31,13 @@ class TableViewController: UITableViewController {
             }
         }
     }
+    
+    @IBAction func addLocation(_ sender: Any) {
+        self.confirmLocationAdd { confirmed in
+            if confirmed { print("Set Location Here!") }
+        }
+    }
+
 
     // MARK: - Table view data source
 

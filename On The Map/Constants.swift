@@ -59,6 +59,10 @@ struct Constants {
     // MARK: CurrentUser {
     struct CurrentUser {
         static var objectId = ""
+        
+        static var hasSetLocation: Bool {
+            return self.objectId != ""
+        }
     }
     
 }

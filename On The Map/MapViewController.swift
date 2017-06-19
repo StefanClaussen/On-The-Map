@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: ParentViewController, MKMapViewDelegate {
+class MapViewController: ParentViewController, StudentDisplaying, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var addLocationButton: UIBarButtonItem!
@@ -65,22 +65,10 @@ class MapViewController: ParentViewController, MKMapViewDelegate {
     }
     
     @IBAction func addLocation(_ sender: Any) {
-        // TODO: Am checking that it is equal to the default value. This seems fragile.
-        if Constants.CurrentUser.objectId == "" {
-            segueToMap()
-        } else {
-            let title = "Student has a location"
-            let message = "\(Constants.LoggedInUser.firstName) \(Constants.LoggedInUser.lastName) has posted a student location. Would you like to overwrite the existing location?"
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Overwrite", style: .default   ) {
-                action in
-                self.segueToMap()
-            })
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            present(alert, animated: true, completion: (segueToMap))
+        self.confirmLocationAdd { confirmed in
+            if confirmed { self.segueToMap() }
         }
-    }
+     }
     
     func segueToMap() {
         self.performSegue(withIdentifier: "MapToFindLocation", sender: self)

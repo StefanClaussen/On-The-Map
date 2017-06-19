@@ -362,7 +362,11 @@
                     <navigationItem key="navigationItem" title="On The Map" id="tDe-9a-GyD">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="TnP-PI-1ML"/>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="QL7-8c-x0N"/>
+                            <barButtonItem systemItem="add" id="QL7-8c-x0N">
+                                <connections>
+                                    <action selector="addLocation:" destination="xOT-fj-bUU" id="jGW-Y1-dpq"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem systemItem="refresh" id="gZ1-fT-wDR"/>
                         </rightBarButtonItems>
                     </navigationItem>

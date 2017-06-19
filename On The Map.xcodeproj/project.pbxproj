@@ -19,6 +19,7 @@
 		F8A1E20C1EE40D4F0021753E /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E20B1EE40D4F0021753E /* UdacityClient.swift */; };
 		F8ACFFE21EF69908009F0FDF /* NSMutableRequest+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ACFFE11EF69908009F0FDF /* NSMutableRequest+Custom.swift */; };
 		F8ACFFE41EF6B58F009F0FDF /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ACFFE31EF6B58F009F0FDF /* ParentViewController.swift */; };
+		F8ACFFE61EF6C231009F0FDF /* StudentDisplaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ACFFE51EF6C231009F0FDF /* StudentDisplaying.swift */; };
 		F8BAECD51ECC4D6100644586 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BAECD41ECC4D6100644586 /* AppDelegate.swift */; };
 		F8BAECDA1ECC4D6100644586 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BAECD81ECC4D6100644586 /* Main.storyboard */; };
 		F8BAECDF1ECC4D6100644586 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BAECDD1ECC4D6100644586 /* LaunchScreen.storyboard */; };
@@ -59,6 +60,7 @@
 		F8A1E20B1EE40D4F0021753E /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		F8ACFFE11EF69908009F0FDF /* NSMutableRequest+Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableRequest+Custom.swift"; sourceTree = "<group>"; };
 		F8ACFFE31EF6B58F009F0FDF /* ParentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
+		F8ACFFE51EF6C231009F0FDF /* StudentDisplaying.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentDisplaying.swift; sourceTree = "<group>"; };
 		F8BAECD11ECC4D6100644586 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8BAECD41ECC4D6100644586 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8BAECD91ECC4D6100644586 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				F8BAED021ECC501A00644586 /* Assets */,
 				F8BAECE01ECC4D6100644586 /* Info.plist */,
 				F8ACFFE11EF69908009F0FDF /* NSMutableRequest+Custom.swift */,
+				F8ACFFE51EF6C231009F0FDF /* StudentDisplaying.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				F8BAECD51ECC4D6100644586 /* AppDelegate.swift in Sources */,
 				F8ACFFE41EF6B58F009F0FDF /* ParentViewController.swift in Sources */,
 				F83B420B1EE01B04002D8235 /* FindLocationViewController.swift in Sources */,
+				F8ACFFE61EF6C231009F0FDF /* StudentDisplaying.swift in Sources */,
 				F85F42911ECF0EB200D8619C /* Student.swift in Sources */,
 				F85F428A1ECF05A400D8619C /* Constants.swift in Sources */,
 			);
