@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewController: UITableViewController, StudentDisplaying {
+class TableViewController: UITableViewController, Networking, StudentDisplaying {
     
     var studentInformation: StudentInformation {
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -34,18 +34,16 @@ class TableViewController: UITableViewController, StudentDisplaying {
     // MARK: - StudentLocations
     
     func retrieveStudentLocations() {
-        studentInformation.GETStudentLocation {
-            (studentsResult) -> Void in
-            
-            switch studentsResult {
-            case let .success(students):
-                self.students = students
-                self.tableView.reloadData()
-            case .failure:
-                let title = "Student Locations not found"
-                let message = "Student locations were not returned from the server and therefore cannot be displayed."
-                self.createAlertWith(title: title, message: message, action: "Okay")
+        getStudentLocations { (students) in
+            guard let students = students else {
+                self.createAlertWith(title: "Student Locations not found",
+                                     message: "Student locations were not returned from the server and therefore cannot be displayed.",
+                                     action: "Okay")
+                return
             }
+            self.students = students
+            self.tableView.reloadData()
+            
         }
     }
     

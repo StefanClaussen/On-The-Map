@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, StudentDisplaying, MKMapViewDelegate {
+class MapViewController: UIViewController, Networking, StudentDisplaying, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -36,24 +36,15 @@ class MapViewController: UIViewController, StudentDisplaying, MKMapViewDelegate 
     // MARK: - StudentLocations
     
     func retrieveStudentLocations() {
-        studentInformation.GETStudentLocation {
-            (studentsResult) -> Void in
-            
-            switch studentsResult {
-            case let .success(students):
-                self.addMapAnnotations(for: students)
-            case .failure:
-                self.showAlertGETStudentLocationFailed()
+        self.getStudentLocations { (students) in
+            guard let students = students else {
+                self.createAlertWith(title: "Student Locations not found",
+                                     message: "Student locations were not returned from the server and therefore cannot be displayed.",
+                                     action: "Okay")
+                return
             }
+            self.addMapAnnotations(for: students)
         }
-    }
-    
-    func showAlertGETStudentLocationFailed() {
-        let title = "Student Locations not found"
-        let message = "Student locations were not returned from the server and therefore cannot be displayed."
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
     }
     
     // MARK: - Actions
@@ -133,6 +124,14 @@ class MapViewController: UIViewController, StudentDisplaying, MKMapViewDelegate 
                 app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
             }
         }
+    }
+    
+    // MARK: - Helper Methods
+    
+    func createAlertWith(title: String, message: String, action: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: action, style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
 }
