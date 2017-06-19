@@ -14,7 +14,6 @@ protocol StudentDisplaying {
 }
 
 extension StudentDisplaying {
-    // TODO: Am checking that it is equal to the default value. This seems fragile.
     
     func confirmLocationAdd(completion: @escaping (Bool) -> Void) {
         

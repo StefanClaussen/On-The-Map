@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F81DCF221EE7FFD3001BE526 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81DCF211EE7FFD3001BE526 /* AddLocationViewController.swift */; };
 		F824154E1EF2BADD00D5BE8C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F824154D1EF2BADD00D5BE8C /* DetailViewController.swift */; };
+		F83315EA1EF7C15800D1BA03 /* Logoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83315E91EF7C15800D1BA03 /* Logoutable.swift */; };
 		F83B420B1EE01B04002D8235 /* FindLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83B420A1EE01B04002D8235 /* FindLocationViewController.swift */; };
 		F85F428A1ECF05A400D8619C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F42891ECF05A400D8619C /* Constants.swift */; };
 		F85F428C1ECF06FD00D8619C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F428B1ECF06FD00D8619C /* MapViewController.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		F81DCF211EE7FFD3001BE526 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		F824154D1EF2BADD00D5BE8C /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		F83315E91EF7C15800D1BA03 /* Logoutable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logoutable.swift; sourceTree = "<group>"; };
 		F83B420A1EE01B04002D8235 /* FindLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindLocationViewController.swift; sourceTree = "<group>"; };
 		F85F42891ECF05A400D8619C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F85F428B1ECF06FD00D8619C /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				F8BAECE01ECC4D6100644586 /* Info.plist */,
 				F8ACFFE11EF69908009F0FDF /* NSMutableRequest+Custom.swift */,
 				F8ACFFE51EF6C231009F0FDF /* StudentDisplaying.swift */,
+				F83315E91EF7C15800D1BA03 /* Logoutable.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				F824154E1EF2BADD00D5BE8C /* DetailViewController.swift in Sources */,
 				F88143EB1ECCD1CA0093964E /* ParseClient.swift in Sources */,
 				F8ACFFE21EF69908009F0FDF /* NSMutableRequest+Custom.swift in Sources */,
+				F83315EA1EF7C15800D1BA03 /* Logoutable.swift in Sources */,
 				F85F428C1ECF06FD00D8619C /* MapViewController.swift in Sources */,
 				F8DCB3981ED1A3D70029D015 /* TableViewController.swift in Sources */,
 				F8A1E20C1EE40D4F0021753E /* UdacityClient.swift in Sources */,
