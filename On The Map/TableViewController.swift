@@ -10,10 +10,6 @@ import UIKit
 
 class TableViewController: UITableViewController, Networking, StudentDisplaying {
     
-    var studentInformation: StudentInformation {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        return delegate.studentInformation
-    }
     var loginAuthentication = LoginAuthentication()
     var students = [Student]()
     
