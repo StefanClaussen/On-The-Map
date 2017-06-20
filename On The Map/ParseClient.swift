@@ -29,6 +29,13 @@ struct ParseClient {
         return createPUTURLRequest()
     }
     
+    // MARK: - JSON data parsing
+    
+    // Parse the data
+    // objectId is retrieved
+    // objectId is used as the identifying parameter when PUTting a student location
+    // PUTting - student with existing location updates their location
+    // https://parse.udacity.com/parse/classes/StudentLocation/<objectId>
     static func objectId(fromJSON data: Data) -> ObjectId {
         var parsedResult: [String: AnyObject]! = nil
         do {
@@ -43,6 +50,12 @@ struct ParseClient {
         
         return .success(objectID)
     }
+    
+    // Parse the data
+    // updatedAt is retrieved
+    // The updatedAt string is never used. 
+    // It is passed as a value in the UpdateStudentLocation enum
+    // It serves no purpose as I understand.
     
     static func updateStudentLocation(fromJSON data: Data) -> UpdateStudentLocation {
         var parsedResult: [String: AnyObject]! = nil
@@ -98,6 +111,8 @@ struct ParseClient {
         
         return Student(firstName: firstName, lastName: lastName, latitude: latitude, longitude: longitude, mediaURL: mediaURL)
     }
+    
+    // MARK: - MutableURLRequests
     
     private static func createParseURLRequest() -> NSMutableURLRequest {
         let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)

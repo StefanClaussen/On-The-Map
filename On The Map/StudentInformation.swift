@@ -22,6 +22,9 @@ enum ObjectId {
     case failure(Error)
 }
 
+// TODO: Simplify or remove enum. 
+// String value is never used.
+// Enum represents that their location has been updated or not.     
 enum UpdateStudentLocation {
     case success(String)
     case failure(Error)
@@ -80,19 +83,15 @@ struct StudentInformation {
             return
         }
         
+        //TODO: can this be moved out to the Parse client?
         request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: String.Encoding.utf8)
         
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
             
-            if error != nil { // Handle error…
-                print("Unable to post student location")
-                return
-            }
-            
-            let studentWithObjectId = self.processPOSTStudentLocationRequest(data: data, error: error)
+            let objectId = self.processPOSTStudentLocationRequest(data: data, error: error)
             OperationQueue.main.addOperation {
-                completion(studentWithObjectId)
+                completion(objectId)
             }
         }
         task.resume()
@@ -102,6 +101,12 @@ struct StudentInformation {
         guard let jsonData = data else {
             return ObjectId.failure(error!)
         }
+        
+        if error != nil {
+            print("Unable to post student location")
+            return ObjectId.failure(error!)
+        }
+
         return ParseClient.objectId(fromJSON: jsonData)
     }
     
@@ -112,6 +117,7 @@ struct StudentInformation {
             return
         }
         
+        //TODO: can this be moved out to the Parse client?
         request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: String.Encoding.utf8)
         
         let task = session.dataTask(with: request as URLRequest) {
