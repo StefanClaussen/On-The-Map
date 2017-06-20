@@ -16,7 +16,7 @@ protocol Networking {
 
 extension Networking {
     
-    // GET studentLocation is the API Naming
+    // GET studentLocation is the name in API
     // It returns students and their locations
     func getStudentLocations(completion: @escaping ([Student]?) -> Void) {
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -28,7 +28,7 @@ extension Networking {
                 completion(students)
             case .failure:
                 let alert = UIAlertController(title: "Student Locations not found",
-                                              message: "Student locations were not returned from the server and therefore cannot be displayed.",
+                                              message: "Connection to the server could not be made. Check your wifi availability and other settings that might prevent a connection.",
                                               preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                 
@@ -49,7 +49,16 @@ extension Networking {
             case .success:
                 completion(true)
             case .failure:
-                completion(false)
+                let alert = UIAlertController(title: "Unable to Log Out",
+                                              message: "Connection to the server could not be made. Check your wifi availability and other settings that might prevent a connection.",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+                
+                if let controller = self as? UIViewController {
+                    controller.present(alert, animated: true) { action in
+                        completion(false)
+                    }
+                }
             }
         }
     }
