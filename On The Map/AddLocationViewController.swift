@@ -78,8 +78,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Helper methods
     
-    private func processStudentObjectIdResult(_ objectId: ObjectId) {
-        switch objectId {
+    private func processStudentObjectIdResult(_ result: Result<String>) {
+        switch result {
         case .success(let objectId):
             Constants.CurrentUser.objectId = objectId
             print("Object id: \(Constants.CurrentUser.objectId)")
@@ -91,8 +91,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    private func processUpdateStudentLocationResult(_ updateStudentLocation: UpdateStudentLocation) {
-        switch updateStudentLocation {
+    private func processUpdateStudentLocationResult(_ result: Result<Bool>) {
+        switch result {
         case .success(let date):
             print("Successfully updated student location: \(date)")
             exitScene()
