@@ -140,7 +140,7 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem image="icon_addpin" id="EyK-d5-UMW">
+                            <barButtonItem systemItem="add" id="EyK-d5-UMW">
                                 <connections>
                                     <action selector="addLocation:" destination="nei-SC-HvY" id="xTO-dN-vmw"/>
                                 </connections>
@@ -266,7 +266,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lEq-jE-vdx">
-                                <rect key="frame" x="0.0" y="60" width="375" height="577"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="487.5"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a website" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YiM-SQ-y8i">
                                         <rect key="frame" x="19" y="0.0" width="337.5" height="40"/>
@@ -286,16 +286,10 @@
                                             <constraint firstAttribute="width" secondItem="Kps-aH-zn0" secondAttribute="height" multiplier="1:1" id="1Tz-Ec-qS3"/>
                                         </constraints>
                                     </mapView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyM-pp-Z0J">
-                                        <rect key="frame" x="0.0" y="454.5" width="375" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMG-E5-q5e">
-                                        <rect key="frame" x="161" y="495" width="53" height="82"/>
+                                        <rect key="frame" x="126.5" y="454.5" width="122" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="FINISH"/>
+                                        <state key="normal" title="ADD LOCATION"/>
                                         <connections>
                                             <action selector="finishAddingLocation:" destination="yZX-fN-kCq" eventType="touchUpInside" id="vjI-Be-Ie1"/>
                                         </connections>
@@ -304,20 +298,17 @@
                                 <constraints>
                                     <constraint firstItem="YiM-SQ-y8i" firstAttribute="width" secondItem="lEq-jE-vdx" secondAttribute="width" multiplier="0.9" id="3pV-HW-1CR"/>
                                     <constraint firstItem="Kps-aH-zn0" firstAttribute="width" secondItem="lEq-jE-vdx" secondAttribute="width" id="WJ5-IM-Pez"/>
-                                    <constraint firstItem="zyM-pp-Z0J" firstAttribute="width" secondItem="lEq-jE-vdx" secondAttribute="width" id="cX5-M6-emb"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lEq-jE-vdx" firstAttribute="top" secondItem="2Mq-5h-7I4" secondAttribute="bottom" constant="40" id="8iS-78-GiX"/>
-                            <constraint firstAttribute="bottom" secondItem="lEq-jE-vdx" secondAttribute="bottom" constant="30" id="Vya-2g-Ibz"/>
+                            <constraint firstItem="lEq-jE-vdx" firstAttribute="top" secondItem="2Mq-5h-7I4" secondAttribute="bottom" constant="30" id="8iS-78-GiX"/>
                             <constraint firstAttribute="trailing" secondItem="lEq-jE-vdx" secondAttribute="trailing" id="mAr-4T-zox"/>
                             <constraint firstItem="lEq-jE-vdx" firstAttribute="leading" secondItem="H3Z-4I-82e" secondAttribute="leading" id="zLJ-5i-aYN"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="coordinatesLabel" destination="zyM-pp-Z0J" id="997-cE-Czu"/>
                         <outlet property="mapView" destination="Kps-aH-zn0" id="6Qv-Bv-52p"/>
                         <outlet property="urlTextField" destination="YiM-SQ-y8i" id="hfY-gY-BT0"/>
                     </connections>
@@ -463,7 +454,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_addpin" width="24" height="24"/>
         <image name="icon_listview-deselected" width="75" height="50"/>
         <image name="icon_listview-selected" width="75" height="50"/>
         <image name="icon_mapview-deselected" width="75" height="50"/>
@@ -472,6 +462,6 @@
         <image name="logo-u" width="62" height="62"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SXQ-Vc-byM"/>
+        <segue reference="Jmu-HM-bbm"/>
     </inferredMetricsTieBreakers>
 </document>
