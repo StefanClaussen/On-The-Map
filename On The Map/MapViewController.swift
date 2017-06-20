@@ -9,7 +9,9 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate, Networking, LocationAdding {
+class MapViewController: UIViewController, Networking, LocationAdding {
+    
+    fileprivate let reuseId = "pin"
     
     @IBOutlet weak var mapView: MKMapView!
 
@@ -79,23 +81,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, Networking, Locati
         return annotation
     }
     
-    // MARK: - MKMapViewDelegate
+}
+
+// MARK: - MKMapViewDelegate
+
+extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        let reuseId = "pin"
-        
-        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-        
-        if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView!.canShowCallout = true
-            pinView!.pinTintColor = .red
-            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        if let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView {
+            pinView.annotation = annotation
+            return pinView
         }
-        else {
-            pinView!.annotation = annotation
-        }
+        
+        let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        pinView.canShowCallout = true
+        pinView.pinTintColor = .red
+        pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        
         
         return pinView
     }
@@ -108,5 +111,4 @@ class MapViewController: UIViewController, MKMapViewDelegate, Networking, Locati
             }
         }
     }
-    
 }

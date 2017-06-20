@@ -19,7 +19,7 @@ extension Networking {
     // GET studentLocation is the name in API
     // It returns students and their locations
     func getStudentLocations(completion: @escaping ([Student]?) -> Void) {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
         delegate.studentInformation.GETStudentLocation {
             (studentsResult) in
             

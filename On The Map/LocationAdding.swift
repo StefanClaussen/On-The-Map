@@ -13,10 +13,10 @@ protocol LocationAdding {
     func hasNoPreviousLocation(completion: @escaping (Bool) -> Void)
 }
 
-extension LocationAdding {
+extension LocationAdding where Self: UIViewController {
     
     func hasNoPreviousLocation(completion: @escaping (Bool) -> Void) {
-        
+        //TODO: Pass in current user
         if !Constants.CurrentUser.hasSetLocation {
             completion(true)
         } else {
@@ -30,9 +30,7 @@ extension LocationAdding {
             
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { action in completion(false) })
             
-            if let controller = self as? UIViewController {
-                controller.present(alert, animated: true, completion: nil)
-            }
+            present(alert, animated: true, completion: nil)
         }
     }
     

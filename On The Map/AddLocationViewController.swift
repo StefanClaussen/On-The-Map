@@ -62,11 +62,12 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
             (loggedInStudent) -> Void in
             switch loggedInStudent {
             case .success(let student):
-                let addStudent = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
+                // ToDo
+                let student = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
                 if Constants.CurrentUser.objectId == "" {
-                    self.studentInformation.POSTStudentLocation(for: addStudent, completion: self.processStudentObjectIdResult)
+                    self.studentInformation.POSTStudentLocation(for: student, completion: self.processStudentObjectIdResult)
                 } else {
-                    self.studentInformation.PUTStudentLocation(for: addStudent, completion: self.processUpdateStudentLocationResult)
+                    self.studentInformation.PUTStudentLocation(for: student, completion: self.processUpdateStudentLocationResult)
                 }
             case .failure(let error):
                 print("failed to retrieve the names for the logged in user: \(error)")
