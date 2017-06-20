@@ -224,11 +224,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Find Location" id="aiS-JY-cUD">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="9P2-yB-LS5">
-                                            <connections>
-                                                <action selector="cancelButtonPressed:" destination="6yW-HS-ekf" id="6Lz-FS-z3X"/>
-                                            </connections>
-                                        </barButtonItem>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="9P2-yB-LS5"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -241,7 +237,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Find Location" id="0QB-8s-UEe">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="rCP-Bs-yhW"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="rCP-Bs-yhW">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="6yW-HS-ekf" id="Lmj-kz-SnL"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="cityTextField" destination="k0I-Ik-uII" id="dif-FY-UiP"/>

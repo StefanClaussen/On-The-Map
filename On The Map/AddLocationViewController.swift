@@ -26,14 +26,13 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Add Location"
+        
         let latitude = Double(coordinate.latitude)
         let longitude = Double(coordinate.longitude)
         coordinatesLabel.text = "Latitude: \(latitude) | Longitude: \(longitude)"
         
         addMapAnnotations()
-    }
-    @IBAction func findLocationBackButtonPressed(_ sender: Any) {
-        
     }
     
     func addMapAnnotations() {
