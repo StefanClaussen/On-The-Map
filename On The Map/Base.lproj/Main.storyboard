@@ -285,6 +285,9 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Kps-aH-zn0" secondAttribute="height" multiplier="1:1" id="1Tz-Ec-qS3"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="delegate" destination="yZX-fN-kCq" id="Vd6-eW-sny"/>
+                                        </connections>
                                     </mapView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMG-E5-q5e">
                                         <rect key="frame" x="126.5" y="454.5" width="122" height="33"/>

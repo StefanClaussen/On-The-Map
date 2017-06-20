@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class AddLocationViewController: UIViewController, UITextFieldDelegate {
+class AddLocationViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
@@ -34,7 +34,16 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         self.mapView.addAnnotation(annotation)
+        
+        focusMap(on: coordinate)
     }
+    
+    func focusMap(on coordinate: CLLocationCoordinate2D) {
+        let metres: CLLocationDistance = 10000
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, metres, metres)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+
 
     @IBAction func finishAddingLocation(_ sender: Any) {
         // TODO: Handle empty or invalid URL
