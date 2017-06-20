@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, Networking, LocationAdding, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, Networking, LocationAdding {
     
     @IBOutlet weak var mapView: MKMapView!
 
@@ -41,13 +41,7 @@ class MapViewController: UIViewController, Networking, LocationAdding, MKMapView
     
     @IBAction func logout(_ sender: Any) {
         deleteSession { (success) in
-            if success {
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                self.createAlertWith(title: "Unable to Log Out",
-                                     message: "Try logging out again or closing the app",
-                                     action: "Okay")
-            }
+            if success { self.dismiss(animated: true, completion: nil) }
         }
     }
     
