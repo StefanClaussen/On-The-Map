@@ -96,9 +96,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     
     private func exitScene() {
         DispatchQueue.main.async {
-            if let controllers = self.navigationController?.viewControllers {
-                self.navigationController?.popToViewController(controllers[controllers.count - 3], animated: true)
-            }
+            self.dismiss(animated: true, completion: nil)
         }
     }
     

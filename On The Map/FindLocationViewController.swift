@@ -18,6 +18,8 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
     lazy var geocoder = CLGeocoder()
     var locationCoordinates = CLLocationCoordinate2D()
 
+    // MARK: - Actions
+    
     @IBAction func cancelButtonPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -34,15 +36,9 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
         
         // Hide button to prevent repeated geocoding requests
         findLocationButton.isHidden = true
-
     }
     
-    private func displayAddLocationVC() {
-        let addLocationVC = storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
-        addLocationVC.coordinate = locationCoordinates
-        self.navigationController?.pushViewController(addLocationVC, animated: true)
-        //present(addLocationVC, animated: true, completion: nil)
-    }
+    // MARK: - Helper methods
     
     private func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
         findLocationButton.isHidden = false
@@ -66,6 +62,14 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
                 print("No Matching Location Found")
             }
         }
+    }
+    
+    // MARK: - Navigation / Storyboard
+    
+    private func displayAddLocationVC() {
+        let addLocationVC = storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
+        addLocationVC.coordinate = locationCoordinates
+        self.navigationController?.pushViewController(addLocationVC, animated: true)
     }
     
     // MARK: UITextFieldDelegate
