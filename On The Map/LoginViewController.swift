@@ -76,7 +76,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func completeLogin() {
         DispatchQueue.main.async {
             let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "OTMTabBarController") as! UITabBarController
-            self.present(tabBarController, animated: true, completion: nil)
+            self.present(tabBarController, animated: true) {
+                self.clearTextFields()
+            }
         }
     }
     
@@ -101,9 +103,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: nil))
         present(alert, animated: true, completion: {
-            self.emailTextField.text = nil
-            self.passwordTextField.text = nil
+            self.clearTextFields()
         })
+    }
+    
+    private func clearTextFields() {
+        self.emailTextField.text = nil
+        self.passwordTextField.text = nil
     }
     
     // MARK: UITextFieldDelegate
