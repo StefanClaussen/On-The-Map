@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class AddLocationViewController: UIViewController, UITextFieldDelegate, MKMapViewDelegate {
+class AddLocationViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
@@ -21,6 +21,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate, MKMapVie
         let delegate = UIApplication.shared.delegate as! AppDelegate
         return delegate.studentInformation
     }
+    
+    // MARK: - View lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate, MKMapVie
         
         addMapAnnotation()
     }
+    
+    // MARK: - Map and Annotation
     
     func addMapAnnotation() {
         let annotation = MKPointAnnotation()
@@ -44,6 +48,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate, MKMapVie
         mapView.setRegion(coordinateRegion, animated: true)
     }
 
+    // MARK: - Actions
 
     @IBAction func finishAddingLocation(_ sender: Any) {
         // TODO: Handle empty or invalid URL
@@ -96,6 +101,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate, MKMapVie
             print("Something went wrong when updating the student location")
         }
     }
+    
+    // MARK: - Navigation and Storyboard
     
     private func exitScene() {
         DispatchQueue.main.async {
