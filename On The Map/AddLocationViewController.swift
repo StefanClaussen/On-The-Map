@@ -58,6 +58,15 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         Constants.LoggedInUser.latitude = Double(self.coordinate.latitude)
         Constants.LoggedInUser.longitude = Double(self.coordinate.longitude)
         
+        
+        
+//        getStudent { user in
+//            if let user = user {
+//                Constants.LoggedInUser.firstName = user.firstName
+//                Constants.LoggedInUser.lastName = user.lastName
+//            }
+//        }
+        
         if Constants.CurrentUser.objectId == "" {
             self.studentInformation.POSTStudentLocation(completion: self.processStudentObjectIdResult)
         } else {

@@ -53,7 +53,6 @@ struct StudentInformation {
         
         return UdacityClient.student(fromJSON: newData)
     }
-
     
     func POSTStudentLocation(completion: @escaping (Result<String>) -> Void) {
         let request = ParseClient.parsePOSTURLRequest
