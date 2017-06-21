@@ -58,7 +58,7 @@ struct StudentInformation {
         return ParseClient.students(fromJSON: jsonData)
     }
     
-    func GETUser(completion: @escaping (Result<Student>) -> Void) {
+    func GETStudent(completion: @escaping (Result<Student>) -> Void) {
         let request = UdacityClient.udacityUserIDURLRequest
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
@@ -84,9 +84,8 @@ struct StudentInformation {
     func POSTStudentLocation(for student: Student, completion: @escaping (Result<String>) -> Void) {
         let request = ParseClient.parsePOSTURLRequest
         
-        guard let latitude = student.latitude, let longitude = student.longitude else {
-            return
-        }
+        let latitude = student.coordinate.latitude
+        let longitude = student.coordinate.longitude
         
         //TODO: can this be moved out to the Parse client?
         request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: .utf8)
@@ -107,9 +106,9 @@ struct StudentInformation {
             return .failure(error!)
         }
         
-        if error != nil {
+        if let error = error {
             print("Unable to post student location")
-            return .failure(error!)
+            return .failure(error)
         }
 
         return ParseClient.objectId(fromJSON: jsonData)
@@ -118,31 +117,21 @@ struct StudentInformation {
     func PUTStudentLocation(for student: Student, completion: @escaping (Result<Bool>) -> Void) {
         let request = ParseClient.parsePUTURLRequest
         
-        guard let latitude = student.latitude, let longitude = student.longitude else {
-            return
-        }
-        
+        let latitude = student.coordinate.latitude
+        let longitude = student.coordinate.longitude         
         //TODO: can this be moved out to the Parse client?
         request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: .utf8)
         
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
             
-            let studentLocation = self.processPUTStudentLocationRequest(data: data, error: error)
-            OperationQueue.main.addOperation {
-                completion(studentLocation)
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
             }
         }
         task.resume()
-    }
-    
-    func processPUTStudentLocationRequest(data: Data?, error: Error?) -> Result<Bool> {
-        guard let jsonData = data else {
-            return .failure(error!)
-        }
-        
-        // TODO: cover error and data being nil
-        return ParseClient.updateStudentLocation(fromJSON: jsonData)
     }
     
 }

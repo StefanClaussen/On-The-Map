@@ -58,11 +58,11 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         let latitude = Double(self.coordinate.latitude)
         let longitude = Double(self.coordinate.longitude)
 
-        self.studentInformation.GETUser {
-            (loggedInStudent) -> Void in
-            switch loggedInStudent {
+        self.studentInformation.GETStudent {
+            (result) -> Void in
+            switch result {
             case .success(let student):
-                // ToDo
+                // TODO: Remove student, make this be the user / currentUser and then just post the current user
                 let student = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
                 if Constants.CurrentUser.objectId == "" {
                     self.studentInformation.POSTStudentLocation(for: student, completion: self.processStudentObjectIdResult)

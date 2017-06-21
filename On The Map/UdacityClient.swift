@@ -46,7 +46,7 @@ struct UdacityClient {
         return .success(value)
     }
     
-    static func student(fromJSON data: Data) -> LoggedInStudent {
+    static func student(fromJSON data: Data) -> Result<Student> {
         var parsedResult: [String: AnyObject]! = nil
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
@@ -54,14 +54,18 @@ struct UdacityClient {
             return .failure(UdacityError.parsingJSONFailed)
         }
         
-        guard
-            let user = parsedResult["user"],
-            let firstName = user["first_name"] as? String,
-            let lastName = user["last_name"] as? String else {
-                return .failure(UdacityError.parsingJSONFailed)
+        guard let student = Student(fromJSON: parsedResult) else {
+            return .failure(UdacityError.parsingJSONFailed)
         }
-        let student = Student(firstName: firstName, lastName: lastName, latitude: nil, longitude: nil, mediaURL: nil)
-        return .success(student)
+        // TODO: Delete when it is working.
+//        guard
+//            let user = parsedResult["user"],
+//            let firstName = user["first_name"] as? String,
+//            let lastName = user["last_name"] as? String else {
+//                return .failure(UdacityError.parsingJSONFailed)
+//        }
+//        let student = Student(firstName: firstName, lastName: lastName, latitude: nil, longitude: nil, mediaURL: nil)
+        return Result.success(student)
     }
     
     static func deleteSession(fromJSON data: Data) -> LogoutResult {

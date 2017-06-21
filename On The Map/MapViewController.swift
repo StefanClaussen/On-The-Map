@@ -69,14 +69,12 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     }
     
     func createAnnotation(for student: Student) -> MKPointAnnotation {
-        let lat = CLLocationDegrees(student.latitude!)
-        let long = CLLocationDegrees(student.longitude!)
-        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         
         let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
+        annotation.coordinate = student.coordinate
         annotation.title = "\(student.firstName) \(student.lastName)"
-        annotation.subtitle = student.mediaURL
+        //TODO: check if absolute URL is correct use. 
+        annotation.subtitle = student.mediaURL?.absoluteString
         
         return annotation
     }
