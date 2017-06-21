@@ -46,8 +46,10 @@ struct UdacityClient {
         return .success(value)
     }
     
+    //TODO: I don't think this should be a student, it should be the currentUser.
+    //Student and CurrentUser have different fields. 
     static func student(fromJSON data: Data) -> Result<Student> {
-        var parsedResult: [String: AnyObject]! = nil
+        var parsedResult: [String: Any]! = nil
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
         } catch {
