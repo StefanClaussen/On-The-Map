@@ -31,7 +31,7 @@ struct StudentInformation {
         return ParseClient.students(fromJSON: jsonData)
     }
     
-    func GETStudent(completion: @escaping (Result<Student>) -> Void) {
+    func GETUser(completion: @escaping (Result<Student>) -> Void) {
         let request = UdacityClient.udacityUserIDURLRequest
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
@@ -48,6 +48,7 @@ struct StudentInformation {
         guard let jsonData = data else {
             return .failure(error!)
         }
+        
         let range = Range(5..<jsonData.count)
         let newData = jsonData.subdata(in: range)
         
