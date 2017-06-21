@@ -47,6 +47,29 @@ struct LoginAuthentication {
         return UdacityClient.session(fromJSON: newData)
     }
     
+    func GETStudent(completion: @escaping (Result<Student>) -> Void) {
+        let request = UdacityClient.udacityUserIDURLRequest
+        let task = session.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            let loggedInStudent = self.processUserRequest(data: data, error: error)
+            OperationQueue.main.addOperation {
+                completion(loggedInStudent)
+            }
+        }
+        task.resume()
+    }
+    
+    func processUserRequest(data: Data?, error: Error?) -> Result<Student> {
+        guard let jsonData = data else {
+            return .failure(error!)
+        }
+        let range = Range(5..<jsonData.count)
+        let newData = jsonData.subdata(in: range)
+        
+        return UdacityClient.student(fromJSON: newData)
+    }
+    
     func DELETESession(completion: @escaping (LogoutResult) -> Void) {
         let request = UdacityClient.deleteSessionURLRequest
         

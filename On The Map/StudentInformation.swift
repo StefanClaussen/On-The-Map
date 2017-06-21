@@ -7,10 +7,10 @@
 
 import UIKit
 
-enum Result<Value> {
-    case success(Value)
-    case failure(Error)
-}
+//enum Result<Value> {
+//    case success(Value)
+//    case failure(Error)
+//}
 
 //enum StudentsResult {
 //    case success([Student])
@@ -38,6 +38,7 @@ enum Result<Value> {
 struct StudentInformation {
     let session = URLSession.shared
     
+    // GETs multiple student locations
     func GETStudentLocation(completion: @escaping (Result<[Student]>) -> Void) {
         let request = ParseClient.parseURLRequest
         let task = session.dataTask(with: request as URLRequest) {
@@ -58,37 +59,35 @@ struct StudentInformation {
         return ParseClient.students(fromJSON: jsonData)
     }
     
-    func GETStudent(completion: @escaping (Result<Student>) -> Void) {
-        let request = UdacityClient.udacityUserIDURLRequest
-        let task = session.dataTask(with: request as URLRequest) {
-            data, response, error in
-            
-            let loggedInStudent = self.processUserRequest(data: data, error: error)
-            OperationQueue.main.addOperation {
-                completion(loggedInStudent)
-            }
-        }
-        task.resume()
-    }
+    // TODO: Remove commented out code when it is working again. 
+//    func GETStudent(completion: @escaping (Result<Student>) -> Void) {
+//        let request = UdacityClient.udacityUserIDURLRequest
+//        let task = session.dataTask(with: request as URLRequest) {
+//            data, response, error in
+//            
+//            let loggedInStudent = self.processUserRequest(data: data, error: error)
+//            OperationQueue.main.addOperation {
+//                completion(loggedInStudent)
+//            }
+//        }
+//        task.resume()
+//    }
+//    
+//    func processUserRequest(data: Data?, error: Error?) -> Result<Student> {
+//        guard let jsonData = data else {
+//            return .failure(error!)
+//        }
+//        let range = Range(5..<jsonData.count)
+//        let newData = jsonData.subdata(in: range)
+//        
+//        return UdacityClient.student(fromJSON: newData)
+//    }
     
-    func processUserRequest(data: Data?, error: Error?) -> Result<Student> {
-        guard let jsonData = data else {
-            return .failure(error!)
-        }
-        let range = Range(5..<jsonData.count)
-        let newData = jsonData.subdata(in: range)
-        
-        return UdacityClient.student(fromJSON: newData)
-    }
-    
-    func POSTStudentLocation(for student: Student, completion: @escaping (Result<String>) -> Void) {
+    func POSTStudentLocation(completion: @escaping (Result<String>) -> Void) {
         let request = ParseClient.parsePOSTURLRequest
         
-        let latitude = student.coordinate.latitude
-        let longitude = student.coordinate.longitude
-        
         //TODO: can this be moved out to the Parse client?
-        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: .utf8)
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
         
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
@@ -114,13 +113,11 @@ struct StudentInformation {
         return ParseClient.objectId(fromJSON: jsonData)
     }
     
-    func PUTStudentLocation(for student: Student, completion: @escaping (Result<Bool>) -> Void) {
+    func PUTStudentLocation(completion: @escaping (Result<Bool>) -> Void) {
         let request = ParseClient.parsePUTURLRequest
         
-        let latitude = student.coordinate.latitude
-        let longitude = student.coordinate.longitude         
         //TODO: can this be moved out to the Parse client?
-        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(latitude), \"longitude\": \(longitude)}".data(using: .utf8)
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
         
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in

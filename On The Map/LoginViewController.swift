@@ -29,7 +29,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     let okay = "Okay"
     
     var loginAuthentication = LoginAuthentication()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,6 +64,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         case .success(let key):
             Constants.LoggedInUser.uniqueKey = key
             self.completeLogin()
+            // TODO: Is there a better time, to create a user?
+            loginAuthentication.GETStudent {
+                (result) -> Void in
+                switch result {
+                case .success(let student):
+                    Constants.LoggedInUser.firstName = student.firstName
+                    Constants.LoggedInUser.lastName = student.lastName
+                case .failure(let error):
+                    print("failed to create a user: \(error)")
+                    return
+                }
+            }
         case .failure(UdacityError.accountNotFoundOrInvalidCredentials):
             self.showAlertWith(title: self.unableToLogin, message: self.noAccountOrInvalidCredentials, actionTitle: tryAgain)
         case .failure(UdacityError.noConnection):

@@ -28,6 +28,7 @@
 		F8BAED061ECC51FA00644586 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8BAED051ECC51FA00644586 /* Assets.xcassets */; };
 		F8BAED081ECC552500644586 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BAED071ECC552500644586 /* LoginViewController.swift */; };
 		F8DCB3981ED1A3D70029D015 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DCB3971ED1A3D70029D015 /* TableViewController.swift */; };
+		F8F93BA91EFA65A6001D5118 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F93BA81EFA65A6001D5118 /* Result.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		F8BAED051ECC51FA00644586 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8BAED071ECC552500644586 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F8DCB3971ED1A3D70029D015 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		F8F93BA81EFA65A6001D5118 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				F85F42891ECF05A400D8619C /* Constants.swift */,
 				F876C2661ED43AE40056CC6B /* LoginAuthentication.swift */,
 				F88143EA1ECCD1CA0093964E /* ParseClient.swift */,
+				F8F93BA81EFA65A6001D5118 /* Result.swift */,
 				F85F42901ECF0EB200D8619C /* Student.swift */,
 				F85F428E1ECF0EA000D8619C /* StudentInformation.swift */,
 				F8A1E20B1EE40D4F0021753E /* UdacityClient.swift */,
@@ -366,6 +369,7 @@
 				F8BAECD51ECC4D6100644586 /* AppDelegate.swift in Sources */,
 				F83B420B1EE01B04002D8235 /* FindLocationViewController.swift in Sources */,
 				F8ACFFE61EF6C231009F0FDF /* LocationAdding.swift in Sources */,
+				F8F93BA91EFA65A6001D5118 /* Result.swift in Sources */,
 				F85F42911ECF0EB200D8619C /* Student.swift in Sources */,
 				F85F428A1ECF05A400D8619C /* Constants.swift in Sources */,
 			);
