@@ -13,6 +13,7 @@ enum UdacityError: Error {
     case noConnection
     case uniqueKeyNotCreated
     case parsingJSONFailed
+    case unableToLogOff
 }
 
 struct UdacityClient {
@@ -27,7 +28,7 @@ struct UdacityClient {
         return createUdacityDELETEURLRequest()
     }
     
-    static func session(fromJSON data: Data) -> LoginResult {
+    static func session(fromJSON data: Data) -> Result<String> {
         var parsedResult: [String: AnyObject]! = nil
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
@@ -35,7 +36,6 @@ struct UdacityClient {
             return .failure(UdacityError.parsingJSONFailed)
         }
         
-        print(parsedResult)
         guard
             let account = parsedResult["account"],
             let keyValue = account["key"],
@@ -57,26 +57,20 @@ struct UdacityClient {
         guard let student = Student(fromJSON: parsedResult) else {
             return .failure(UdacityError.parsingJSONFailed)
         }
-        // TODO: Delete when it is working.
-//        guard
-//            let user = parsedResult["user"],
-//            let firstName = user["first_name"] as? String,
-//            let lastName = user["last_name"] as? String else {
-//                return .failure(UdacityError.parsingJSONFailed)
-//        }
-//        let student = Student(firstName: firstName, lastName: lastName, latitude: nil, longitude: nil, mediaURL: nil)
+
         return Result.success(student)
     }
     
-    static func deleteSession(fromJSON data: Data) -> LogoutResult {
+    //TODO: Why do I need this. The task does the work for this. I don't need to use the JSON
+    static func deleteSession(fromJSON data: Data) -> Result<Bool> {
         var parsedResult: [String: AnyObject]! = nil
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
         } catch {
-            return .failure
+            return .failure(UdacityError.parsingJSONFailed)
         }
         
-        return .success
+        return .success(true)
     }
     
     // MARK: - Private Methods

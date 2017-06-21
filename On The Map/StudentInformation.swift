@@ -58,9 +58,6 @@ struct StudentInformation {
     func POSTStudentLocation(completion: @escaping (Result<String>) -> Void) {
         let request = ParseClient.parsePOSTURLRequest
         
-        //TODO: can this be moved out to the Parse client?
-        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
-        
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
             
@@ -87,9 +84,6 @@ struct StudentInformation {
     
     func PUTStudentLocation(completion: @escaping (Result<Bool>) -> Void) {
         let request = ParseClient.parsePUTURLRequest
-        
-        //TODO: can this be moved out to the Parse client?
-        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
         
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in

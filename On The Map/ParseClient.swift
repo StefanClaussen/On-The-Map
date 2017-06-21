@@ -51,12 +51,6 @@ struct ParseClient {
         return .success(objectID)
     }
     
-    // Parse the data
-    // updatedAt is retrieved
-    // The updatedAt string is never used. 
-    // It is passed as a value in the UpdateStudentLocation enum
-    // It serves no purpose as I understand.
-    
     static func students(fromJSON data: Data) -> Result<[Student]> {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
@@ -100,6 +94,8 @@ struct ParseClient {
         request.addApplicationIdApiKeyAndContentType()
         
         request.httpMethod = "POST"
+        
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
 
         return request
     }
@@ -111,6 +107,8 @@ struct ParseClient {
         request.addApplicationIdApiKeyAndContentType()
         
         request.httpMethod = "PUT"
+        
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
         
         return request
     }
