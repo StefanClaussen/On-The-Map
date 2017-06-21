@@ -61,18 +61,6 @@ struct UdacityClient {
         return Result.success(student)
     }
     
-    //TODO: Why do I need this. The task does the work for this. I don't need to use the JSON
-    static func deleteSession(fromJSON data: Data) -> Result<Bool> {
-        var parsedResult: [String: AnyObject]! = nil
-        do {
-            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
-        } catch {
-            return .failure(UdacityError.parsingJSONFailed)
-        }
-        
-        return .success(true)
-    }
-    
     // MARK: - Private Methods
     
     private static func createUdacityURLRequest() -> NSMutableURLRequest {

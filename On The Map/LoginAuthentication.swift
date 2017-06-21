@@ -51,22 +51,16 @@ struct LoginAuthentication {
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
-            let result = self.processDELETESessionRequest(data: data, error: error)
             OperationQueue.main.addOperation {
-                completion(result)
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(true))
+                }
             }
         }
         task.resume()
     }
-    
-    func processDELETESessionRequest(data: Data?, error: Error?) -> Result<Bool> {
-        guard let data = data else {
-            return .failure(UdacityError.unableToLogOff)
-        }
-        let range = Range(5..<data.count)
-        let newData = data.subdata(in: range)
-        
-        return UdacityClient.deleteSession(fromJSON: newData)
-    }
+
 }
 
