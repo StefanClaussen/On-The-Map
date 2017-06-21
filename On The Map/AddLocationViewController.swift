@@ -54,23 +54,25 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         // TODO: Handle empty or invalid URL
         guard let mediaURL = urlTextField.text else { return }
         
-        Constants.LoggedInUser.mediaURL = mediaURL
-        Constants.LoggedInUser.latitude = Double(self.coordinate.latitude)
-        Constants.LoggedInUser.longitude = Double(self.coordinate.longitude)
-        
-        
-        
-//        getStudent { user in
-//            if let user = user {
-//                Constants.LoggedInUser.firstName = user.firstName
-//                Constants.LoggedInUser.lastName = user.lastName
-//            }
-//        }
-        
-        if Constants.CurrentUser.objectId == "" {
-            self.studentInformation.POSTStudentLocation(completion: self.processStudentObjectIdResult)
-        } else {
-            self.studentInformation.PUTStudentLocation(completion: self.processUpdateStudentLocationResult)
+        self.studentInformation.GETUser {
+            (loggedInStudent) -> Void in
+            switch loggedInStudent {
+            case .success(let student):
+                Constants.LoggedInUser.firstName = student.firstName
+                Constants.LoggedInUser.lastName = student.lastName
+                Constants.LoggedInUser.mediaURL = mediaURL
+                Constants.LoggedInUser.latitude = Double(self.coordinate.latitude)
+                Constants.LoggedInUser.longitude = Double(self.coordinate.longitude)
+                
+                if Constants.CurrentUser.objectId == "" {
+                    self.studentInformation.POSTStudentLocation(completion: self.processStudentObjectIdResult)
+                } else {
+                    self.studentInformation.PUTStudentLocation(completion: self.processUpdateStudentLocationResult)
+                }
+            case .failure(let error):
+                print("Failed to retrieve the names for the logged in user: \(error)")
+                return
+            }
         }
     }
     
