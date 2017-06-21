@@ -63,25 +63,6 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         } else {
             self.studentInformation.PUTStudentLocation(completion: self.processUpdateStudentLocationResult)
         }
-        
-        
-        //TODO: remove once working
-//        self.studentInformation.GETStudent {
-//            (result) -> Void in
-//            switch result {
-//            case .success(let student):
-//                // TODO: Remove student, make this be the user / currentUser and then just post the current user
-//                let student = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
-//                if Constants.CurrentUser.objectId == "" {
-//                    self.studentInformation.POSTStudentLocation(for: student, completion: self.processStudentObjectIdResult)
-//                } else {
-//                    self.studentInformation.PUTStudentLocation(for: student, completion: self.processUpdateStudentLocationResult)
-//                }
-//            case .failure(let error):
-//                print("failed to retrieve the names for the logged in user: \(error)")
-//                return
-//            }
-//        }
     }
     
     // MARK: Helper methods

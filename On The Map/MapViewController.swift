@@ -21,6 +21,13 @@ class MapViewController: UIViewController, Networking, LocationAdding {
         super.viewDidLoad()
         
         retrieveStudentLocations()
+        
+        getStudent { user in
+            if let user = user {
+                Constants.LoggedInUser.firstName = user.firstName
+                Constants.LoggedInUser.lastName = user.lastName
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

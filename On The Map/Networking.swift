@@ -11,13 +11,15 @@ import UIKit
 
 protocol Networking {
     func getStudentLocations(completion: @escaping ([Student]?) -> Void)
+    //TODO: Change this to currentUser idea
+    func getStudent(completion: @escaping (Student?) -> Void)
     func deleteSession(completion: @escaping (Bool) -> Void)
 }
 
 extension Networking {
     
     // GET studentLocation is the name in API
-    // It returns students and their locations
+    // Request returns students and their locations
     func getStudentLocations(completion: @escaping ([Student]?) -> Void) {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
         delegate.studentInformation.GETStudentLocation {
@@ -35,6 +37,22 @@ extension Networking {
                 if let controller = self as? UIViewController {
                     controller.present(alert, animated: true, completion: nil)
                 }
+            }
+        }
+    }
+    
+    // GETStudentLocation/{UniqueKey: Value}
+    // Request returns the student matching the unique key
+    func getStudent(completion: @escaping (Student?) -> Void) {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        delegate.studentInformation.GETStudent {
+            (result) -> Void in
+            switch result {
+            case .success(let student):
+                completion(student)
+            case .failure(let error):
+                print("failed to create a user: \(error)")
+                return
             }
         }
     }

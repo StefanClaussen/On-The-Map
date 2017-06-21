@@ -7,34 +7,6 @@
 
 import UIKit
 
-//enum Result<Value> {
-//    case success(Value)
-//    case failure(Error)
-//}
-
-//enum StudentsResult {
-//    case success([Student])
-//    case failure(Error)
-//}
-//
-//enum LoggedInStudent {
-//    case success(Student)
-//    case failure(Error)
-//}
-//
-//enum ObjectId {
-//    case success(String)
-//    case failure(Error)
-//}
-
-// TODO: Simplify or remove enum. 
-// String value is never used.
-// Enum represents that their location has been updated or not.     
-//enum UpdateStudentLocation {
-//    case success(String)
-//    case failure(Error)
-//}
-
 struct StudentInformation {
     let session = URLSession.shared
     
@@ -59,29 +31,29 @@ struct StudentInformation {
         return ParseClient.students(fromJSON: jsonData)
     }
     
-    // TODO: Remove commented out code when it is working again. 
-//    func GETStudent(completion: @escaping (Result<Student>) -> Void) {
-//        let request = UdacityClient.udacityUserIDURLRequest
-//        let task = session.dataTask(with: request as URLRequest) {
-//            data, response, error in
-//            
-//            let loggedInStudent = self.processUserRequest(data: data, error: error)
-//            OperationQueue.main.addOperation {
-//                completion(loggedInStudent)
-//            }
-//        }
-//        task.resume()
-//    }
-//    
-//    func processUserRequest(data: Data?, error: Error?) -> Result<Student> {
-//        guard let jsonData = data else {
-//            return .failure(error!)
-//        }
-//        let range = Range(5..<jsonData.count)
-//        let newData = jsonData.subdata(in: range)
-//        
-//        return UdacityClient.student(fromJSON: newData)
-//    }
+    func GETStudent(completion: @escaping (Result<Student>) -> Void) {
+        let request = UdacityClient.udacityUserIDURLRequest
+        let task = session.dataTask(with: request as URLRequest) {
+            data, response, error in
+            
+            let loggedInStudent = self.processUserRequest(data: data, error: error)
+            OperationQueue.main.addOperation {
+                completion(loggedInStudent)
+            }
+        }
+        task.resume()
+    }
+    
+    func processUserRequest(data: Data?, error: Error?) -> Result<Student> {
+        guard let jsonData = data else {
+            return .failure(error!)
+        }
+        let range = Range(5..<jsonData.count)
+        let newData = jsonData.subdata(in: range)
+        
+        return UdacityClient.student(fromJSON: newData)
+    }
+
     
     func POSTStudentLocation(completion: @escaping (Result<String>) -> Void) {
         let request = ParseClient.parsePOSTURLRequest
