@@ -36,7 +36,7 @@ struct ParseClient {
     // objectId is used as the identifying parameter when PUTting a student location
     // PUTting - student with existing location updates their location
     // https://parse.udacity.com/parse/classes/StudentLocation/<objectId>
-    static func objectId(fromJSON data: Data) -> ObjectId {
+    static func objectId(fromJSON data: Data) -> Result<String> {
         var parsedResult: [String: AnyObject]! = nil
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
@@ -51,27 +51,7 @@ struct ParseClient {
         return .success(objectID)
     }
     
-    // Parse the data
-    // updatedAt is retrieved
-    // The updatedAt string is never used. 
-    // It is passed as a value in the UpdateStudentLocation enum
-    // It serves no purpose as I understand.
-    
-    static func updateStudentLocation(fromJSON data: Data) -> UpdateStudentLocation {
-        var parsedResult: [String: AnyObject]! = nil
-        do {
-            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
-        } catch {
-            return .failure(ParseError.parsingJSONFailed)
-        }
-        
-        guard let updateDate = parsedResult["updatedAt"] as? String else {
-            return .failure(ParseError.studentLocationNotUpdated)
-        }
-        return .success(updateDate)
-    }
-    
-    static func students(fromJSON data: Data) -> StudentsResult {
+    static func students(fromJSON data: Data) -> Result<[Student]> {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
             guard
@@ -83,7 +63,7 @@ struct ParseClient {
             var finalStudents = [Student]()
             
             for studentJSON in studentsArray {
-                if let student = student(fromJSON: studentJSON) {
+                if let student = Student(fromJSON: studentJSON) {
                     finalStudents.append(student)
                 }
             }
@@ -96,20 +76,6 @@ struct ParseClient {
             return .failure(error)
         }
         
-    }
-    
-    private static func student(fromJSON json: [String:Any]) -> Student? {
-        guard
-            let firstName = json["firstName"] as? String,
-            let lastName = json["lastName"] as? String,
-            let latitude = json["latitude"] as? Double,
-            let longitude = json["longitude"] as? Double,
-            let mediaURL = json["mediaURL"] as? String
-        else {
-            return nil
-        }
-        
-        return Student(firstName: firstName, lastName: lastName, latitude: latitude, longitude: longitude, mediaURL: mediaURL)
     }
     
     // MARK: - MutableURLRequests
@@ -128,6 +94,8 @@ struct ParseClient {
         request.addApplicationIdApiKeyAndContentType()
         
         request.httpMethod = "POST"
+        
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
 
         return request
     }
@@ -139,6 +107,8 @@ struct ParseClient {
         request.addApplicationIdApiKeyAndContentType()
         
         request.httpMethod = "PUT"
+        
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
         
         return request
     }

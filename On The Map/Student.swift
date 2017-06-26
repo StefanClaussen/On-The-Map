@@ -7,16 +7,32 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Student {
     //let createdAt: String
     let firstName: String
     let lastName: String
-    var latitude: Double?
-    var longitude: Double?
+    var coordinate: CLLocationCoordinate2D
     //let mapString: String
-    let mediaURL: String?
+    var mediaURL: URL?
 //    let objectID: String
 //    let uniqueKey: Float
 //    let updatedAt: String
+    
+    init?(fromJSON json: [String: Any]) {
+        guard
+            let firstName = json["firstName"] as? String,
+            let lastName = json["lastName"] as? String,
+            let latitude = json["latitude"] as? Double,
+            let longitude = json["longitude"] as? Double,
+            let mediaPath = json["mediaURL"] as? String
+            else {
+                return nil
+        }
+        self.firstName = firstName
+        self.lastName = lastName
+        self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        self.mediaURL = URL(string: mediaPath)
+    }
 }

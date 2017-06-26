@@ -79,7 +79,7 @@ class TableViewController: UITableViewController, Networking, LocationAdding {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let student = students[indexPath.row]
         
-        guard let urlString = student.mediaURL, let urlToOpen = URL(string: urlString) else {
+        guard let urlToOpen = student.mediaURL else {
             createAlertWith(title: "No URL to Open", message: "Student did not add a URL.", action: "Okay")
             return
         }

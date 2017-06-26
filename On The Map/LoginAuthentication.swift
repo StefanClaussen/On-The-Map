@@ -8,21 +8,11 @@
 
 import UIKit
 
-enum LoginResult {
-    case success(String)
-    case failure(Error)
-}
-// TODO: This seems overkill, based on what it is doing.
-enum LogoutResult {
-    case success
-    case failure
-}
-
 struct LoginAuthentication {
     
     let session = URLSession.shared
     
-    func POSTSessionFor(email: String, password: String, completion: @escaping (LoginResult) -> Void) {
+    func POSTSessionFor(email: String, password: String, completion: @escaping (Result<String>) -> Void) {
         let request = UdacityClient.udacityURLRequest
         request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
         
@@ -37,7 +27,7 @@ struct LoginAuthentication {
         task.resume()
     }
     
-    func processSessionRequest(data: Data?, error: Error?) -> LoginResult {
+    func processSessionRequest(data: Data?, error: Error?) -> Result<String> {
         guard let data = data else {
             return .failure(UdacityError.noConnection)
         }
@@ -47,7 +37,7 @@ struct LoginAuthentication {
         return UdacityClient.session(fromJSON: newData)
     }
     
-    func DELETESession(completion: @escaping (LogoutResult) -> Void) {
+    func DELETESession(completion: @escaping (Result<Bool>) -> Void) {
         let request = UdacityClient.deleteSessionURLRequest
         
         var xsrfCookie: HTTPCookie? = nil
@@ -61,23 +51,16 @@ struct LoginAuthentication {
         
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             
-            let result = self.processDELETESessionRequest(data: data, error: error)
             OperationQueue.main.addOperation {
-                completion(result)
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(true))
+                }
             }
         }
         task.resume()
-        
     }
-    
-    func processDELETESessionRequest(data: Data?, error: Error?) -> LogoutResult {
-        guard let data = data else {
-            return .failure
-        }
-        let range = Range(5..<data.count)
-        let newData = data.subdata(in: range)
-        
-        return UdacityClient.deleteSession(fromJSON: newData)
-    }
+
 }
 

@@ -29,7 +29,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     let okay = "Okay"
     
     var loginAuthentication = LoginAuthentication()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,8 +59,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Helper methods
     
-    private func processLoginResult(_ loginResult: LoginResult) {
-        switch loginResult {
+    private func processLoginResult(_ result: Result<String>) {
+        switch result {
         case .success(let key):
             Constants.LoggedInUser.uniqueKey = key
             self.completeLogin()

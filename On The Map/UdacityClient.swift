@@ -13,6 +13,7 @@ enum UdacityError: Error {
     case noConnection
     case uniqueKeyNotCreated
     case parsingJSONFailed
+    case unableToLogOff
 }
 
 struct UdacityClient {
@@ -27,7 +28,7 @@ struct UdacityClient {
         return createUdacityDELETEURLRequest()
     }
     
-    static func session(fromJSON data: Data) -> LoginResult {
+    static func session(fromJSON data: Data) -> Result<String> {
         var parsedResult: [String: AnyObject]! = nil
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
@@ -35,7 +36,6 @@ struct UdacityClient {
             return .failure(UdacityError.parsingJSONFailed)
         }
         
-        print(parsedResult)
         guard
             let account = parsedResult["account"],
             let keyValue = account["key"],
@@ -46,33 +46,21 @@ struct UdacityClient {
         return .success(value)
     }
     
-    static func student(fromJSON data: Data) -> LoggedInStudent {
-        var parsedResult: [String: AnyObject]! = nil
+    //TODO: I don't think this should be a student, it should be the currentUser.
+    //Student and CurrentUser have different fields. 
+    static func student(fromJSON data: Data) -> Result<Student> {
+        var parsedResult: [String: Any]! = nil
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
         } catch {
             return .failure(UdacityError.parsingJSONFailed)
         }
         
-        guard
-            let user = parsedResult["user"],
-            let firstName = user["first_name"] as? String,
-            let lastName = user["last_name"] as? String else {
-                return .failure(UdacityError.parsingJSONFailed)
+        guard let student = Student(fromJSON: parsedResult) else {
+            return .failure(UdacityError.parsingJSONFailed)
         }
-        let student = Student(firstName: firstName, lastName: lastName, latitude: nil, longitude: nil, mediaURL: nil)
-        return .success(student)
-    }
-    
-    static func deleteSession(fromJSON data: Data) -> LogoutResult {
-        var parsedResult: [String: AnyObject]! = nil
-        do {
-            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
-        } catch {
-            return .failure
-        }
-        
-        return .success
+
+        return Result.success(student)
     }
     
     // MARK: - Private Methods

@@ -54,6 +54,8 @@ struct Constants {
         // Stores the unique key created when logging in
         static var uniqueKey = ""
         static var mediaURL = ""
+        static var latitude: Double = 0
+        static var longitude: Double = 0
     }
     
     // MARK: CurrentUser {

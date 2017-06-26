@@ -53,24 +53,24 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     @IBAction func finishAddingLocation(_ sender: Any) {
         // TODO: Handle empty or invalid URL
         guard let mediaURL = urlTextField.text else { return }
-        Constants.LoggedInUser.mediaURL = mediaURL
         
-        let latitude = Double(self.coordinate.latitude)
-        let longitude = Double(self.coordinate.longitude)
-
         self.studentInformation.GETUser {
             (loggedInStudent) -> Void in
             switch loggedInStudent {
             case .success(let student):
-                // ToDo
-                let student = Student(firstName: student.firstName, lastName: student.lastName, latitude: latitude, longitude: longitude, mediaURL: Constants.LoggedInUser.mediaURL)
+                Constants.LoggedInUser.firstName = student.firstName
+                Constants.LoggedInUser.lastName = student.lastName
+                Constants.LoggedInUser.mediaURL = mediaURL
+                Constants.LoggedInUser.latitude = Double(self.coordinate.latitude)
+                Constants.LoggedInUser.longitude = Double(self.coordinate.longitude)
+                
                 if Constants.CurrentUser.objectId == "" {
-                    self.studentInformation.POSTStudentLocation(for: student, completion: self.processStudentObjectIdResult)
+                    self.studentInformation.POSTStudentLocation(completion: self.processStudentObjectIdResult)
                 } else {
-                    self.studentInformation.PUTStudentLocation(for: student, completion: self.processUpdateStudentLocationResult)
+                    self.studentInformation.PUTStudentLocation(completion: self.processUpdateStudentLocationResult)
                 }
             case .failure(let error):
-                print("failed to retrieve the names for the logged in user: \(error)")
+                print("Failed to retrieve the names for the logged in user: \(error)")
                 return
             }
         }
@@ -78,8 +78,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Helper methods
     
-    private func processStudentObjectIdResult(_ objectId: ObjectId) {
-        switch objectId {
+    private func processStudentObjectIdResult(_ result: Result<String>) {
+        switch result {
         case .success(let objectId):
             Constants.CurrentUser.objectId = objectId
             print("Object id: \(Constants.CurrentUser.objectId)")
@@ -91,8 +91,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    private func processUpdateStudentLocationResult(_ updateStudentLocation: UpdateStudentLocation) {
-        switch updateStudentLocation {
+    private func processUpdateStudentLocationResult(_ result: Result<Bool>) {
+        switch result {
         case .success(let date):
             print("Successfully updated student location: \(date)")
             exitScene()
