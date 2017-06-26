@@ -75,7 +75,6 @@ struct StudentInformation {
         }
         
         if let error = error {
-            print("Unable to post student location")
             return .failure(error)
         }
 

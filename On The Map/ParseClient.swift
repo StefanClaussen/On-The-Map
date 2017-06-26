@@ -34,7 +34,7 @@ struct ParseClient {
     // Parse the data
     // objectId is retrieved
     // objectId is used as the identifying parameter when PUTting a student location
-    // PUTting - student with existing location updates their location
+    // PUTting - Student with existing location. Location updates.
     // https://parse.udacity.com/parse/classes/StudentLocation/<objectId>
     static func objectId(fromJSON data: Data) -> Result<String> {
         var parsedResult: [String: AnyObject]! = nil
@@ -95,13 +95,13 @@ struct ParseClient {
         
         request.httpMethod = "POST"
         
-        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"Constants.LoggedInUser.mapString\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
+        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"\(Constants.LoggedInUser.mapString)\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
 
         return request
     }
     
     private static func createPUTURLRequest() -> NSMutableURLRequest {
-        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation?/\(Constants.CurrentUser.objectId)"
+        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.CurrentUser.objectId)"
         
         let request = NSMutableURLRequest(url: URL(string: urlString)!)
         request.addApplicationIdApiKeyAndContentType()

@@ -94,8 +94,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     
     private func processUpdateStudentLocationResult(_ result: Result<Bool>) {
         switch result {
-        case .success(let date):
-            print("Successfully updated student location: \(date)")
+        case .success(let boolValue):
+            print("Successfully updated student location: \(boolValue)")
             exitScene()
         case .failure(ParseError.studentLocationNotUpdated):
             print("Student location not updated")
