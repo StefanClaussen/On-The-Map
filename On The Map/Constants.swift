@@ -48,6 +48,7 @@ struct Constants {
     struct LoggedInUser {
         static var firstName = ""
         static var lastName = ""
+        static var mapString = ""
         // Stores the unique key created when logging in
         static var uniqueKey = ""
         static var mediaURL = ""

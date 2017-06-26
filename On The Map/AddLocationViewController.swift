@@ -60,6 +60,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
             case .success(let student):
                 Constants.LoggedInUser.firstName = student.firstName
                 Constants.LoggedInUser.lastName = student.lastName
+                Constants.LoggedInUser.mapString = student.mapString
                 Constants.LoggedInUser.mediaURL = mediaURL
                 Constants.LoggedInUser.latitude = Double(self.coordinate.latitude)
                 Constants.LoggedInUser.longitude = Double(self.coordinate.longitude)

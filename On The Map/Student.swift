@@ -14,7 +14,7 @@ struct Student {
     let firstName: String
     let lastName: String
     var coordinate: CLLocationCoordinate2D
-    //let mapString: String
+    var mapString: String
     var mediaURL: URL?
 //    let objectID: String
 //    let uniqueKey: Float
@@ -26,6 +26,7 @@ struct Student {
             let lastName = json["lastName"] as? String,
             let latitude = json["latitude"] as? Double,
             let longitude = json["longitude"] as? Double,
+            let mapString = json["mapString"] as? String,
             let mediaPath = json["mediaURL"] as? String
             else {
                 return nil
@@ -33,6 +34,7 @@ struct Student {
         self.firstName = firstName
         self.lastName = lastName
         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        self.mapString = mapString
         self.mediaURL = URL(string: mediaPath)
     }
 }
