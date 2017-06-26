@@ -66,8 +66,8 @@ struct UdacityClient {
     // MARK: - Private Methods
     
     private static func createUdacityURLRequest() -> NSMutableURLRequest {
-        let request = NSMutableURLRequest(url: URL(string:  Constants.Udacity.baseURLString)!)
-        request.httpMethod = Constants.Udacity.Methods.Post
+        let request = NSMutableURLRequest(url: URL(string:  "https://www.udacity.com/api/session")!)
+        request.httpMethod = "POST"
         request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.Udacity.ParameterKeys.Accept)
         request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
         
@@ -75,6 +75,7 @@ struct UdacityClient {
     }
     
     private static func createUdacityUserIDURLRequest() -> NSMutableURLRequest {
+        // UserID string example
         // "https://www.udacity.com/api/users/3903878747"
         
         let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/users/\(Constants.LoggedInUser.uniqueKey)")!)

@@ -28,11 +28,6 @@ struct Constants {
     // MARK: Udacity's Server
     struct Udacity {
         static let signUpPage = "https://www.udacity.com/account/auth#!/signup"
-        static let baseURLString = "https://www.udacity.com/api/session"
-        
-        struct Methods {
-            static let Post = "POST"
-        }
         
         struct ParameterKeys {
             static let Accept = "Accept"
