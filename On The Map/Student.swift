@@ -13,7 +13,7 @@ struct Student {
     //let createdAt: String
     let firstName: String
     let lastName: String
-    var coordinate: CLLocationCoordinate2D
+    var coordinate: CLLocationCoordinate2D?
     var mediaURL: URL?
 //    let objectID: String
 //    let uniqueKey: Float
@@ -41,7 +41,5 @@ struct Student {
         }
         self.firstName = firstName
         self.lastName = lastName
-        self.coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-        self.mediaURL = URL(string: "https://www.udacity.com")
     }
 }
