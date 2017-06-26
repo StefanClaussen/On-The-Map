@@ -17,6 +17,7 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
     
     lazy var geocoder = CLGeocoder()
     var locationCoordinates = CLLocationCoordinate2D()
+    var locationName: String?
 
     // MARK: - Actions
     
@@ -48,19 +49,23 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
             // TODO: Handle failure to geocode address error in an alert.
         } else {
             var location: CLLocation?
+            var name: String?
             
             if let placemarks = placemarks, placemarks.count > 0 {
                 location = placemarks.first?.location
+                name = placemarks.first?.name
             }
             
-            if let unwrappedLocation = location {
-                let coordinate = unwrappedLocation.coordinate
-                locationCoordinates = coordinate
-                displayAddLocationVC()
-            } else {
+            guard let _location = location, let _name = name else {
                 // Handle error, might be done above.
                 print("No Matching Location Found")
+                return
             }
+            
+            locationCoordinates = _location.coordinate
+            locationName = _name
+            displayAddLocationVC()
+            
         }
     }
     
@@ -69,6 +74,7 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
     private func displayAddLocationVC() {
         let addLocationVC = storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
         addLocationVC.coordinate = locationCoordinates
+        addLocationVC.locationName = locationName
         self.navigationController?.pushViewController(addLocationVC, animated: true)
     }
     

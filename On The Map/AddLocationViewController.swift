@@ -16,6 +16,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     var coordinate = CLLocationCoordinate2D()
+    var locationName: String?
     
     var studentInformation: StudentInformation {
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -52,7 +53,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func finishAddingLocation(_ sender: Any) {
         // TODO: Handle empty or invalid URL
-        guard let mediaURL = urlTextField.text else { return }
+        guard let mediaURL = urlTextField.text, let name = locationName else { return }
+        print("Location name: \(name)")
         
         self.studentInformation.GETUser {
             (loggedInStudent) -> Void in
@@ -60,7 +62,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
             case .success(let student):
                 Constants.LoggedInUser.firstName = student.firstName
                 Constants.LoggedInUser.lastName = student.lastName
-                Constants.LoggedInUser.mapString = student.mapString
+                Constants.LoggedInUser.mapString = name
                 Constants.LoggedInUser.mediaURL = mediaURL
                 Constants.LoggedInUser.latitude = Double(self.coordinate.latitude)
                 Constants.LoggedInUser.longitude = Double(self.coordinate.longitude)
