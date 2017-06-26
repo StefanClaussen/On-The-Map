@@ -89,7 +89,7 @@ struct ParseClient {
     }
     
     private static func createParsePOSTURLRequest() -> NSMutableURLRequest {
-        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?")!)
+        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
         
         request.addApplicationIdApiKeyAndContentType()
         
