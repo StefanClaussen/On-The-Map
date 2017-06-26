@@ -34,6 +34,8 @@ struct Constants {
         }
     }
     
+    // MARK: Parameters
+    
     struct ParameterKeys {
         static let ContentType = "Content-Type"
     }
