@@ -34,4 +34,14 @@ struct Student {
         self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         self.mediaURL = URL(string: mediaPath)
     }
+    
+    init?(fromUser user: [String: AnyObject]) {
+        guard let firstName = user["first_name"] as? String, let lastName = user["last_name"] as? String else {
+                return nil
+        }
+        self.firstName = firstName
+        self.lastName = lastName
+        self.coordinate = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        self.mediaURL = URL(string: "https://www.udacity.com")
+    }
 }

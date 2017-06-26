@@ -54,7 +54,6 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     @IBAction func finishAddingLocation(_ sender: Any) {
         // TODO: Handle empty or invalid URL
         guard let mediaURL = urlTextField.text, let name = locationName else { return }
-        print("Location name: \(name)")
         
         self.studentInformation.GETUser {
             (loggedInStudent) -> Void in
@@ -85,7 +84,6 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         switch result {
         case .success(let objectId):
             Constants.CurrentUser.objectId = objectId
-            print("Object id: \(Constants.CurrentUser.objectId)")
             exitScene()
         case .failure(ParseError.objectIdNotRetrieved):
             print("ObjectId not created")
