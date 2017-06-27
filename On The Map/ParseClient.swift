@@ -74,10 +74,13 @@ struct ParseClient {
     }
     
     private static func createParseURLRequest(for method: HTTPMethod) -> NSMutableURLRequest {
-        let baseString = "https://parse.udacity.com/parse/classes/StudentLocation"
-        let putString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.CurrentUser.objectId)"
+        var urlString: String
         
-        let urlString = method != .put ? baseString : putString
+        switch method {
+        case .get: urlString = "https://parse.udacity.com/parse/classes/StudentLocation?limit=100?order=-updatedAt"
+        case .put: urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.CurrentUser.objectId)"
+        default: urlString = "https://parse.udacity.com/parse/classes/StudentLocation"
+        }
         
         let request = NSMutableURLRequest(url: URL(string: urlString)!)
         
@@ -85,6 +88,7 @@ struct ParseClient {
         
         request.addValue(Constants.Parse.ParameterValues.ApplicationID, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApplicationID)
         request.addValue(Constants.Parse.ParameterValues.ApiKey, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApiKey)
+        
         
         if method == .post || method == .put {
             request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
