@@ -18,9 +18,9 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     var coordinate = CLLocationCoordinate2D()
     var locationName: String?
     
-    var networkingManager: NetworkingManager {
+    var networkingRouter: NetworkingRouter {
         let delegate = UIApplication.shared.delegate as! AppDelegate
-        return delegate.networkingManager    }
+        return delegate.networkingRouter    }
     
     // MARK: - View lifecycle
 
@@ -54,7 +54,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         // TODO: Handle empty or invalid URL
         guard let mediaURL = urlTextField.text, let name = locationName else { return }
         
-        self.networkingManager.GETUser {
+        self.networkingRouter.GETUser {
             (loggedInStudent) -> Void in
             switch loggedInStudent {
             case .success(let student):
@@ -66,9 +66,9 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
                 Constants.LoggedInUser.longitude = Double(self.coordinate.longitude)
                 
                 if Constants.CurrentUser.objectId == "" {
-                    self.networkingManager.POSTStudentLocation(completion: self.processStudentObjectIdResult)
+                    self.networkingRouter.POSTStudentLocation(completion: self.processStudentObjectIdResult)
                 } else {
-                    self.networkingManager.PUTStudentLocation(completion: self.processUpdateStudentLocationResult)
+                    self.networkingRouter.PUTStudentLocation(completion: self.processUpdateStudentLocationResult)
                 }
             case .failure(let error):
                 print("Failed to retrieve the names for the logged in user: \(error)")
