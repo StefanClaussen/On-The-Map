@@ -52,7 +52,7 @@ struct NetworkingRouter {
         let range = Range(5..<jsonData.count)
         let newData = jsonData.subdata(in: range)
         
-        return UdacityClient.student(fromJSON: newData)
+        return UdacityClient.studentInformation(fromJSON: newData)
     }
     
     func POSTStudentLocation(completion: @escaping (Result<String>) -> Void) {

@@ -46,7 +46,7 @@ struct UdacityClient {
         return .success(value)
     }
     
-    static func student(fromJSON data: Data) -> Result<StudentInformation> {
+    static func studentInformation(fromJSON data: Data) -> Result<StudentInformation> {
         var parsedResult: [String: Any]! = nil
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
