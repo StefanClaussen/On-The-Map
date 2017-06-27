@@ -1,4 +1,4 @@
-//  StudentInformation.swift
+//  NetworkingManager.swift
 //  On The Map
 //
 //  Created by Stefan Claussen on 19/05/2017.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct StudentInformation {
+struct NetworkingManager {
     let session = URLSession.shared
     
     // GETs multiple student locations
