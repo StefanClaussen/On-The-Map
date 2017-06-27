@@ -40,9 +40,9 @@ extension Networking {
     }
     
     func deleteSession(completion: @escaping (Bool) -> Void) {
-        let loginAuthentication = LoginAuthentication()
+        let sessionManager = SessionManager()
         
-        loginAuthentication.DELETESession {
+        sessionManager.DELETESession {
             (logoutResult) in
             
             switch logoutResult {

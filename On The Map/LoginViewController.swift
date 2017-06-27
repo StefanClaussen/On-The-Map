@@ -28,7 +28,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     let tryAgain = "Try Again"
     let okay = "Okay"
     
-    var loginAuthentication = LoginAuthentication()
+    var sessionManager = SessionManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if let information = alertDetails(emailTextField.text, passwordTextField.text) {
             showAlertWith(title: information.title, message: information.message, actionTitle: tryAgain)
         } else {
-            loginAuthentication.POSTSessionFor(email: emailTextField.text!, password: passwordTextField.text!, completion: (self.processLoginResult))
+            sessionManager.POSTSessionFor(email: emailTextField.text!, password: passwordTextField.text!, completion: (self.processLoginResult))
         }
     }
     

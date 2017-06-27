@@ -1,5 +1,5 @@
 //
-//  LoginAuthentication.swift
+//  SessionManager.swift
 //  On The Map
 //
 //  Created by Stefan Claussen on 23/05/2017.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct LoginAuthentication {
+struct SessionManager {
     
     let session = URLSession.shared
     
