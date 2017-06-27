@@ -32,6 +32,7 @@ class TableViewController: UITableViewController, Networking, LocationAdding {
         getStudentLocations { students in
             if let students = students {
                 self.students = students
+                print("TableViewController, student count: \(self.students.count)")
                 self.tableView.reloadData()
             }
         }

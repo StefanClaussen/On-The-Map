@@ -77,7 +77,7 @@ struct ParseClient {
         var urlString: String
         
         switch method {
-        case .get: urlString = "https://parse.udacity.com/parse/classes/StudentLocation?limit=100?order=-updatedAt"
+        case .get: urlString = "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt"
         case .put: urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.CurrentUser.objectId)"
         default: urlString = "https://parse.udacity.com/parse/classes/StudentLocation"
         }
