@@ -18,7 +18,6 @@
 		F876C2671ED43AE40056CC6B /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876C2661ED43AE40056CC6B /* SessionManager.swift */; };
 		F88143EB1ECCD1CA0093964E /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88143EA1ECCD1CA0093964E /* ParseClient.swift */; };
 		F8A1E20C1EE40D4F0021753E /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A1E20B1EE40D4F0021753E /* UdacityClient.swift */; };
-		F8ACFFE21EF69908009F0FDF /* NSMutableRequest+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ACFFE11EF69908009F0FDF /* NSMutableRequest+Custom.swift */; };
 		F8ACFFE61EF6C231009F0FDF /* LocationAdding.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8ACFFE51EF6C231009F0FDF /* LocationAdding.swift */; };
 		F8BAECD51ECC4D6100644586 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8BAECD41ECC4D6100644586 /* AppDelegate.swift */; };
 		F8BAECDA1ECC4D6100644586 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8BAECD81ECC4D6100644586 /* Main.storyboard */; };
@@ -60,7 +59,6 @@
 		F876C2661ED43AE40056CC6B /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		F88143EA1ECCD1CA0093964E /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		F8A1E20B1EE40D4F0021753E /* UdacityClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
-		F8ACFFE11EF69908009F0FDF /* NSMutableRequest+Custom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableRequest+Custom.swift"; sourceTree = "<group>"; };
 		F8ACFFE51EF6C231009F0FDF /* LocationAdding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationAdding.swift; sourceTree = "<group>"; };
 		F8BAECD11ECC4D6100644586 /* On The Map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "On The Map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8BAECD41ECC4D6100644586 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 		F83315EC1EF7DE8300D1BA03 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				F8ACFFE11EF69908009F0FDF /* NSMutableRequest+Custom.swift */,
 				F83315F31EF8274400D1BA03 /* UIViewController+SingleActionAlert.swift */,
 			);
 			name = Extensions;
@@ -356,7 +353,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F88143EB1ECCD1CA0093964E /* ParseClient.swift in Sources */,
-				F8ACFFE21EF69908009F0FDF /* NSMutableRequest+Custom.swift in Sources */,
 				F85F428C1ECF06FD00D8619C /* MapViewController.swift in Sources */,
 				F83315F41EF8274400D1BA03 /* UIViewController+SingleActionAlert.swift in Sources */,
 				F8DCB3981ED1A3D70029D015 /* TableViewController.swift in Sources */,

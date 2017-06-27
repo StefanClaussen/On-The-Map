@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum Method: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+}
+
 enum ParseError: Error {
     case invalidJSONData
     case parsingJSONFailed
@@ -18,15 +24,15 @@ enum ParseError: Error {
 struct ParseClient {
     
     static var parseURLRequest: NSMutableURLRequest {
-        return createParseURLRequest()
+        return createParseURLRequestWith(method: .get)
     }
     
     static var parsePOSTURLRequest: NSMutableURLRequest {
-        return createParsePOSTURLRequest() 
+        return createParseURLRequestWith(method: .post)
     }
     
     static var parsePUTURLRequest: NSMutableURLRequest {
-        return createPUTURLRequest()
+        return createParseURLRequestWith(method: .put)
     }
     
     // MARK: - JSON data parsing
@@ -78,39 +84,25 @@ struct ParseClient {
         
     }
     
-    // MARK: - MutableURLRequests
-    
-    private static func createParseURLRequest() -> NSMutableURLRequest {
-        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
+    private static func createParseURLRequestWith(method: Method) -> NSMutableURLRequest {
+        let baseString = "https://parse.udacity.com/parse/classes/StudentLocation"
+        let putString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.CurrentUser.objectId)"
         
-        request.addApplicationIdAndApiKey()
-        
-        return request
-    }
-    
-    private static func createParsePOSTURLRequest() -> NSMutableURLRequest {
-        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
-        
-        request.addApplicationIdApiKeyAndContentType()
-        
-        request.httpMethod = "POST"
-        
-        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"\(Constants.LoggedInUser.mapString)\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
-
-        return request
-    }
-    
-    private static func createPUTURLRequest() -> NSMutableURLRequest {
-        let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.CurrentUser.objectId)"
+        let urlString = method != .put ? baseString : putString
         
         let request = NSMutableURLRequest(url: URL(string: urlString)!)
-        request.addApplicationIdApiKeyAndContentType()
         
-        request.httpMethod = "PUT"
+        request.httpMethod = method.rawValue
         
-        request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"\(Constants.LoggedInUser.mapString)\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
+        request.addValue(Constants.Parse.ParameterValues.ApplicationID, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApplicationID)
+        request.addValue(Constants.Parse.ParameterValues.ApiKey, forHTTPHeaderField: Constants.Parse.ParameterKeys.ApiKey)
+        
+        if method == .post || method == .put {
+            request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
+            request.httpBody = "{\"uniqueKey\": \"\(Constants.LoggedInUser.uniqueKey)\", \"firstName\": \"\(Constants.LoggedInUser.firstName)\", \"lastName\": \"\(Constants.LoggedInUser.lastName)\",\"mapString\": \"\(Constants.LoggedInUser.mapString)\", \"mediaURL\": \"\(Constants.LoggedInUser.mediaURL)\",\"latitude\": \(Constants.LoggedInUser.latitude), \"longitude\": \(Constants.LoggedInUser.longitude)}".data(using: .utf8)
+        }
         
         return request
     }
-
+    
 }
