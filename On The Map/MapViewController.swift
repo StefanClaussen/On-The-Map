@@ -60,7 +60,7 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     
     // MARK: - Map annotations
         
-    func addMapAnnotations(for students: [Student]) {
+    func addMapAnnotations(for students: [StudentInformation]) {
         var annotations = [MKPointAnnotation]()
         for student in students {
             let annotation = createAnnotation(for: student)
@@ -69,7 +69,7 @@ class MapViewController: UIViewController, Networking, LocationAdding {
         self.mapView.addAnnotations(annotations)
     }
     
-    func createAnnotation(for student: Student) -> MKPointAnnotation {
+    func createAnnotation(for student: StudentInformation) -> MKPointAnnotation {
         
         let annotation = MKPointAnnotation()
         if let coordinate = student.coordinate {

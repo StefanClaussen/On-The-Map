@@ -51,7 +51,7 @@ struct ParseClient {
         return .success(objectID)
     }
     
-    static func students(fromJSON data: Data) -> Result<[Student]> {
+    static func students(fromJSON data: Data) -> Result<[StudentInformation]> {
         do {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
             guard
@@ -60,10 +60,10 @@ struct ParseClient {
                     return .failure(ParseError.invalidJSONData)
             }
             
-            var finalStudents = [Student]()
+            var finalStudents = [StudentInformation]()
             
             for studentJSON in studentsArray {
-                if let student = Student(fromJSON: studentJSON) {
+                if let student = StudentInformation(fromJSON: studentJSON) {
                     finalStudents.append(student)
                 }
             }

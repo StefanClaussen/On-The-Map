@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol Networking {
-    func getStudentLocations(completion: @escaping ([Student]?) -> Void)
+    func getStudentLocations(completion: @escaping ([StudentInformation]?) -> Void)
     func deleteSession(completion: @escaping (Bool) -> Void)
 }
 
@@ -18,7 +18,7 @@ extension Networking {
     
     // GET studentLocation is the name in API
     // Request returns students and their locations
-    func getStudentLocations(completion: @escaping ([Student]?) -> Void) {
+    func getStudentLocations(completion: @escaping ([StudentInformation]?) -> Void) {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
         delegate.networkingRouter.GETStudentLocation {
             (studentsResult) in

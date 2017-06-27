@@ -10,7 +10,7 @@ import UIKit
 
 class TableViewController: UITableViewController, Networking, LocationAdding {
     
-    var students = [Student]()
+    var students = [StudentInformation]()
     
     // MARK: - View lifecycle
     

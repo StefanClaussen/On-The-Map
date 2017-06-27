@@ -11,7 +11,7 @@ struct NetworkingRouter {
     let session = URLSession.shared
     
     // GETs multiple student locations
-    func GETStudentLocation(completion: @escaping (Result<[Student]>) -> Void) {
+    func GETStudentLocation(completion: @escaping (Result<[StudentInformation]>) -> Void) {
         let request = ParseClient.parseURLRequest
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
@@ -24,14 +24,14 @@ struct NetworkingRouter {
         task.resume()
     }
     
-    func processGETStudentLocationRequest(data: Data?, error: Error?) -> Result<[Student]> {
+    func processGETStudentLocationRequest(data: Data?, error: Error?) -> Result<[StudentInformation]> {
         guard let jsonData = data else {
             return .failure(error!)
         }
         return ParseClient.students(fromJSON: jsonData)
     }
     
-    func GETUser(completion: @escaping (Result<Student>) -> Void) {
+    func GETUser(completion: @escaping (Result<StudentInformation>) -> Void) {
         let request = UdacityClient.udacityUserIDURLRequest
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
@@ -44,7 +44,7 @@ struct NetworkingRouter {
         task.resume()
     }
     
-    func processUserRequest(data: Data?, error: Error?) -> Result<Student> {
+    func processUserRequest(data: Data?, error: Error?) -> Result<StudentInformation> {
         guard let jsonData = data else {
             return .failure(error!)
         }

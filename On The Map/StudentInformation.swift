@@ -1,5 +1,5 @@
 //
-//  Student.swift
+//  StudentInformation.swift
 //  On The Map
 //
 //  Created by Stefan Claussen on 19/05/2017.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreLocation
 
-struct Student {
+struct StudentInformation {
     //let createdAt: String
     let firstName: String
     let lastName: String

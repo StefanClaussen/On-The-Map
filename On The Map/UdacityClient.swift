@@ -46,7 +46,7 @@ struct UdacityClient {
         return .success(value)
     }
     
-    static func student(fromJSON data: Data) -> Result<Student> {
+    static func student(fromJSON data: Data) -> Result<StudentInformation> {
         var parsedResult: [String: Any]! = nil
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
@@ -54,7 +54,7 @@ struct UdacityClient {
             return .failure(UdacityError.parsingJSONFailed)
         }
         
-        guard let user = parsedResult["user"] as? [String: AnyObject], let student = Student(fromUser: user) else {
+        guard let user = parsedResult["user"] as? [String: AnyObject], let student = StudentInformation(fromUser: user) else {
                 return .failure(UdacityError.parsingJSONFailed)
         }
 
