@@ -35,7 +35,6 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     func retrieveStudentLocations() {
         getStudentLocations { students in
             if let students = students {
-                print("MapViewController, student count: \(students.count)")
                 self.addMapAnnotations(for: students)
             }
         }
