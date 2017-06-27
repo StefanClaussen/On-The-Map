@@ -20,7 +20,7 @@ extension Networking {
     // Request returns students and their locations
     func getStudentLocations(completion: @escaping ([StudentInformation]?) -> Void) {
         guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        delegate.networkingRouter.GETStudentLocation {
+        delegate.networkingManager.GETStudentLocation {
             (studentsResult) in
             
             switch studentsResult {

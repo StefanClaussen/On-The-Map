@@ -1,4 +1,4 @@
-//  NetworkingRouter.swift
+//  NetworkingManager.swift
 //  On The Map
 //
 //  Created by Stefan Claussen on 19/05/2017.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct NetworkingRouter {
+struct NetworkingManager {
     
     let session = URLSession.shared
     

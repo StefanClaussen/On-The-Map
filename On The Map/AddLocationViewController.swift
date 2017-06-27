@@ -18,9 +18,9 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     var coordinate = CLLocationCoordinate2D()
     var locationName: String?
     
-    var networkingRouter: NetworkingRouter {
+    var networkingRouter: NetworkingManager {
         let delegate = UIApplication.shared.delegate as! AppDelegate
-        return delegate.networkingRouter    }
+        return delegate.networkingManager    }
     
     // MARK: - View lifecycle
 
