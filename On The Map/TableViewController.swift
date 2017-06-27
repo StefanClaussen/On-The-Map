@@ -55,8 +55,12 @@ class TableViewController: UITableViewController, Networking, LocationAdding {
             if correct { self.performSegue(withIdentifier: "MapToFindLocation", sender: self) }
         }
     }
+    
+}
 
-    // MARK: - Table view data source
+// MARK: - Table view data source
+    
+extension TableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return students.count
@@ -74,7 +78,11 @@ class TableViewController: UITableViewController, Networking, LocationAdding {
         return cell
     }
     
-    // MARK: - UITableViewDelegate
+}
+
+// MARK: - UITableViewDelegate
+
+extension TableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let student = students[indexPath.row]
