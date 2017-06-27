@@ -8,9 +8,9 @@
 import UIKit
 
 struct NetworkingRouter {
+    
     let session = URLSession.shared
     
-    // GETs multiple student locations
     func GETStudentLocation(completion: @escaping (Result<[StudentInformation]>) -> Void) {
         let request = ParseClient.parseURLRequest
         let task = session.dataTask(with: request as URLRequest) {

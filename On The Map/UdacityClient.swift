@@ -19,13 +19,13 @@ enum UdacityError: Error {
 struct UdacityClient {
     
     static var udacityURLRequest: NSMutableURLRequest {
-        return createUdacityURLRequest()
+        return createUdacityURLRequest(for: .post)
     }
     static var udacityUserIDURLRequest: NSMutableURLRequest {
-        return createUdacityUserIDURLRequest()
+        return createUdacityURLRequest(for: .get)
     }
     static var deleteSessionURLRequest: NSMutableURLRequest {
-        return createUdacityDELETEURLRequest()
+        return createUdacityURLRequest(for: .delete)
     }
     
     static func session(fromJSON data: Data) -> Result<String> {
@@ -63,26 +63,21 @@ struct UdacityClient {
     
     // MARK: - Private Methods
     
-    private static func createUdacityURLRequest() -> NSMutableURLRequest {
-        let request = NSMutableURLRequest(url: URL(string:  "https://www.udacity.com/api/session")!)
-        request.httpMethod = "POST"
-        request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.Udacity.ParameterKeys.Accept)
-        request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
+    private static func createUdacityURLRequest(for method: HTTPMethod) -> NSMutableURLRequest {
+        let sessionString = "https://www.udacity.com/api/session"
+        let uniqueKeyString = "https://www.udacity.com/api/users/\(Constants.LoggedInUser.uniqueKey)"
+        
+        let urlString = method != .get ? sessionString : uniqueKeyString
+        let request = NSMutableURLRequest(url: URL(string:  urlString)!)
+        
+        request.httpMethod = method.rawValue
+        
+        if method == .post {
+            request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.Udacity.ParameterKeys.Accept)
+            request.addValue(Constants.ParameterValues.ApplicationJSON, forHTTPHeaderField: Constants.ParameterKeys.ContentType)
+        }
         
         return request
     }
     
-    private static func createUdacityUserIDURLRequest() -> NSMutableURLRequest {
-        // UserID string example
-        // "https://www.udacity.com/api/users/3903878747"
-        
-        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/users/\(Constants.LoggedInUser.uniqueKey)")!)
-        return request
-    }
-    
-    private static func createUdacityDELETEURLRequest() -> NSMutableURLRequest {
-        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
-        request.httpMethod = "DELETE"
-        return request
-    }
 }

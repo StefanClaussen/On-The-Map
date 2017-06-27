@@ -8,12 +8,6 @@
 
 import Foundation
 
-enum Method: String {
-    case get = "GET"
-    case post = "POST"
-    case put = "PUT"
-}
-
 enum ParseError: Error {
     case invalidJSONData
     case parsingJSONFailed
@@ -24,23 +18,18 @@ enum ParseError: Error {
 struct ParseClient {
     
     static var parseURLRequest: NSMutableURLRequest {
-        return createParseURLRequestWith(method: .get)
+        return createParseURLRequest(for: .get)
     }
     
     static var parsePOSTURLRequest: NSMutableURLRequest {
-        return createParseURLRequestWith(method: .post)
+        return createParseURLRequest(for: .post)
     }
     
     static var parsePUTURLRequest: NSMutableURLRequest {
-        return createParseURLRequestWith(method: .put)
+        return createParseURLRequest(for: .put)
     }
     
-    // MARK: - JSON data parsing
-    
-    // Parse the data
-    // objectId is retrieved
     // objectId is used as the identifying parameter when PUTting a student location
-    // PUTting - Student with existing location. Location updates.
     // https://parse.udacity.com/parse/classes/StudentLocation/<objectId>
     static func objectId(fromJSON data: Data) -> Result<String> {
         var parsedResult: [String: AnyObject]! = nil
@@ -84,7 +73,7 @@ struct ParseClient {
         
     }
     
-    private static func createParseURLRequestWith(method: Method) -> NSMutableURLRequest {
+    private static func createParseURLRequest(for method: HTTPMethod) -> NSMutableURLRequest {
         let baseString = "https://parse.udacity.com/parse/classes/StudentLocation"
         let putString = "https://parse.udacity.com/parse/classes/StudentLocation/\(Constants.CurrentUser.objectId)"
         
