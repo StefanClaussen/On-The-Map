@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Alert Titles
     let unableToLogin = "Unable to login"
@@ -42,6 +43,7 @@ class LoginViewController: UIViewController {
         if let information = alertDetails(emailTextField.text, passwordTextField.text) {
             showAlertWith(title: information.title, message: information.message, actionTitle: tryAgain)
         } else {
+            self.activityIndicator.startAnimating()
             sessionManager.POSTSessionFor(email: emailTextField.text!, password: passwordTextField.text!, completion: (self.processLoginResult))
         }
     }
@@ -60,6 +62,7 @@ class LoginViewController: UIViewController {
     // MARK: Helper methods
     
     private func processLoginResult(_ result: Result<String>) {
+        self.activityIndicator.stopAnimating()
         switch result {
         case .success(let key):
             Constants.LoggedInUser.uniqueKey = key

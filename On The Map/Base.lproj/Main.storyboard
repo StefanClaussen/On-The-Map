@@ -88,15 +88,25 @@
                                     <constraint firstItem="3VV-GR-6Gh" firstAttribute="height" secondItem="BYG-Th-u4V" secondAttribute="height" id="9pV-dr-Vun"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" alpha="0.25" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fSm-wl-3Ld">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="BgJ-K3-4YH" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="J2s-Yy-M30"/>
+                            <constraint firstItem="fSm-wl-3Ld" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="KJf-01-Xry"/>
+                            <constraint firstItem="fSm-wl-3Ld" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="R8g-SR-YIf"/>
+                            <constraint firstItem="fSm-wl-3Ld" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rvq-PQ-rgf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BgJ-K3-4YH" secondAttribute="trailing" id="VWX-D5-LCC"/>
+                            <constraint firstItem="fSm-wl-3Ld" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="YNT-5j-OLt"/>
                             <constraint firstItem="BgJ-K3-4YH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="nrB-hk-637"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="fSm-wl-3Ld" id="qbQ-l2-pKs"/>
                         <outlet property="emailTextField" destination="BYG-Th-u4V" id="xfR-pz-Iyl"/>
                         <outlet property="passwordTextField" destination="3VV-GR-6Gh" id="W1t-UV-GvD"/>
                     </connections>
@@ -334,7 +344,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uKz-1x-v9b">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                            <rect key="frame" x="16" y="0.0" width="344" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
