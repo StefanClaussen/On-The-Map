@@ -133,13 +133,21 @@
                                     <outlet property="delegate" destination="nei-SC-HvY" id="E2s-wK-cgQ"/>
                                 </connections>
                             </mapView>
+                            <activityIndicatorView hidden="YES" opaque="NO" alpha="0.25" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ZiE-Xr-7VL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ZiE-Xr-7VL" firstAttribute="centerY" secondItem="6LL-cc-WlR" secondAttribute="centerY" id="4O3-bQ-7IW"/>
                             <constraint firstAttribute="trailing" secondItem="dtr-qd-dtV" secondAttribute="trailing" id="8b8-YB-gwH"/>
+                            <constraint firstItem="ZiE-Xr-7VL" firstAttribute="width" secondItem="6LL-cc-WlR" secondAttribute="width" id="UXy-5P-4jc"/>
                             <constraint firstItem="dtr-qd-dtV" firstAttribute="centerY" secondItem="6LL-cc-WlR" secondAttribute="centerY" id="Zey-Vp-vJ2"/>
                             <constraint firstAttribute="bottom" secondItem="dtr-qd-dtV" secondAttribute="bottom" id="bFs-BX-c4G"/>
                             <constraint firstItem="dtr-qd-dtV" firstAttribute="leading" secondItem="6LL-cc-WlR" secondAttribute="leading" id="dWe-NL-xyg"/>
+                            <constraint firstItem="ZiE-Xr-7VL" firstAttribute="height" secondItem="6LL-cc-WlR" secondAttribute="height" id="pmT-Sl-WGr"/>
+                            <constraint firstItem="ZiE-Xr-7VL" firstAttribute="centerX" secondItem="6LL-cc-WlR" secondAttribute="centerX" id="wID-ZZ-GAh"/>
                             <constraint firstItem="dtr-qd-dtV" firstAttribute="top" secondItem="6LL-cc-WlR" secondAttribute="top" id="zDy-42-bXq"/>
                         </constraints>
                     </view>
@@ -163,6 +171,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="ZiE-Xr-7VL" id="lSN-zm-bp7"/>
                         <outlet property="mapView" destination="dtr-qd-dtV" id="fg7-QS-OUz"/>
                         <segue destination="lQn-tU-4ht" kind="presentation" identifier="MapToFindLocation" id="Jmu-HM-bbm"/>
                     </connections>
@@ -310,15 +319,24 @@
                                     <constraint firstItem="Kps-aH-zn0" firstAttribute="width" secondItem="lEq-jE-vdx" secondAttribute="width" id="WJ5-IM-Pez"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" alpha="0.25" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fHm-Kx-izj">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lEq-jE-vdx" firstAttribute="top" secondItem="2Mq-5h-7I4" secondAttribute="bottom" constant="30" id="8iS-78-GiX"/>
+                            <constraint firstItem="fHm-Kx-izj" firstAttribute="centerX" secondItem="H3Z-4I-82e" secondAttribute="centerX" id="Cno-HF-h5J"/>
+                            <constraint firstItem="fHm-Kx-izj" firstAttribute="width" secondItem="H3Z-4I-82e" secondAttribute="width" id="eZf-Os-3cm"/>
+                            <constraint firstItem="fHm-Kx-izj" firstAttribute="height" secondItem="H3Z-4I-82e" secondAttribute="height" id="hx9-z5-xtj"/>
                             <constraint firstAttribute="trailing" secondItem="lEq-jE-vdx" secondAttribute="trailing" id="mAr-4T-zox"/>
+                            <constraint firstItem="fHm-Kx-izj" firstAttribute="centerY" secondItem="H3Z-4I-82e" secondAttribute="centerY" id="wm3-3H-2uv"/>
                             <constraint firstItem="lEq-jE-vdx" firstAttribute="leading" secondItem="H3Z-4I-82e" secondAttribute="leading" id="zLJ-5i-aYN"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="fHm-Kx-izj" id="BTS-gd-Cs7"/>
                         <outlet property="mapView" destination="Kps-aH-zn0" id="6Qv-Bv-52p"/>
                         <outlet property="urlTextField" destination="YiM-SQ-y8i" id="hfY-gY-BT0"/>
                     </connections>
@@ -344,7 +362,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uKz-1x-v9b">
-                                            <rect key="frame" x="16" y="0.0" width="344" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>

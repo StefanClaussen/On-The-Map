@@ -14,6 +14,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var coordinate = CLLocationCoordinate2D()
     var locationName: String?
@@ -51,6 +52,8 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Actions
 
     @IBAction func finishAddingLocation(_ sender: Any) {
+        activityIndicator.startAnimating()
+        
         // TODO: Handle empty or invalid URL
         guard let mediaURL = urlTextField.text, let name = locationName else { return }
         
@@ -80,6 +83,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     // MARK: Helper methods
     
     private func processStudentObjectIdResult(_ result: Result<String>) {
+        self.activityIndicator.stopAnimating()
         switch result {
         case .success(let objectId):
             Constants.CurrentUser.objectId = objectId
@@ -92,6 +96,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func processUpdateStudentLocationResult(_ result: Result<Bool>) {
+        self.activityIndicator.stopAnimating()
         switch result {
         case .success(let boolValue):
             print("Successfully updated student location: \(boolValue)")

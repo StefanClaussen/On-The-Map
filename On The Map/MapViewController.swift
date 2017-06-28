@@ -14,6 +14,7 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     fileprivate let reuseId = "pin"
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     // MARK: - View lifecycle
     
@@ -21,7 +22,6 @@ class MapViewController: UIViewController, Networking, LocationAdding {
         super.viewDidLoad()
         
         retrieveStudentLocations()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -33,9 +33,11 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     // MARK: - StudentLocations
     
     func retrieveStudentLocations() {
+        activityIndicator.startAnimating()
         getStudentLocations { students in
             if let students = students {
                 self.addMapAnnotations(for: students)
+                self.activityIndicator.stopAnimating()
             }
         }
     }
