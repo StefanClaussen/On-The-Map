@@ -110,11 +110,17 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        //TODO: Display an alert if url is invalid, as I do in the table view. 
         if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
-            if let toOpen = view.annotation?.subtitle! {
-                app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
+            
+            guard let urlToOpen = URL(string: "view.annotation?.subtitle!") else {
+                createAlertWith(title: "No URL to Open", message: "Student did not add a URL.", action: "Okay")
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(urlToOpen) {
+                UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
+            } else {
+                createAlertWith(title: "Invalid URL", message: "Student did not add a valid URL.", action: "Okay" )
             }
         }
     }
