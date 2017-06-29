@@ -44,9 +44,8 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
     private func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
         findLocationButton.isHidden = false
         
-        if let error = error {
-            print("Unable to Forward Geocode Address (\(error)")
-            // TODO: Handle failure to geocode address error in an alert.
+        if error != nil {
+            createAlertWith(title: "No Matching Location Found", message: "Try entering the address again.", action: "Okay")
         } else {
             var location: CLLocation?
             var name: String?
@@ -57,8 +56,7 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
             }
             
             guard let _location = location, let _name = name else {
-                // Handle error, might be done above.
-                print("No Matching Location Found")
+                createAlertWith(title: "No Matching Location Found", message: "Try entering the address again.", action: "Okay")
                 return
             }
             
