@@ -206,7 +206,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="JWt-k4-Shx">
-                                <rect key="frame" x="16" y="183.5" width="343" height="300"/>
+                                <rect key="frame" x="16" y="220" width="343" height="227"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="cDp-AQ-STb">
                                         <rect key="frame" x="145.5" y="0.0" width="52" height="67"/>
@@ -215,7 +215,7 @@
                                             <constraint firstAttribute="width" constant="52" id="vPP-Mz-HEJ"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a City" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k0I-Ik-uII">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Location" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k0I-Ik-uII">
                                         <rect key="frame" x="17" y="107" width="309" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="4H2-4D-RPG"/>
@@ -236,16 +236,6 @@
                                             <outlet property="delegate" destination="6yW-HS-ekf" id="2Ug-9I-rwW"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oTf-RA-mqH">
-                                        <rect key="frame" x="109" y="267" width="125" height="33"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="FIND LOCATION">
-                                            <color key="titleColor" red="0.063723258674144745" green="0.71904140710830688" blue="0.90697282552719116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="findLocation:" destination="6yW-HS-ekf" eventType="touchUpInside" id="HWl-wZ-Usq"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="UUu-qE-qJQ" firstAttribute="width" secondItem="k0I-Ik-uII" secondAttribute="width" id="0Ge-be-aOH"/>
@@ -277,11 +267,17 @@
                                 <action selector="cancelButtonPressed:" destination="6yW-HS-ekf" id="Lmj-kz-SnL"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Find" id="EMz-gn-r1b">
+                            <color key="tintColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="findLocation:" destination="6yW-HS-ekf" id="Wcz-8q-0KG"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="cityTextField" destination="k0I-Ik-uII" id="dif-FY-UiP"/>
                         <outlet property="countryTextField" destination="UUu-qE-qJQ" id="BAu-84-dKA"/>
-                        <outlet property="findLocationButton" destination="oTf-RA-mqH" id="h3q-T8-rSO"/>
+                        <outlet property="findLocationButton" destination="EMz-gn-r1b" id="Bpi-EV-beq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iSn-a9-nCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -301,7 +297,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lEq-jE-vdx">
-                                <rect key="frame" x="0.0" y="50" width="375" height="487.5"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="494.5"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a website" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YiM-SQ-y8i">
                                         <rect key="frame" x="19" y="0.0" width="337.5" height="40"/>
@@ -322,10 +318,11 @@
                                         </constraints>
                                     </mapView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMG-E5-q5e">
-                                        <rect key="frame" x="126.5" y="454.5" width="122" height="33"/>
+                                        <rect key="frame" x="19" y="454.5" width="337.5" height="40"/>
+                                        <color key="backgroundColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="ADD LOCATION">
-                                            <color key="titleColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="finishAddingLocation:" destination="yZX-fN-kCq" eventType="touchUpInside" id="vjI-Be-Ie1"/>
@@ -334,7 +331,9 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="YiM-SQ-y8i" firstAttribute="width" secondItem="lEq-jE-vdx" secondAttribute="width" multiplier="0.9" id="3pV-HW-1CR"/>
+                                    <constraint firstItem="oMG-E5-q5e" firstAttribute="width" secondItem="YiM-SQ-y8i" secondAttribute="width" id="HWz-mv-qiS"/>
                                     <constraint firstItem="Kps-aH-zn0" firstAttribute="width" secondItem="lEq-jE-vdx" secondAttribute="width" id="WJ5-IM-Pez"/>
+                                    <constraint firstItem="oMG-E5-q5e" firstAttribute="height" secondItem="YiM-SQ-y8i" secondAttribute="height" id="fdp-hX-1Gq"/>
                                 </constraints>
                             </stackView>
                             <activityIndicatorView hidden="YES" opaque="NO" alpha="0.25" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fHm-Kx-izj">
@@ -490,7 +489,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lQn-tU-4ht" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lQc-d7-LgC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lQc-d7-LgC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

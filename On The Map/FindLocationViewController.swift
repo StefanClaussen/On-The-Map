@@ -13,7 +13,7 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var cityTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
-    @IBOutlet weak var findLocationButton: UIButton!
+    @IBOutlet weak var findLocationButton: UIBarButtonItem!
     
     lazy var geocoder = CLGeocoder()
     var locationCoordinates = CLLocationCoordinate2D()
@@ -36,13 +36,13 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
         }
         
         // Hide button to prevent repeated geocoding requests
-        findLocationButton.isHidden = true
+        findLocationButton.isEnabled = false
     }
     
     // MARK: - Helper methods
     
     private func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
-        findLocationButton.isHidden = false
+        findLocationButton.isEnabled = true
         
         if error != nil {
             createAlertWith(title: "No Matching Location Found", message: "Try entering the address again.", action: "Okay")
@@ -63,7 +63,6 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
             locationCoordinates = _location.coordinate
             locationName = _name
             displayAddLocationVC()
-            
         }
     }
     
@@ -82,5 +81,7 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    // TODO: Check if a textfield has a value, before showing the 'Find' button
 
 }
