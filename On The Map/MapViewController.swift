@@ -27,17 +27,19 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        mapView.removeAnnotations(mapView.annotations)
         retrieveStudentLocations()
     }
     
     // MARK: - StudentLocations
     
     func retrieveStudentLocations() {
+        // TODO: Stop the activity indicator if unable to get students.
         activityIndicator.startAnimating()
         getStudentLocations { students in
             if let students = students {
-                self.addMapAnnotations(for: students)
                 self.activityIndicator.stopAnimating()
+                self.addMapAnnotations(for: students)
             }
         }
     }
@@ -51,6 +53,7 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     }
     
     @IBAction func refreshMap(_ sender: Any) {
+        mapView.removeAnnotations(mapView.annotations)
         retrieveStudentLocations()
     }
     
@@ -107,6 +110,7 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        //TODO: Display an alert if url is invalid, as I do in the table view. 
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
