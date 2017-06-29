@@ -35,7 +35,7 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
             self.processResponse(withPlacemarks: placemarks, error: error)
         }
         
-        // Hide button to prevent repeated geocoding requests
+        // Disable button to prevent repeated geocoding requests
         findLocationButton.isEnabled = false
     }
     
