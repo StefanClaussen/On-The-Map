@@ -10,14 +10,10 @@ import Foundation
 import CoreLocation
 
 struct StudentInformation {
-    //let createdAt: String
     let firstName: String
     let lastName: String
     var coordinate: CLLocationCoordinate2D?
     var mediaURL: URL?
-//    let objectID: String
-//    let uniqueKey: Float
-//    let updatedAt: String
     
     init?(fromJSON json: [String: Any]) {
         guard
