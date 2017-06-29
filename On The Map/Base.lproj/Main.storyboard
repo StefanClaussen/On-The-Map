@@ -279,6 +279,7 @@
                         <outlet property="countryTextField" destination="UUu-qE-qJQ" id="BAu-84-dKA"/>
                         <outlet property="findLocationButton" destination="EMz-gn-r1b" id="Bpi-EV-beq"/>
                         <outlet property="locationTextField" destination="k0I-Ik-uII" id="ByP-gG-bpo"/>
+                        <segue destination="yZX-fN-kCq" kind="show" identifier="ShowAddLocation" id="Cl6-LB-hPC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iSn-a9-nCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -298,7 +299,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lEq-jE-vdx">
-                                <rect key="frame" x="0.0" y="50" width="375" height="494.5"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="494.5"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a website" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YiM-SQ-y8i">
                                         <rect key="frame" x="19" y="0.0" width="337.5" height="40"/>
@@ -347,7 +348,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lEq-jE-vdx" firstAttribute="top" secondItem="2Mq-5h-7I4" secondAttribute="bottom" constant="30" id="8iS-78-GiX"/>
+                            <constraint firstItem="lEq-jE-vdx" firstAttribute="top" secondItem="2Mq-5h-7I4" secondAttribute="bottom" constant="20" id="8iS-78-GiX"/>
                             <constraint firstItem="fHm-Kx-izj" firstAttribute="centerX" secondItem="H3Z-4I-82e" secondAttribute="centerX" id="Cno-HF-h5J"/>
                             <constraint firstItem="fHm-Kx-izj" firstAttribute="width" secondItem="H3Z-4I-82e" secondAttribute="width" id="eZf-Os-3cm"/>
                             <constraint firstItem="fHm-Kx-izj" firstAttribute="height" secondItem="H3Z-4I-82e" secondAttribute="height" id="hx9-z5-xtj"/>

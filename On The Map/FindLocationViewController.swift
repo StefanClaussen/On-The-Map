@@ -84,17 +84,17 @@ class FindLocationViewController: UIViewController {
             
             locationCoordinates = _location.coordinate
             locationName = _name
-            displayAddLocationVC()
+            performSegue(withIdentifier: "ShowAddLocation", sender: self)
         }
     }
     
     // MARK: - Navigation / Storyboard
     
-    private func displayAddLocationVC() {
-        let addLocationVC = storyboard?.instantiateViewController(withIdentifier: "AddLocationViewController") as! AddLocationViewController
-        addLocationVC.coordinate = locationCoordinates
-        addLocationVC.locationName = locationName
-        self.navigationController?.pushViewController(addLocationVC, animated: true)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowAddLocation", let viewController = segue.destination as? AddLocationViewController {
+            viewController.coordinate = locationCoordinates
+            viewController.locationName = locationName
+        }
     }
 }
 
