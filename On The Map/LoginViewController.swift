@@ -6,6 +6,10 @@
 //  Copyright © 2017 One foot after the other. All rights reserved.
 //
 
+//TODO: 
+// - Remove unneccessary alert when email or password is blank
+// - Move alert messages to their own file
+
 import UIKit
 
 class LoginViewController: UIViewController {
