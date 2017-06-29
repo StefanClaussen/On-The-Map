@@ -26,7 +26,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="BgJ-K3-4YH" userLabel="Login Stack View">
-                                <rect key="frame" x="16" y="80" width="343" height="372.5"/>
+                                <rect key="frame" x="16" y="80" width="343" height="382.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="hIK-cV-GUf">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="62"/>
@@ -59,14 +59,21 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mkj-FH-u17">
-                                        <rect key="frame" x="0.0" y="282.5" width="343" height="30"/>
-                                        <state key="normal" title="Login"/>
+                                        <rect key="frame" x="0.0" y="282.5" width="343" height="40"/>
+                                        <color key="backgroundColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="LOGIN">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="cornerRadius" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="loginPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rnn-cj-1FA"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVY-va-T3M" userLabel="No Account Stack View">
-                                        <rect key="frame" x="0.0" y="342.5" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="352.5" width="343" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egl-68-Wkx">
                                                 <rect key="frame" x="0.0" y="0.0" width="160.5" height="30"/>
@@ -86,6 +93,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="3VV-GR-6Gh" firstAttribute="height" secondItem="BYG-Th-u4V" secondAttribute="height" id="9pV-dr-Vun"/>
+                                    <constraint firstItem="Mkj-FH-u17" firstAttribute="height" secondItem="BYG-Th-u4V" secondAttribute="height" id="uEf-tq-PcV"/>
                                 </constraints>
                             </stackView>
                             <activityIndicatorView hidden="YES" opaque="NO" alpha="0.25" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fSm-wl-3Ld">
@@ -226,7 +234,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oTf-RA-mqH">
                                         <rect key="frame" x="109" y="267" width="125" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="FIND LOCATION"/>
+                                        <state key="normal" title="FIND LOCATION">
+                                            <color key="titleColor" red="0.063723258674144745" green="0.71904140710830688" blue="0.90697282552719116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="findLocation:" destination="6yW-HS-ekf" eventType="touchUpInside" id="HWl-wZ-Usq"/>
                                         </connections>
@@ -257,6 +267,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Find Location" id="0QB-8s-UEe">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="rCP-Bs-yhW">
+                            <color key="tintColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="6yW-HS-ekf" id="Lmj-kz-SnL"/>
                             </connections>
