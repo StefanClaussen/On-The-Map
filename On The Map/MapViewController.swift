@@ -81,7 +81,6 @@ class MapViewController: UIViewController, Networking, LocationAdding {
             annotation.coordinate = coordinate
         }
         annotation.title = "\(student.firstName) \(student.lastName)"
-        //TODO: check if absolute URL is correct use. 
         annotation.subtitle = student.mediaURL?.absoluteString
         
         return annotation
@@ -124,4 +123,5 @@ extension MapViewController: MKMapViewDelegate {
             }
         }
     }
+    
 }

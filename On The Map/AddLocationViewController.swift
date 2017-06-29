@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class AddLocationViewController: UIViewController, UITextFieldDelegate {
+class AddLocationViewController: UIViewController {
     
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
@@ -19,7 +19,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
     var coordinate = CLLocationCoordinate2D()
     var locationName: String?
     
-    var networkingRouter: NetworkingManager {
+    var networkingManager: NetworkingManager {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         return delegate.networkingManager    }
     
@@ -57,7 +57,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         // TODO: Handle empty or invalid URL
         guard let mediaURL = urlTextField.text, let name = locationName else { return }
         
-        self.networkingRouter.GETUser {
+        self.networkingManager.GETUser {
             (loggedInStudent) -> Void in
             switch loggedInStudent {
             case .success(let student):
@@ -69,12 +69,14 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
                 Constants.LoggedInUser.longitude = Double(self.coordinate.longitude)
                 
                 if Constants.CurrentUser.objectId == "" {
-                    self.networkingRouter.POSTStudentLocation(completion: self.processStudentObjectIdResult)
+                    self.networkingManager.POSTStudentLocation(completion: self.processStudentObjectIdResult)
                 } else {
-                    self.networkingRouter.PUTStudentLocation(completion: self.processUpdateStudentLocationResult)
+                    self.networkingManager.PUTStudentLocation(completion: self.processUpdateStudentLocationResult)
                 }
             case .failure(let error):
+                self.activityIndicator.stopAnimating()
                 print("Failed to retrieve the names for the logged in user: \(error)")
+                self.unableToAddLocationAlert()
                 return
             }
         }
@@ -90,8 +92,10 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
             exitScene()
         case .failure(ParseError.objectIdNotRetrieved):
             print("ObjectId not created")
+            unableToAddLocationAlert()
         default:
-            print("Something went wrong when creating the objectID")
+            print("Something went wrong when posting the student location")
+            unableToAddLocationAlert()
         }
     }
     
@@ -103,9 +107,15 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
             exitScene()
         case .failure(ParseError.studentLocationNotUpdated):
             print("Student location not updated")
+            unableToAddLocationAlert()
         default:
             print("Something went wrong when updating the student location")
+            unableToAddLocationAlert()
         }
+    }
+    
+    func unableToAddLocationAlert() {
+        createAlertWith(title: "Unable to Add Location", message: "Location could not be added. Check your internet connection. Alternatively the server may be unavailable.", action: "Okay")
     }
     
     // MARK: - Navigation and Storyboard
@@ -116,7 +126,11 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    // MARK: - UITextFieldDelegate
+}
+    
+// MARK: - UITextFieldDelegate
+    
+extension AddLocationViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

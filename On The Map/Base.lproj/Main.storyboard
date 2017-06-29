@@ -276,9 +276,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cityTextField" destination="k0I-Ik-uII" id="dif-FY-UiP"/>
                         <outlet property="countryTextField" destination="UUu-qE-qJQ" id="BAu-84-dKA"/>
                         <outlet property="findLocationButton" destination="EMz-gn-r1b" id="Bpi-EV-beq"/>
+                        <outlet property="locationTextField" destination="k0I-Ik-uII" id="ByP-gG-bpo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iSn-a9-nCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
