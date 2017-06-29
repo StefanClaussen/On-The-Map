@@ -26,19 +26,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="BgJ-K3-4YH" userLabel="Login Stack View">
-                                <rect key="frame" x="16" y="80" width="343" height="382.5"/>
+                                <rect key="frame" x="31" y="80" width="313" height="382.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="hIK-cV-GUf">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="62"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="62"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpx-fn-mNt">
-                                        <rect key="frame" x="0.0" y="92" width="343" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="92" width="313" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BYG-Th-u4V">
-                                        <rect key="frame" x="0.0" y="142.5" width="343" height="40"/>
+                                        <rect key="frame" x="0.0" y="142.5" width="313" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="m6S-wz-a6n"/>
                                         </constraints>
@@ -50,7 +50,7 @@
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3VV-GR-6Gh">
-                                        <rect key="frame" x="0.0" y="212.5" width="343" height="40"/>
+                                        <rect key="frame" x="0.0" y="212.5" width="313" height="40"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
@@ -59,7 +59,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mkj-FH-u17">
-                                        <rect key="frame" x="0.0" y="282.5" width="343" height="40"/>
+                                        <rect key="frame" x="0.0" y="282.5" width="313" height="40"/>
                                         <color key="backgroundColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="LOGIN">
@@ -72,18 +72,20 @@
                                             <action selector="loginPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rnn-cj-1FA"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVY-va-T3M" userLabel="No Account Stack View">
-                                        <rect key="frame" x="0.0" y="352.5" width="343" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="bVY-va-T3M" userLabel="No Account Stack View">
+                                        <rect key="frame" x="0.0" y="352.5" width="313" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egl-68-Wkx">
-                                                <rect key="frame" x="0.0" y="0.0" width="160.5" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="233" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5vT-Bq-o0U">
-                                                <rect key="frame" x="160.5" y="0.0" width="182.5" height="30"/>
-                                                <state key="normal" title="Sign Up"/>
+                                                <rect key="frame" x="233" y="0.0" width="80" height="30"/>
+                                                <state key="normal" title="Sign Up">
+                                                    <color key="titleColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="signUpPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ieu-KO-jbJ"/>
                                                 </connections>
@@ -108,9 +110,9 @@
                             <constraint firstItem="fSm-wl-3Ld" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="KJf-01-Xry"/>
                             <constraint firstItem="fSm-wl-3Ld" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="R8g-SR-YIf"/>
                             <constraint firstItem="fSm-wl-3Ld" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rvq-PQ-rgf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="BgJ-K3-4YH" secondAttribute="trailing" id="VWX-D5-LCC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="BgJ-K3-4YH" secondAttribute="trailing" constant="15" id="VWX-D5-LCC"/>
                             <constraint firstItem="fSm-wl-3Ld" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="YNT-5j-OLt"/>
-                            <constraint firstItem="BgJ-K3-4YH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="nrB-hk-637"/>
+                            <constraint firstItem="BgJ-K3-4YH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="15" id="nrB-hk-637"/>
                         </constraints>
                     </view>
                     <connections>
@@ -161,17 +163,20 @@
                     </view>
                     <navigationItem key="navigationItem" title="On The Map" id="8HX-5k-Bgw">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="HJW-nr-0EY">
+                            <color key="tintColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="logout:" destination="nei-SC-HvY" id="zq2-GT-jdB"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="EyK-d5-UMW">
+                                <color key="tintColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="addLocation:" destination="nei-SC-HvY" id="xTO-dN-vmw"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="refresh" id="YMU-PD-dfE">
+                                <color key="tintColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="refreshMap:" destination="nei-SC-HvY" id="bi4-Qz-3AA"/>
                                 </connections>
@@ -319,7 +324,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMG-E5-q5e">
                                         <rect key="frame" x="126.5" y="454.5" width="122" height="33"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="ADD LOCATION"/>
+                                        <state key="normal" title="ADD LOCATION">
+                                            <color key="titleColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="finishAddingLocation:" destination="yZX-fN-kCq" eventType="touchUpInside" id="vjI-Be-Ie1"/>
                                         </connections>
@@ -390,17 +397,20 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="On The Map" id="tDe-9a-GyD">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="TnP-PI-1ML">
+                            <color key="tintColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="logout:" destination="xOT-fj-bUU" id="bOg-5r-af2"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="QL7-8c-x0N">
+                                <color key="tintColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="addLocation:" destination="xOT-fj-bUU" id="jGW-Y1-dpq"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="refresh" id="gZ1-fT-wDR">
+                                <color key="tintColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="refreshTable:" destination="xOT-fj-bUU" id="gza-N3-jtb"/>
                                 </connections>
@@ -444,6 +454,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="b3K-nf-6x3" kind="relationship" relationship="viewControllers" id="Cqa-dZ-biB"/>
@@ -478,9 +490,10 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lQn-tU-4ht" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lQc-d7-LgC">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lQc-d7-LgC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -501,6 +514,6 @@
         <image name="logo-u" width="62" height="62"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Jmu-HM-bbm"/>
+        <segue reference="SXQ-Vc-byM"/>
     </inferredMetricsTieBreakers>
 </document>
