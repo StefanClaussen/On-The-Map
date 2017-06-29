@@ -85,6 +85,7 @@ extension TableViewController {
 extension TableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let student = students[indexPath.row]
         
         guard let urlToOpen = student.mediaURL else {
