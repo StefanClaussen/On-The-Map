@@ -9,15 +9,28 @@
 import UIKit
 import CoreLocation
 
-class FindLocationViewController: UIViewController, UITextFieldDelegate {
+class FindLocationViewController: UIViewController {
 
-    @IBOutlet weak var cityTextField: UITextField!
+    @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
     @IBOutlet weak var findLocationButton: UIBarButtonItem!
     
     lazy var geocoder = CLGeocoder()
     var locationCoordinates = CLLocationCoordinate2D()
     var locationName: String?
+    
+    // MARK: - View lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        configureView()
+    }
+    
+    func configureView() {
+        findLocationButton.isEnabled = false
+        locationTextField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+    }
 
     // MARK: - Actions
     
@@ -27,7 +40,7 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func findLocation(_ sender: Any) {
         guard let country = countryTextField.text else { return }
-        guard let city = cityTextField.text else { return }
+        guard let city = locationTextField.text else { return }
         
         let address = "\(country), \(city)"
         
@@ -40,6 +53,15 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Helper methods
+    
+    func editingChanged(_ textField: UITextField) {
+        guard let location = locationTextField.text, !location.isEmpty else {
+            findLocationButton.isEnabled = false
+            return
+        }
+        
+        findLocationButton.isEnabled = true
+    }
     
     private func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
         findLocationButton.isEnabled = true
@@ -74,14 +96,15 @@ class FindLocationViewController: UIViewController, UITextFieldDelegate {
         addLocationVC.locationName = locationName
         self.navigationController?.pushViewController(addLocationVC, animated: true)
     }
+}
+
+// MARK: UITextFieldDelegate
     
-    // MARK: UITextFieldDelegate
+    extension FindLocationViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-    
-    // TODO: Check if a textfield has a value, before showing the 'Find' button
-
+        
 }

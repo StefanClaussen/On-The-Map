@@ -139,13 +139,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		F85F428D1ECF075E00D8619C /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = View;
-			sourceTree = "<group>";
-		};
 		F8BAECC81ECC4D6100644586 = {
 			isa = PBXGroup;
 			children = (
@@ -171,7 +164,6 @@
 			children = (
 				F8BAECD41ECC4D6100644586 /* AppDelegate.swift */,
 				F85F42871ECF04A000D8619C /* Model */,
-				F85F428D1ECF075E00D8619C /* View */,
 				F8BAED091ECC552A00644586 /* Controller */,
 				F83315EB1EF7C4F300D1BA03 /* Protocols */,
 				F83315EC1EF7DE8300D1BA03 /* Extensions */,
