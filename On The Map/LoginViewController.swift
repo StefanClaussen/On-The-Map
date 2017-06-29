@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Alert Titles
@@ -30,6 +31,21 @@ class LoginViewController: UIViewController {
     let okay = "Okay"
     
     var sessionManager = SessionManager()
+    
+    // MARK: - View lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        configureView()
+    }
+    
+    func configureView() {
+        loginButton.isEnabled = false
+        loginButton.alpha = 0.4
+        emailTextField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
+    }
     
     // MARK: Actions
     
@@ -54,6 +70,18 @@ class LoginViewController: UIViewController {
     
     
     // MARK: Helper methods
+    
+    func editingChanged(_ textField: UITextField) {
+        guard
+            let email = emailTextField.text, !email.isEmpty,
+            let password = passwordTextField.text, !password.isEmpty else {
+                loginButton.isEnabled = false
+                loginButton.alpha = 0.4
+                return
+        }
+        loginButton.isEnabled = true
+        loginButton.alpha = 1.0
+    }
     
     private func processLoginResult(_ result: Result<String>) {
         self.activityIndicator.stopAnimating()
