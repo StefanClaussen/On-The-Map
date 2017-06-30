@@ -9,6 +9,7 @@
 //TODO: 
 // - Remove unneccessary alert when email or password is blank
 // - Move alert messages to their own file
+// - loginPressed action - add weak self / strongSelf, I think?
 
 import UIKit
 

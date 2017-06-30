@@ -30,7 +30,6 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     // MARK: - StudentLocations
     
     func retrieveStudentLocations() {
-        // TODO: Stop the activity indicator if unable to get students.
         activityIndicator.startAnimating()
         studentDataSource.fetchStudentLocations { [weak self] (result) in
             guard let strongSelf = self else { return }

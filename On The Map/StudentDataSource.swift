@@ -16,7 +16,7 @@ class StudentDataSource {
     func fetchStudentLocations(completion: @escaping (Result<Bool>) -> Void) {
         
         NetworkingManager.GETStudentLocation {
-            // Unowned because it is a singleton, and singleton can never be nil
+            // Unowned because it is a singleton, and a singleton can never be nil
             [unowned self] (studentsResult) in
             
             switch studentsResult {

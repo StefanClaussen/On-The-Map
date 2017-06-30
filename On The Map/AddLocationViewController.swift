@@ -78,7 +78,7 @@ class AddLocationViewController: UIViewController {
                     NetworkingManager.PUTStudentLocation(completion: strongSelf.processUpdateStudentLocationResult)
                 }
             case .failure(let error):
-                // Single line - see how self is an optional
+                // Single line example - see how self is an optional, instead of using strongSelf
                 self?.activityIndicator.stopAnimating()
                 print("Failed to retrieve the names for the logged in user: \(error)")
                 strongSelf.unableToAddLocationAlert()

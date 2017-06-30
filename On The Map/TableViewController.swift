@@ -77,8 +77,7 @@ extension TableViewController {
         cell.imageView?.image = #imageLiteral(resourceName: "icon_pin")
         
         let student = studentDataSource.studentData[indexPath.row]
-        //TODO: change to string intro....
-        cell.textLabel?.text = student.firstName + " " + student.lastName
+        cell.textLabel?.text = "\(student.firstName) \(student.lastName)"
         
         return cell
     }

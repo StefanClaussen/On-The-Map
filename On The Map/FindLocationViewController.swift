@@ -47,8 +47,9 @@ class FindLocationViewController: UIViewController {
         
         let address = "\(country), \(city)"
         
-        geocoder.geocodeAddressString(address) { (placemarks, error) in
-            self.processResponse(withPlacemarks: placemarks, error: error)
+        geocoder.geocodeAddressString(address) { [weak self] (placemarks, error) in
+            guard let strongSelf = self else { return }
+            strongSelf.processResponse(withPlacemarks: placemarks, error: error)
         }
         
         // Disable button to prevent repeated geocoding requests
