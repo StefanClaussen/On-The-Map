@@ -253,11 +253,19 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" alpha="0.25" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="kVc-OA-m0a">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="kVc-OA-m0a" firstAttribute="centerY" secondItem="Ioh-Oc-ric" secondAttribute="centerY" id="6nU-AF-5cq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JWt-k4-Shx" secondAttribute="trailing" id="8G6-aN-y58"/>
+                            <constraint firstItem="kVc-OA-m0a" firstAttribute="width" secondItem="Ioh-Oc-ric" secondAttribute="width" id="BAo-uw-twv"/>
                             <constraint firstItem="JWt-k4-Shx" firstAttribute="leading" secondItem="Ioh-Oc-ric" secondAttribute="leadingMargin" id="E6k-SL-ihx"/>
+                            <constraint firstItem="kVc-OA-m0a" firstAttribute="height" secondItem="Ioh-Oc-ric" secondAttribute="height" id="qgW-xt-Cbx"/>
+                            <constraint firstItem="kVc-OA-m0a" firstAttribute="centerX" secondItem="Ioh-Oc-ric" secondAttribute="centerX" id="rbb-zw-JsI"/>
                             <constraint firstItem="JWt-k4-Shx" firstAttribute="centerY" secondItem="Ioh-Oc-ric" secondAttribute="centerY" id="wrK-8H-XiH"/>
                         </constraints>
                     </view>
@@ -279,6 +287,7 @@
                         <outlet property="countryTextField" destination="UUu-qE-qJQ" id="BAu-84-dKA"/>
                         <outlet property="findLocationButton" destination="EMz-gn-r1b" id="Bpi-EV-beq"/>
                         <outlet property="locationTextField" destination="k0I-Ik-uII" id="ByP-gG-bpo"/>
+                        <outlet property="spinner" destination="kVc-OA-m0a" id="Q1J-qh-uFA"/>
                         <segue destination="yZX-fN-kCq" kind="show" identifier="ShowAddLocation" id="Cl6-LB-hPC"/>
                     </connections>
                 </viewController>

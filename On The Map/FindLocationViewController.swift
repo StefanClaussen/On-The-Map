@@ -14,6 +14,7 @@ class FindLocationViewController: UIViewController {
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var countryTextField: UITextField!
     @IBOutlet weak var findLocationButton: UIBarButtonItem!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     lazy var geocoder = CLGeocoder()
     var locationCoordinates = CLLocationCoordinate2D()
@@ -39,6 +40,8 @@ class FindLocationViewController: UIViewController {
     }
     
     @IBAction func findLocation(_ sender: Any) {
+        spinner.startAnimating()
+        
         guard let country = countryTextField.text else { return }
         guard let city = locationTextField.text else { return }
         
@@ -65,7 +68,7 @@ class FindLocationViewController: UIViewController {
     
     private func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
         findLocationButton.isEnabled = true
-        
+        spinner.stopAnimating()
         if error != nil {
             createAlertWith(title: "No Matching Location Found", message: "Try entering the address again.", action: "Okay")
         } else {
