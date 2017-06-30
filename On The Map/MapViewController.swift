@@ -15,17 +15,13 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    private let studentDataSource = StudentDataSource.shared
 
     // MARK: - View lifecycle
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        retrieveStudentLocations()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         mapView.removeAnnotations(mapView.annotations)
         retrieveStudentLocations()
@@ -36,10 +32,14 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     func retrieveStudentLocations() {
         // TODO: Stop the activity indicator if unable to get students.
         activityIndicator.startAnimating()
-        getStudentLocations { students in
-            if let students = students {
-                self.activityIndicator.stopAnimating()
-                self.addMapAnnotations(for: students)
+        studentDataSource.fetchStudentLocations { [weak self] (result) in
+            guard let strongSelf = self else { return }
+            strongSelf.activityIndicator.stopAnimating()
+            switch result {
+            case .success:
+                strongSelf.addMapAnnotations(for: strongSelf.studentDataSource.studentData)
+            case .failure:
+                strongSelf.presentStudentLocationsNotFoundAlert()
             }
         }
     }

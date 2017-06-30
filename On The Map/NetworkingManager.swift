@@ -9,9 +9,9 @@ import UIKit
 
 struct NetworkingManager {
     
-    let session = URLSession.shared
+    static private let session = URLSession.shared
     
-    func GETStudentLocation(completion: @escaping (Result<[StudentInformation]>) -> Void) {
+    static func GETStudentLocation(completion: @escaping (Result<[StudentInformation]>) -> Void) {
         let request = ParseClient.parseURLRequest
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
@@ -24,14 +24,14 @@ struct NetworkingManager {
         task.resume()
     }
     
-    func processGETStudentLocationRequest(data: Data?, error: Error?) -> Result<[StudentInformation]> {
+    static func processGETStudentLocationRequest(data: Data?, error: Error?) -> Result<[StudentInformation]> {
         guard let jsonData = data else {
             return .failure(error!)
         }
         return ParseClient.students(fromJSON: jsonData)
     }
     
-    func GETUser(completion: @escaping (Result<StudentInformation>) -> Void) {
+    static func GETUser(completion: @escaping (Result<StudentInformation>) -> Void) {
         let request = UdacityClient.udacityUserIDURLRequest
         let task = session.dataTask(with: request as URLRequest) {
             data, response, error in
@@ -44,7 +44,7 @@ struct NetworkingManager {
         task.resume()
     }
     
-    func processUserRequest(data: Data?, error: Error?) -> Result<StudentInformation> {
+    static func processUserRequest(data: Data?, error: Error?) -> Result<StudentInformation> {
         guard let jsonData = data else {
             return .failure(error!)
         }
@@ -55,7 +55,7 @@ struct NetworkingManager {
         return UdacityClient.studentInformation(fromJSON: newData)
     }
     
-    func POSTStudentLocation(completion: @escaping (Result<String>) -> Void) {
+    static func POSTStudentLocation(completion: @escaping (Result<String>) -> Void) {
         let request = ParseClient.parsePOSTURLRequest
         
         let task = session.dataTask(with: request as URLRequest) {
@@ -69,7 +69,7 @@ struct NetworkingManager {
         task.resume()
     }
     
-    func processPOSTStudentLocationRequest(data: Data?, error: Error?) -> Result<String> {
+    static func processPOSTStudentLocationRequest(data: Data?, error: Error?) -> Result<String> {
         guard let jsonData = data else {
             return .failure(error!)
         }
@@ -81,7 +81,7 @@ struct NetworkingManager {
         return ParseClient.objectId(fromJSON: jsonData)
     }
     
-    func PUTStudentLocation(completion: @escaping (Result<Bool>) -> Void) {
+    static func PUTStudentLocation(completion: @escaping (Result<Bool>) -> Void) {
         let request = ParseClient.parsePUTURLRequest
         
         let task = session.dataTask(with: request as URLRequest) {

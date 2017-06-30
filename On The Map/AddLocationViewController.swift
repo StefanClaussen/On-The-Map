@@ -19,10 +19,6 @@ class AddLocationViewController: UIViewController {
     var coordinate = CLLocationCoordinate2D()
     var locationName: String?
     
-    var networkingManager: NetworkingManager {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        return delegate.networkingManager    }
-    
     // MARK: - View lifecycle
 
     override func viewDidLoad() {
@@ -57,26 +53,29 @@ class AddLocationViewController: UIViewController {
         // TODO: Handle empty or invalid URL
         guard let mediaURL = urlTextField.text, let name = locationName else { return }
         
-        self.networkingManager.GETUser {
-            (loggedInStudent) -> Void in
+        NetworkingManager.GETUser {
+            [weak self] (loggedInStudent) -> Void in
+            // gaurd retains strong, which makes it strong.
+            guard let strongSelf = self else { return }
             switch loggedInStudent {
             case .success(let student):
                 Constants.LoggedInUser.firstName = student.firstName
                 Constants.LoggedInUser.lastName = student.lastName
                 Constants.LoggedInUser.mapString = name
                 Constants.LoggedInUser.mediaURL = mediaURL
-                Constants.LoggedInUser.latitude = Double(self.coordinate.latitude)
-                Constants.LoggedInUser.longitude = Double(self.coordinate.longitude)
+                Constants.LoggedInUser.latitude = Double(strongSelf.coordinate.latitude)
+                Constants.LoggedInUser.longitude = Double(strongSelf.coordinate.longitude)
                 
                 if Constants.CurrentUser.objectId == "" {
-                    self.networkingManager.POSTStudentLocation(completion: self.processStudentObjectIdResult)
+                    NetworkingManager.POSTStudentLocation(completion: strongSelf.processStudentObjectIdResult)
                 } else {
-                    self.networkingManager.PUTStudentLocation(completion: self.processUpdateStudentLocationResult)
+                    NetworkingManager.PUTStudentLocation(completion: strongSelf.processUpdateStudentLocationResult)
                 }
             case .failure(let error):
-                self.activityIndicator.stopAnimating()
+                // Single line - see how self is an optional
+                self?.activityIndicator.stopAnimating()
                 print("Failed to retrieve the names for the logged in user: \(error)")
-                self.unableToAddLocationAlert()
+                strongSelf.unableToAddLocationAlert()
                 return
             }
         }

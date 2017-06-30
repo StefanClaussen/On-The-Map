@@ -10,7 +10,7 @@ import UIKit
 
 class TableViewController: UITableViewController, Networking, LocationAdding {
     
-    var students = [StudentInformation]()
+    fileprivate let studentDataSource = StudentDataSource.shared
     
     // MARK: - View lifecycle
     
@@ -29,10 +29,14 @@ class TableViewController: UITableViewController, Networking, LocationAdding {
     // MARK: - StudentLocations
     
     func retrieveStudentLocations() {
-        getStudentLocations { students in
-            if let students = students {
-                self.students = students
-                self.tableView.reloadData()
+        studentDataSource.fetchStudentLocations { [weak self] (result) in
+            guard let strongSelf = self else { return }
+
+            switch result {
+            case .success:
+                strongSelf.tableView.reloadData()
+            case .failure:
+                strongSelf.presentStudentLocationsNotFoundAlert()
             }
         }
     }
@@ -63,7 +67,7 @@ class TableViewController: UITableViewController, Networking, LocationAdding {
 extension TableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return students.count
+        return studentDataSource.studentData.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -72,7 +76,8 @@ extension TableViewController {
         
         cell.imageView?.image = #imageLiteral(resourceName: "icon_pin")
         
-        let student = students[indexPath.row]
+        let student = studentDataSource.studentData[indexPath.row]
+        //TODO: change to string intro....
         cell.textLabel?.text = student.firstName + " " + student.lastName
         
         return cell
@@ -86,7 +91,7 @@ extension TableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let student = students[indexPath.row]
+        let student = studentDataSource.studentData[indexPath.row]
         
         guard let urlToOpen = student.mediaURL else {
             createAlertWith(title: "No URL to Open", message: "Student did not add a URL.", action: "Okay")

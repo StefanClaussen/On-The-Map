@@ -5,38 +5,23 @@
 //  Created by Stefan Claussen on 19/06/2017.
 //  Copyright © 2017 One foot after the other. All rights reserved.
 //
+// TODO: Add weak references inside the closures
 
 import Foundation
 import UIKit
 
-protocol Networking {
-    func getStudentLocations(completion: @escaping ([StudentInformation]?) -> Void)
-    func deleteSession(completion: @escaping (Bool) -> Void)
-}
+protocol Networking { }
 
-extension Networking {
+extension Networking where Self: UIViewController {
     
-    // GET studentLocation is the name in API
-    // Request returns students and their locations
-    func getStudentLocations(completion: @escaping ([StudentInformation]?) -> Void) {
-        guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        delegate.networkingManager.GETStudentLocation {
-            (studentsResult) in
-            
-            switch studentsResult {
-            case let .success(students):
-                completion(students)
-            case .failure:
-                let alert = UIAlertController(title: "Student Locations not found",
-                                              message: "Connection to the server could not be made. Check your wifi availability and other settings that might prevent a connection.",
-                                              preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                
-                if let controller = self as? UIViewController {
-                    controller.present(alert, animated: true, completion: nil)
-                }
-            }
-        }
+    func presentStudentLocationsNotFoundAlert() {
+        let alert = UIAlertController(title: "Student Locations not found",
+                                      message: "Connection to the server could not be made. Check your wifi availability and other settings that might prevent a connection.",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     func deleteSession(completion: @escaping (Bool) -> Void) {
@@ -54,10 +39,9 @@ extension Networking {
                                               preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                 
-                if let controller = self as? UIViewController {
-                    controller.present(alert, animated: true) { action in
+            
+                self.present(alert, animated: true) { action in
                         completion(false)
-                    }
                 }
             }
         }

@@ -16,6 +16,7 @@
 		F85F428F1ECF0EA000D8619C /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F428E1ECF0EA000D8619C /* NetworkingManager.swift */; };
 		F85F42911ECF0EB200D8619C /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85F42901ECF0EB200D8619C /* StudentInformation.swift */; };
 		F862722C1F050F1A00F00EA9 /* UIButton+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = F862722B1F050F1A00F00EA9 /* UIButton+CornerRadius.swift */; };
+		F862722E1F05745800F00EA9 /* StudentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F862722D1F05745800F00EA9 /* StudentDataSource.swift */; };
 		F86C56D01F0293AF00EAF0F8 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86C56CF1F0293AF00EAF0F8 /* HTTPMethod.swift */; };
 		F876C2671ED43AE40056CC6B /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F876C2661ED43AE40056CC6B /* SessionManager.swift */; };
 		F88143EB1ECCD1CA0093964E /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88143EA1ECCD1CA0093964E /* ParseClient.swift */; };
@@ -59,6 +60,7 @@
 		F85F428E1ECF0EA000D8619C /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		F85F42901ECF0EB200D8619C /* StudentInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
 		F862722B1F050F1A00F00EA9 /* UIButton+CornerRadius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+CornerRadius.swift"; sourceTree = "<group>"; };
+		F862722D1F05745800F00EA9 /* StudentDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentDataSource.swift; sourceTree = "<group>"; };
 		F86C56CF1F0293AF00EAF0F8 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		F876C2661ED43AE40056CC6B /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		F88143EA1ECCD1CA0093964E /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				F876C2661ED43AE40056CC6B /* SessionManager.swift */,
 				F85F42901ECF0EB200D8619C /* StudentInformation.swift */,
 				F8A1E20B1EE40D4F0021753E /* UdacityClient.swift */,
+				F862722D1F05745800F00EA9 /* StudentDataSource.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				F83315F01EF800A400D1BA03 /* Networking.swift in Sources */,
 				F85F428F1ECF0EA000D8619C /* NetworkingManager.swift in Sources */,
 				F876C2671ED43AE40056CC6B /* SessionManager.swift in Sources */,
+				F862722E1F05745800F00EA9 /* StudentDataSource.swift in Sources */,
 				F81DCF221EE7FFD3001BE526 /* AddLocationViewController.swift in Sources */,
 				F862722C1F050F1A00F00EA9 /* UIButton+CornerRadius.swift in Sources */,
 				F8BAECD51ECC4D6100644586 /* AppDelegate.swift in Sources */,
