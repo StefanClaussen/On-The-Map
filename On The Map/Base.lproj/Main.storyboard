@@ -289,7 +289,7 @@
         <!--Add Location-->
         <scene sceneID="qH4-GK-xMh">
             <objects>
-                <viewController storyboardIdentifier="AddLocationViewController" id="yZX-fN-kCq" userLabel="Add Location" customClass="AddLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddLocationViewController" title="Add Location" id="yZX-fN-kCq" userLabel="Add Location" customClass="AddLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2Mq-5h-7I4"/>
                         <viewControllerLayoutGuide type="bottom" id="qVX-dt-2zT"/>
@@ -298,8 +298,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lEq-jE-vdx">
-                                <rect key="frame" x="0.0" y="84" width="375" height="494.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="lEq-jE-vdx">
+                                <rect key="frame" x="0.0" y="94" width="375" height="444.5"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a website" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YiM-SQ-y8i">
                                         <rect key="frame" x="19" y="0.0" width="337.5" height="40"/>
@@ -314,31 +314,15 @@
                                         </connections>
                                     </textField>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Kps-aH-zn0">
-                                        <rect key="frame" x="0.0" y="60" width="375" height="374.5"/>
+                                        <rect key="frame" x="0.0" y="70" width="375" height="374.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Kps-aH-zn0" secondAttribute="height" multiplier="1:1" id="1Tz-Ec-qS3"/>
                                         </constraints>
                                     </mapView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMG-E5-q5e">
-                                        <rect key="frame" x="19" y="454.5" width="337.5" height="40"/>
-                                        <color key="backgroundColor" red="0.063723258670000005" green="0.71904140709999997" blue="0.90697282550000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="ADD LOCATION">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="cornerRadius" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="finishAddingLocation:" destination="yZX-fN-kCq" eventType="touchUpInside" id="vjI-Be-Ie1"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="YiM-SQ-y8i" firstAttribute="width" secondItem="lEq-jE-vdx" secondAttribute="width" multiplier="0.9" id="3pV-HW-1CR"/>
-                                    <constraint firstItem="oMG-E5-q5e" firstAttribute="width" secondItem="YiM-SQ-y8i" secondAttribute="width" id="HWz-mv-qiS"/>
                                     <constraint firstItem="Kps-aH-zn0" firstAttribute="width" secondItem="lEq-jE-vdx" secondAttribute="width" id="WJ5-IM-Pez"/>
-                                    <constraint firstItem="oMG-E5-q5e" firstAttribute="height" secondItem="YiM-SQ-y8i" secondAttribute="height" id="fdp-hX-1Gq"/>
                                 </constraints>
                             </stackView>
                             <activityIndicatorView hidden="YES" opaque="NO" alpha="0.25" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fHm-Kx-izj">
@@ -348,7 +332,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lEq-jE-vdx" firstAttribute="top" secondItem="2Mq-5h-7I4" secondAttribute="bottom" constant="20" id="8iS-78-GiX"/>
+                            <constraint firstItem="lEq-jE-vdx" firstAttribute="top" secondItem="2Mq-5h-7I4" secondAttribute="bottom" constant="30" id="8iS-78-GiX"/>
                             <constraint firstItem="fHm-Kx-izj" firstAttribute="centerX" secondItem="H3Z-4I-82e" secondAttribute="centerX" id="Cno-HF-h5J"/>
                             <constraint firstItem="fHm-Kx-izj" firstAttribute="width" secondItem="H3Z-4I-82e" secondAttribute="width" id="eZf-Os-3cm"/>
                             <constraint firstItem="fHm-Kx-izj" firstAttribute="height" secondItem="H3Z-4I-82e" secondAttribute="height" id="hx9-z5-xtj"/>
@@ -357,8 +341,16 @@
                             <constraint firstItem="lEq-jE-vdx" firstAttribute="leading" secondItem="H3Z-4I-82e" secondAttribute="leading" id="zLJ-5i-aYN"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Add Location" id="S67-l2-Z5o">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="SN9-p1-g6i">
+                            <connections>
+                                <action selector="finishAddingLocation:" destination="yZX-fN-kCq" id="Bkf-Vq-CqU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="fHm-Kx-izj" id="BTS-gd-Cs7"/>
+                        <outlet property="addButton" destination="SN9-p1-g6i" id="Xo6-23-r65"/>
                         <outlet property="mapView" destination="Kps-aH-zn0" id="6Qv-Bv-52p"/>
                         <outlet property="urlTextField" destination="YiM-SQ-y8i" id="hfY-gY-BT0"/>
                     </connections>

@@ -6,12 +6,15 @@
 //  Copyright © 2017 One foot after the other. All rights reserved.
 //
 
+// TODO: Handle an invalid URL / ensure url is valid
+
 import UIKit
 import CoreLocation
 import MapKit
 
 class AddLocationViewController: UIViewController {
     
+    @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -24,8 +27,12 @@ class AddLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Add Location"
-        
+        configureView()
+    }
+    
+    func configureView() {
+        addButton.isEnabled = false
+        urlTextField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         addMapAnnotation()
     }
     
@@ -50,12 +57,11 @@ class AddLocationViewController: UIViewController {
     @IBAction func finishAddingLocation(_ sender: Any) {
         activityIndicator.startAnimating()
         
-        // TODO: Handle empty or invalid URL
         guard let mediaURL = urlTextField.text, let name = locationName else { return }
         
         NetworkingManager.GETUser {
             [weak self] (loggedInStudent) -> Void in
-            // gaurd retains strong, which makes it strong.
+            // guard retains self as strong, thus strongSelf
             guard let strongSelf = self else { return }
             switch loggedInStudent {
             case .success(let student):
@@ -82,6 +88,15 @@ class AddLocationViewController: UIViewController {
     }
     
     // MARK: Helper methods
+    
+    func editingChanged(_ textField: UITextField) {
+        guard let urlString = urlTextField.text, !urlString.isEmpty else {
+            addButton.isEnabled = false
+            return
+        }
+        
+        addButton.isEnabled = true
+    }
     
     private func processStudentObjectIdResult(_ result: Result<String>) {
         self.activityIndicator.stopAnimating()
