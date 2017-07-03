@@ -288,6 +288,7 @@
                         <outlet property="findLocationButton" destination="EMz-gn-r1b" id="Bpi-EV-beq"/>
                         <outlet property="locationTextField" destination="k0I-Ik-uII" id="ByP-gG-bpo"/>
                         <outlet property="spinner" destination="kVc-OA-m0a" id="Q1J-qh-uFA"/>
+                        <outlet property="stackView" destination="JWt-k4-Shx" id="lfN-II-8OV"/>
                         <segue destination="yZX-fN-kCq" kind="show" identifier="ShowAddLocation" id="Cl6-LB-hPC"/>
                     </connections>
                 </viewController>
