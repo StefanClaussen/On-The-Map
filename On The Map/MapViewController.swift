@@ -109,8 +109,7 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            
-            guard let urlToOpen = URL(string: "view.annotation?.subtitle!") else {
+            guard let urlString = view.annotation?.subtitle!, let urlToOpen = URL(string: urlString) else {
                 createAlertWith(title: "No URL to Open", message: "Student did not add a URL.", action: "Okay")
                 return
             }
