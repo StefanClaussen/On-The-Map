@@ -72,12 +72,12 @@ class FindLocationViewController: UIViewController {
     // MARK: - Keyboard
     
     func keyboardWillShow(_ notification:Notification) {
-        
-        view.frame.origin.y = 0 - getKeyboardHeight(notification) + 150
+        let spacing = view.frame.height * 0.20
+        stackView.frame.origin.y = getKeyboardHeight(notification) - spacing
     }
     
     func keyboardWillHide(_ notification:Notification) {
-        view.frame.origin.y = 0
+        stackView.frame.origin.y = 0
     }
     
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
