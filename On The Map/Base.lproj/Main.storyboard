@@ -266,7 +266,7 @@
                             <constraint firstItem="JWt-k4-Shx" firstAttribute="leading" secondItem="Ioh-Oc-ric" secondAttribute="leadingMargin" id="E6k-SL-ihx"/>
                             <constraint firstItem="kVc-OA-m0a" firstAttribute="height" secondItem="Ioh-Oc-ric" secondAttribute="height" id="qgW-xt-Cbx"/>
                             <constraint firstItem="kVc-OA-m0a" firstAttribute="centerX" secondItem="Ioh-Oc-ric" secondAttribute="centerX" id="rbb-zw-JsI"/>
-                            <constraint firstItem="JWt-k4-Shx" firstAttribute="centerY" secondItem="Ioh-Oc-ric" secondAttribute="centerY" id="wrK-8H-XiH"/>
+                            <constraint firstItem="JWt-k4-Shx" firstAttribute="centerY" secondItem="Ioh-Oc-ric" secondAttribute="centerY" priority="750" id="wrK-8H-XiH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Find Location" id="0QB-8s-UEe">

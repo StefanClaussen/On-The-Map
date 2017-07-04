@@ -17,6 +17,8 @@ class FindLocationViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var stackView: UIStackView!
     
+    private weak var stackViewBottomConstraint: NSLayoutConstraint?
+    
     lazy var geocoder = CLGeocoder()
     var locationCoordinates = CLLocationCoordinate2D()
     var locationName: String?
@@ -72,19 +74,32 @@ class FindLocationViewController: UIViewController {
     // MARK: - Keyboard
     
     func keyboardWillShow(_ notification:Notification) {
-        let spacing = view.frame.height * 0.20
-        stackView.frame.origin.y = getKeyboardHeight(notification) - spacing
+        guard let keyboardSettings = KeyboardSettings(from: notification) else { return }
+        
+        let keyboardTop = view.bounds.height - keyboardSettings.height
+        //TODO: rename stackView
+        let stackViewBottom = stackView.frame.maxY
+        let padding: CGFloat = 10
+
+        guard keyboardTop - padding < stackViewBottom else { return }
+        
+        let constraint = stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardSettings.height - padding)
+        view.addConstraint(constraint)
+        stackViewBottomConstraint = constraint
+        
+        UIView.animate(withDuration: keyboardSettings.duration, delay: 0, options: keyboardSettings.options, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
     func keyboardWillHide(_ notification:Notification) {
-        stackView.frame.origin.y = 0
-    }
-    
-    func getKeyboardHeight(_ notification:Notification) -> CGFloat {
+        guard let keyboardSettings = KeyboardSettings(from: notification),
+            let constraint = stackViewBottomConstraint else { return }
+        view.removeConstraint(constraint)
         
-        let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue // of CGRect
-        return keyboardSize.cgRectValue.height
+        UIView.animate(withDuration: keyboardSettings.duration, delay: 0, options: keyboardSettings.options, animations: {
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
     func subscribeToKeyboardNotifications() {
@@ -153,4 +168,23 @@ class FindLocationViewController: UIViewController {
         return true
     }
         
+}
+
+private struct KeyboardSettings {
+    let height: CGFloat
+    let duration: Double
+    let options: UIViewAnimationOptions
+    
+    init?(from notification: Notification) {
+        guard
+            let userInfo = notification.userInfo,
+            let height = (userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect)?.height,
+            let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? Double,
+            let curve = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? UInt else {
+                return nil
+        }
+        self.height = height
+        self.duration = duration
+        self.options = UIViewAnimationOptions(rawValue: curve)
+    }
 }
