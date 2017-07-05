@@ -285,10 +285,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="countryTextField" destination="UUu-qE-qJQ" id="BAu-84-dKA"/>
+                        <outlet property="enterLocationStackView" destination="JWt-k4-Shx" id="gsK-Yv-3iC"/>
                         <outlet property="findLocationButton" destination="EMz-gn-r1b" id="Bpi-EV-beq"/>
                         <outlet property="locationTextField" destination="k0I-Ik-uII" id="ByP-gG-bpo"/>
                         <outlet property="spinner" destination="kVc-OA-m0a" id="Q1J-qh-uFA"/>
-                        <outlet property="stackView" destination="JWt-k4-Shx" id="lfN-II-8OV"/>
                         <segue destination="yZX-fN-kCq" kind="show" identifier="ShowAddLocation" id="Cl6-LB-hPC"/>
                     </connections>
                 </viewController>
@@ -386,7 +386,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uKz-1x-v9b">
-                                            <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                            <rect key="frame" x="16" y="0.0" width="344" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
