@@ -6,6 +6,7 @@
 //  Copyright © 2017 One foot after the other. All rights reserved.
 //
 
+// TODO: Take out text field delegate method to protocol extension
 // TODO: Handle an invalid URL / ensure url is valid
 
 import UIKit
@@ -30,7 +31,7 @@ class AddLocationViewController: UIViewController {
         configureView()
     }
     
-    func configureView() {
+    private func configureView() {
         addButton.isEnabled = false
         urlTextField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         addMapAnnotation()
@@ -38,7 +39,7 @@ class AddLocationViewController: UIViewController {
     
     // MARK: - Map and Annotation
     
-    func addMapAnnotation() {
+    private func addMapAnnotation() {
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         self.mapView.addAnnotation(annotation)
@@ -46,7 +47,7 @@ class AddLocationViewController: UIViewController {
         focusMap(on: coordinate)
     }
     
-    func focusMap(on coordinate: CLLocationCoordinate2D) {
+    private func focusMap(on coordinate: CLLocationCoordinate2D) {
         let metres: CLLocationDistance = 10000
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(coordinate, metres, metres)
         mapView.setRegion(coordinateRegion, animated: true)
@@ -114,7 +115,7 @@ class AddLocationViewController: UIViewController {
     }
     
     private func processUpdateStudentLocationResult(_ result: Result<Bool>) {
-        self.activityIndicator.stopAnimating()
+        activityIndicator.stopAnimating()
         switch result {
         case .success(let boolValue):
             print("Successfully updated student location: \(boolValue)")
@@ -128,7 +129,7 @@ class AddLocationViewController: UIViewController {
         }
     }
     
-    func unableToAddLocationAlert() {
+    private func unableToAddLocationAlert() {
         createAlertWith(title: "Unable to Add Location", message: "Location could not be added. Check your internet connection. Alternatively the server may be unavailable.", action: "Okay")
     }
     
