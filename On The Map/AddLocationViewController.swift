@@ -42,7 +42,7 @@ class AddLocationViewController: UIViewController {
     private func addMapAnnotation() {
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        self.mapView.addAnnotation(annotation)
+        mapView.addAnnotation(annotation)
         
         focusMap(on: coordinate)
     }
