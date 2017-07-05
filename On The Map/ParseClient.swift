@@ -32,6 +32,7 @@ struct ParseClient {
     // objectId is used as the identifying parameter when PUTting a student location
     // https://parse.udacity.com/parse/classes/StudentLocation/<objectId>
     static func objectId(fromJSON data: Data) -> Result<String> {
+        // TODO: I don't understand line below
         var parsedResult: [String: AnyObject]! = nil
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
@@ -73,6 +74,7 @@ struct ParseClient {
         
     }
     
+    //TODO: Tidy up base string and parameters
     private static func createParseURLRequest(for method: HTTPMethod) -> NSMutableURLRequest {
         var urlString: String
         
