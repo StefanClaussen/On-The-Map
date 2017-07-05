@@ -47,7 +47,9 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     
     @IBAction func logout(_ sender: Any) {
         deleteSession { (success) in
-            if success { self.dismiss(animated: true, completion: nil) }
+            if success {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
@@ -58,7 +60,9 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     
     @IBAction func addLocation(_ sender: Any) {
         hasNoPreviousLocation { correct in
-            if correct { self.performSegue(withIdentifier: "MapToFindLocation", sender: self) }
+            if correct {
+                self.performSegue(withIdentifier: "MapToFindLocation", sender: self)
+            }
         }
     }
     
@@ -70,7 +74,7 @@ class MapViewController: UIViewController, Networking, LocationAdding {
             let annotation = createAnnotation(for: student)
             annotations.append(annotation)
         }
-        self.mapView.addAnnotations(annotations)
+        mapView.addAnnotations(annotations)
     }
     
     func createAnnotation(for student: StudentInformation) -> MKPointAnnotation {
@@ -108,6 +112,7 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        // TODO: make this a guard
         if control == view.rightCalloutAccessoryView {
             guard let urlString = view.annotation?.subtitle!, let urlToOpen = URL(string: urlString) else {
                 createAlertWith(title: "No URL to Open", message: "Student did not add a URL.", action: "Okay")

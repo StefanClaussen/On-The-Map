@@ -20,16 +20,13 @@ extension Networking where Self: UIViewController {
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         
-        
         self.present(alert, animated: true, completion: nil)
     }
     
     func deleteSession(completion: @escaping (Bool) -> Void) {
         let sessionManager = SessionManager()
         
-        sessionManager.DELETESession {
-            (logoutResult) in
-            
+        sessionManager.DELETESession { (logoutResult) in
             switch logoutResult {
             case .success:
                 completion(true)
@@ -39,9 +36,8 @@ extension Networking where Self: UIViewController {
                                               preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                 
-            
                 self.present(alert, animated: true) { action in
-                        completion(false)
+                    completion(false)
                 }
             }
         }

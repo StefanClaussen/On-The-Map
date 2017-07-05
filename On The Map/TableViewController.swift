@@ -45,7 +45,9 @@ class TableViewController: UITableViewController, Networking, LocationAdding {
     
     @IBAction func logout(_ sender: Any) {
         deleteSession { (success) in
-            if success { self.dismiss(animated: true, completion: nil) }
+            if success {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
@@ -56,7 +58,9 @@ class TableViewController: UITableViewController, Networking, LocationAdding {
     
     @IBAction func addLocation(_ sender: Any) {
         hasNoPreviousLocation { correct in
-            if correct { self.performSegue(withIdentifier: "MapToFindLocation", sender: self) }
+            if correct {
+                self.performSegue(withIdentifier: "MapToFindLocation", sender: self)
+            }
         }
     }
     
