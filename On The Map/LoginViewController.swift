@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
         if let information = alertDetails(emailTextField.text, passwordTextField.text) {
             showAlertWith(title: information.title, message: information.message, actionTitle: tryAgain)
         } else {
-            self.activityIndicator.startAnimating()
+            activityIndicator.startAnimating()
             sessionManager.POSTSessionFor(email: emailTextField.text!, password: passwordTextField.text!, completion: (self.processLoginResult))
         }
     }
@@ -85,7 +85,7 @@ class LoginViewController: UIViewController {
                 return
         }
         loginButton.isEnabled = true
-        loginButton.alpha = 1.0
+        loginButton.alpha = 1
     }
     
     private func processLoginResult(_ result: Result<String>) {
@@ -93,17 +93,18 @@ class LoginViewController: UIViewController {
         switch result {
         case .success(let key):
             Constants.LoggedInUser.uniqueKey = key
-            self.completeLogin()
+            completeLogin()
         case .failure(UdacityError.accountNotFoundOrInvalidCredentials):
-            self.showAlertWith(title: self.unableToLogin, message: self.noAccountOrInvalidCredentials, actionTitle: tryAgain)
+            showAlertWith(title: self.unableToLogin, message: self.noAccountOrInvalidCredentials, actionTitle: tryAgain)
         case .failure(UdacityError.noConnection):
-            self.showAlertWith(title: self.unableToLogin, message: self.noConnection, actionTitle: okay)
+            showAlertWith(title: self.unableToLogin, message: self.noConnection, actionTitle: okay)
         default:
-            self.showAlertWith(title: self.unableToLogin, message: self.unknown, actionTitle: okay)
+            showAlertWith(title: self.unableToLogin, message: self.unknown, actionTitle: okay)
         }
     }
     
     private func completeLogin() {
+        // TODO: Is dispatch necessary
         DispatchQueue.main.async {
             let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "OTMTabBarController") as! UITabBarController
             self.present(tabBarController, animated: true) {
@@ -138,8 +139,8 @@ class LoginViewController: UIViewController {
     }
     
     private func clearTextFields() {
-        self.emailTextField.text = nil
-        self.passwordTextField.text = nil
+        emailTextField.text = nil
+        passwordTextField.text = nil
     }
     
 }
