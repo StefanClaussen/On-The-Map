@@ -15,13 +15,13 @@ class FindLocationViewController: UIViewController {
     @IBOutlet weak var countryTextField: UITextField!
     @IBOutlet weak var findLocationButton: UIBarButtonItem!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var enterLocationStackView: UIStackView!
     
     private weak var stackViewBottomConstraint: NSLayoutConstraint?
     
     lazy var geocoder = CLGeocoder()
-    var locationCoordinates = CLLocationCoordinate2D()
-    var locationName: String?
+    private var locationCoordinates = CLLocationCoordinate2D()
+    private var locationName: String?
     
     // MARK: - View lifecycle
     
@@ -32,18 +32,18 @@ class FindLocationViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
+        
         subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
         super.viewWillDisappear(animated)
+        
         unsubscribeFromKeyboardNotifications()
     }
     
-    func configureView() {
+    private func configureView() {
         findLocationButton.isEnabled = false
         locationTextField.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
     }
@@ -51,7 +51,7 @@ class FindLocationViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func findLocation(_ sender: Any) {
@@ -78,12 +78,12 @@ class FindLocationViewController: UIViewController {
         
         let keyboardTop = view.bounds.height - keyboardSettings.height
         //TODO: rename stackView
-        let stackViewBottom = stackView.frame.maxY
+        let stackViewBottom = enterLocationStackView.frame.maxY
         let padding: CGFloat = 10
 
         guard keyboardTop - padding < stackViewBottom else { return }
         
-        let constraint = stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardSettings.height - padding)
+        let constraint = enterLocationStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardSettings.height - padding)
         view.addConstraint(constraint)
         stackViewBottomConstraint = constraint
         
@@ -102,13 +102,12 @@ class FindLocationViewController: UIViewController {
         }, completion: nil)
     }
     
-    func subscribeToKeyboardNotifications() {
-        
+    private func subscribeToKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
     }
     
-    func unsubscribeFromKeyboardNotifications() {
+    private func unsubscribeFromKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
     }
@@ -130,21 +129,16 @@ class FindLocationViewController: UIViewController {
         if error != nil {
             createAlertWith(title: "No Matching Location Found", message: "Try entering the address again.", action: "Okay")
         } else {
-            var location: CLLocation?
-            var name: String?
-            
-            if let placemarks = placemarks, placemarks.count > 0 {
-                location = placemarks.first?.location
-                name = placemarks.first?.name
+            guard
+                let placemarks = placemarks, placemarks.count > 0,
+                let location = placemarks.first?.location,
+                let name = placemarks.first?.name else {
+                    createAlertWith(title: "No Matching Location Found", message: "Try entering the address again.", action: "Okay")
+                    return
             }
             
-            guard let _location = location, let _name = name else {
-                createAlertWith(title: "No Matching Location Found", message: "Try entering the address again.", action: "Okay")
-                return
-            }
-            
-            locationCoordinates = _location.coordinate
-            locationName = _name
+            locationCoordinates = location.coordinate
+            locationName = name
             performSegue(withIdentifier: "ShowAddLocation", sender: self)
         }
     }
@@ -161,7 +155,7 @@ class FindLocationViewController: UIViewController {
 
 // MARK: UITextFieldDelegate
     
-    extension FindLocationViewController: UITextFieldDelegate {
+extension FindLocationViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
