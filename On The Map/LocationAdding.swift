@@ -9,9 +9,7 @@
 import Foundation
 import UIKit
 
-protocol LocationAdding {
-    func hasNoPreviousLocation(completion: @escaping (Bool) -> Void)
-}
+protocol LocationAdding { }
 
 extension LocationAdding where Self: UIViewController {
     
