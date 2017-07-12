@@ -112,18 +112,17 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        // TODO: make this a guard
-        if control == view.rightCalloutAccessoryView {
-            guard let urlString = view.annotation?.subtitle!, let urlToOpen = URL(string: urlString) else {
-                createAlertWith(title: "No URL to Open", message: "Student did not add a URL.", action: "Okay")
-                return
-            }
-            
-            if UIApplication.shared.canOpenURL(urlToOpen) {
-                UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
-            } else {
-                createAlertWith(title: "Invalid URL", message: "Student did not add a valid URL.", action: "Okay" )
-            }
+        guard control == view.rightCalloutAccessoryView else { return }
+        
+        guard let urlString = view.annotation?.subtitle!, let urlToOpen = URL(string: urlString) else {
+            createAlertWith(title: "No URL to Open", message: "Student did not add a URL.", action: "Okay")
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(urlToOpen) {
+            UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
+        } else {
+            createAlertWith(title: "Invalid URL", message: "Student did not add a valid URL.", action: "Okay" )
         }
     }
     
