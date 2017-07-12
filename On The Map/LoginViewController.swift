@@ -104,12 +104,9 @@ class LoginViewController: UIViewController {
     }
     
     private func completeLogin() {
-        // TODO: Is dispatch necessary
-        DispatchQueue.main.async {
-            let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "OTMTabBarController") as! UITabBarController
-            self.present(tabBarController, animated: true) {
-                self.clearTextFields()
-            }
+        let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "OTMTabBarController") as! UITabBarController
+        self.present(tabBarController, animated: true) {
+            self.clearTextFields()
         }
     }
     
