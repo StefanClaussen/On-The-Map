@@ -96,4 +96,54 @@ struct NetworkingManager {
         task.resume()
     }
     
+    // MARK: Session methods
+    
+    static func POSTSessionFor(email: String, password: String, completion: @escaping (Result<String>) -> Void) {
+        let request = UdacityClient.udacityURLRequest
+        request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
+        
+        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+            let result = processSessionRequest(data: data, error: error)
+            OperationQueue.main.addOperation {
+                completion(result)
+            }
+        }
+        task.resume()
+    }
+    
+    static func DELETESession(completion: @escaping (Result<Bool>) -> Void) {
+        let request = UdacityClient.deleteSessionURLRequest
+        
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            
+            OperationQueue.main.addOperation {
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(true))
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    static private func processSessionRequest(data: Data?, error: Error?) -> Result<String> {
+        guard let data = data else {
+            return .failure(UdacityError.noConnection)
+        }
+        let range = Range(5..<data.count)
+        let newData = data.subdata(in: range)
+        
+        return UdacityClient.session(fromJSON: newData)
+    }
+    
 }
