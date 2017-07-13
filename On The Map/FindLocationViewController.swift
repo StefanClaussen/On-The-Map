@@ -17,7 +17,7 @@ class FindLocationViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var enterLocationStackView: UIStackView!
     
-    private weak var stackViewBottomConstraint: NSLayoutConstraint?
+    private weak var enterLocationStackViewBottomConstraint: NSLayoutConstraint?
     
     lazy var geocoder = CLGeocoder()
     private var locationCoordinates = CLLocationCoordinate2D()
@@ -77,7 +77,7 @@ class FindLocationViewController: UIViewController {
         guard let keyboardSettings = KeyboardSettings(from: notification) else { return }
         
         let keyboardTop = view.bounds.height - keyboardSettings.height
-        //TODO: rename stackView
+        
         let stackViewBottom = enterLocationStackView.frame.maxY
         let padding: CGFloat = 10
 
@@ -85,7 +85,7 @@ class FindLocationViewController: UIViewController {
         
         let constraint = enterLocationStackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardSettings.height - padding)
         view.addConstraint(constraint)
-        stackViewBottomConstraint = constraint
+        enterLocationStackViewBottomConstraint = constraint
         
         UIView.animate(withDuration: keyboardSettings.duration, delay: 0, options: keyboardSettings.options, animations: {
             self.view.layoutIfNeeded()
@@ -94,7 +94,7 @@ class FindLocationViewController: UIViewController {
     
     func keyboardWillHide(_ notification:Notification) {
         guard let keyboardSettings = KeyboardSettings(from: notification),
-            let constraint = stackViewBottomConstraint else { return }
+            let constraint = enterLocationStackViewBottomConstraint else { return }
         view.removeConstraint(constraint)
         
         UIView.animate(withDuration: keyboardSettings.duration, delay: 0, options: keyboardSettings.options, animations: {
@@ -126,21 +126,19 @@ class FindLocationViewController: UIViewController {
     private func processResponse(withPlacemarks placemarks: [CLPlacemark]?, error: Error?) {
         findLocationButton.isEnabled = true
         spinner.stopAnimating()
-        if error != nil {
-            createAlertWith(title: "No Matching Location Found", message: "Try entering the address again.", action: "Okay")
-        } else {
-            guard
-                let placemarks = placemarks, placemarks.count > 0,
-                let location = placemarks.first?.location,
-                let name = placemarks.first?.name else {
-                    createAlertWith(title: "No Matching Location Found", message: "Try entering the address again.", action: "Okay")
-                    return
-            }
-            
-            locationCoordinates = location.coordinate
-            locationName = name
-            performSegue(withIdentifier: "ShowAddLocation", sender: self)
+        
+        guard
+            error == nil,
+            let placemarks = placemarks, placemarks.count > 0,
+            let location = placemarks.first?.location,
+            let name = placemarks.first?.name else {
+                createAlertWith(title: "No Matching Location Found", message: "Try entering the address again.", action: "Okay")
+                return
         }
+        
+        locationCoordinates = location.coordinate
+        locationName = name
+        performSegue(withIdentifier: "ShowAddLocation", sender: self)
     }
     
     // MARK: - Navigation / Storyboard
