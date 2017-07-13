@@ -78,7 +78,6 @@ class MapViewController: UIViewController, Networking, LocationAdding {
     }
     
     func createAnnotation(for student: StudentInformation) -> MKPointAnnotation {
-        
         let annotation = MKPointAnnotation()
         if let coordinate = student.coordinate {
             annotation.coordinate = coordinate
@@ -88,7 +87,6 @@ class MapViewController: UIViewController, Networking, LocationAdding {
         
         return annotation
     }
-    
 }
 
 // MARK: - MKMapViewDelegate
@@ -96,7 +94,6 @@ class MapViewController: UIViewController, Networking, LocationAdding {
 extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
         if let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView {
             pinView.annotation = annotation
             return pinView
@@ -106,7 +103,6 @@ extension MapViewController: MKMapViewDelegate {
         pinView.canShowCallout = true
         pinView.pinTintColor = .red
         pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-        
         
         return pinView
     }
