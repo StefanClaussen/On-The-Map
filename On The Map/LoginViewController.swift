@@ -9,7 +9,6 @@
 //TODO: 
 // - Remove unneccessary alert when email or password is blank
 // - Move alert messages to their own file
-// - loginPressed action - add weak self / strongSelf, I think?
 
 import UIKit
 
@@ -35,8 +34,6 @@ class LoginViewController: UIViewController {
     let tryAgain = "Try Again"
     let okay = "Okay"
     
-    var sessionManager = SessionManager()
-    
     // MARK: - View lifecycle
     
     override func viewDidLoad() {
@@ -59,13 +56,12 @@ class LoginViewController: UIViewController {
             showAlertWith(title: information.title, message: information.message, actionTitle: tryAgain)
         } else {
             activityIndicator.startAnimating()
-            sessionManager.POSTSessionFor(email: emailTextField.text!, password: passwordTextField.text!, completion: (self.processLoginResult))
+            NetworkingManager.POSTSessionFor(email: emailTextField.text!, password: passwordTextField.text!, completion: (self.processLoginResult))
         }
     }
     
     @IBAction func signUpPressed(_ sender: Any) {
-        guard
-            let url = URL(string: Constants.Udacity.signUpPage),
+        guard let url = URL(string: Constants.Udacity.signUpPage),
             UIApplication.shared.canOpenURL(url) else {
                 showAlertWith(title: signUpPageNotFound, message: noSignUpPage, actionTitle: okay)
                 return
@@ -73,12 +69,10 @@ class LoginViewController: UIViewController {
         UIApplication.shared.open(url as URL)
     }
     
-    
     // MARK: Helper methods
     
     func editingChanged(_ textField: UITextField) {
-        guard
-            let email = emailTextField.text, !email.isEmpty,
+        guard let email = emailTextField.text, !email.isEmpty,
             let password = passwordTextField.text, !password.isEmpty else {
                 loginButton.isEnabled = false
                 loginButton.alpha = 0.4
