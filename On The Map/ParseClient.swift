@@ -91,6 +91,8 @@ struct ParseClient {
         let body: [String: Any] = [
             "uniqueKey": Constants.LoggedInUser.uniqueKey,
             "firstName": Constants.LoggedInUser.firstName,
+            "lastName": Constants.LoggedInUser.lastName,
+            "mapString": Constants.LoggedInUser.mapString,
             "mediaURL": Constants.LoggedInUser.mediaURL,
             "latitude": Constants.LoggedInUser.latitude,
             "longitude": Constants.LoggedInUser.longitude
