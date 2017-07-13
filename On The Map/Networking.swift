@@ -5,7 +5,6 @@
 //  Created by Stefan Claussen on 19/06/2017.
 //  Copyright © 2017 One foot after the other. All rights reserved.
 //
-// TODO: Add weak references inside the closures
 
 import Foundation
 import UIKit
@@ -20,13 +19,12 @@ extension Networking where Self: UIViewController {
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         
-        self.present(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     func deleteSession(completion: @escaping (Bool) -> Void) {
-        let sessionManager = SessionManager()
-        
-        sessionManager.DELETESession { (logoutResult) in
+        NetworkingManager.DELETESession { [weak self] (logoutResult) in
+            guard let strongSelf = self else { return }
             switch logoutResult {
             case .success:
                 completion(true)
@@ -36,7 +34,7 @@ extension Networking where Self: UIViewController {
                                               preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
                 
-                self.present(alert, animated: true) { action in
+                strongSelf.present(alert, animated: true) { action in
                     completion(false)
                 }
             }
