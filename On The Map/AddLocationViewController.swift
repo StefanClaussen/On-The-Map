@@ -60,8 +60,7 @@ class AddLocationViewController: UIViewController {
         
         guard let mediaURL = urlTextField.text, let name = locationName else { return }
         
-        NetworkingManager.GETUser {
-            [weak self] (loggedInStudent) -> Void in
+        NetworkingManager.GETUser { [weak self] (loggedInStudent) -> Void in
             // guard retains self as strong, thus strongSelf
             guard let strongSelf = self else { return }
             switch loggedInStudent {
