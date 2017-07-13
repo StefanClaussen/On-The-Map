@@ -63,7 +63,6 @@ class TableViewController: UITableViewController, Networking, LocationAdding {
             }
         }
     }
-    
 }
 
 // MARK: - Table view data source
@@ -78,14 +77,12 @@ extension TableViewController {
         let identifier = "cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         
-        cell.imageView?.image = #imageLiteral(resourceName: "icon_pin")
-        
         let student = studentDataSource.studentData[indexPath.row]
         cell.textLabel?.text = "\(student.firstName) \(student.lastName)"
+        cell.imageView?.image = #imageLiteral(resourceName: "icon_pin")
         
         return cell
     }
-    
 }
 
 // MARK: - UITableViewDelegate
