@@ -29,7 +29,7 @@ struct UdacityClient {
     }
     
     static func session(fromJSON data: Data) -> Result<String> {
-        var parsedResult: [String: AnyObject]! = nil
+        var parsedResult: [String: AnyObject]
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
         } catch {
@@ -47,7 +47,7 @@ struct UdacityClient {
     }
     
     static func studentInformation(fromJSON data: Data) -> Result<StudentInformation> {
-        var parsedResult: [String: Any]! = nil
+        var parsedResult: [String: Any]
         do {
             parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: AnyObject]
         } catch {
@@ -64,8 +64,9 @@ struct UdacityClient {
     // MARK: - Private Methods
     
     private static func createUdacityURLRequest(for method: HTTPMethod) -> NSMutableURLRequest {
-        let sessionString = "https://www.udacity.com/api/session"
-        let uniqueKeyString = "https://www.udacity.com/api/users/\(Constants.LoggedInUser.uniqueKey)"
+        let baseURL = "https://www.udacity.com"
+        let sessionString = "\(baseURL)/api/session"
+        let uniqueKeyString = "\(baseURL)/api/users/\(Constants.LoggedInUser.uniqueKey)"
         
         let urlString = method != .get ? sessionString : uniqueKeyString
         let request = NSMutableURLRequest(url: URL(string:  urlString)!)
